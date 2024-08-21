@@ -23,11 +23,11 @@
     cursor: pointer;
   } 
   .pagetitle button {
-  font-size: 24px;
-  margin-bottom: 0;
-  font-weight: 600;
-  color: #fff !important ;
-}
+    font-size: 24px;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #fff !important ;
+  }
   
   </style>
 

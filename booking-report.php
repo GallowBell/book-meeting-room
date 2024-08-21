@@ -122,7 +122,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                         <td><?= htmlspecialchars($row["notes"]) ?></td>
                         <td>
                           <div class="btn-group btn-group-sm" role="group">
-                              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reportModal">✔</button>
+                              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reportModal">test✔</button>
                               <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reportModal">✖</button>
                               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="bi bi-eye"></i></button>
                           </div>

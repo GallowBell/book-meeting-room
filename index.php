@@ -14,14 +14,6 @@
     FROM `reservations`");
   $data = $query -> fetch_all(MYSQLI_ASSOC);
 
-  
-
-  /* 
-  
-  title
-  start
-  end
-  */
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,28 +29,26 @@
   
   <style>
     .hide-calendar .ui-datepicker-calendar{
-    display: none;
+      display: none;
     }
-
     .fc-day-today {
       background: #F6FF97 !important;
-      } 
+    } 
     .fc-day:hover {
       background: #72ACE7 !important;
       cursor: pointer;
     } 
-      .pagetitle button {
+    .pagetitle button {
       font-size: 24px;
       margin-bottom: 0;
       font-weight: 600;
       color: #fff !important ;
     }
-
-        #calendar {
-            width: 100%;
-            max-width: 100%;
-            margin: 0 auto;
-        }
+    #calendar {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+    }
   
   </style>
 
@@ -219,7 +209,6 @@
               <div class="card info-card revenue-card bg-dark">
                 <div class="card-body">
                   <h5 class="card-title text-white fw-bold">ห้องประชุม <span class="text-white">| ที่ว่าง</span></h5>
-
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-door-open-fill"></i>

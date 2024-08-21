@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
         $query = "INSERT INTO user (username, password, first_name, last_name, phone_number, userlevel)
             VALUES ('$username', '$password', '$first_name', '$last_name', '$phone_number', 'm')";
 
-        $result = mysqli_query($conn, $query) 
+        $result = mysqli_query($conn, $query);
 
         if ($result) {
             $_SESSION['success'] = "เพิ่มข้อมูลสําเร็จ";

@@ -43,6 +43,7 @@ function InsertCar($equipment_qty = [], $equipment=''){
     $eq_date,
     $eq_start_time,
     $eq_end_time,
+    $reservation_date_end,
     $reservation_id;
     
     $r = [];
@@ -67,6 +68,7 @@ function InsertCar($equipment_qty = [], $equipment=''){
                                                                         equipment_quantity,
                                                                         additional_details,
                                                                         reservation_date,
+                                                                        reservation_date_end,
                                                                         start_time,
                                                                         end_time
                                                                     )
@@ -77,6 +79,7 @@ function InsertCar($equipment_qty = [], $equipment=''){
                                             '$value',
                                             '',
                                             '$eq_date',
+                                            '$reservation_date_end',
                                             '$eq_start_time',
                                             '$eq_end_time')";
             
@@ -142,8 +145,8 @@ if ($result->num_rows > 0) {
             // Insert into database if quantity is greater than 0
             if ($qty > 0 || $i == 16) {
                 $equipment_full_name = $equipment_name;
-                $sql_insert_equipment = "INSERT INTO equipment_reservations (reservation_id, equipment_name, equipment_size, equipment_quantity, additional_details, reservation_date, start_time, end_time)
-                                        VALUES ($reservation_id, '$equipment_full_name', '$size', $qty, '$details', '$eq_date', '$eq_start_time', '$eq_end_time')";
+                $sql_insert_equipment = "INSERT INTO equipment_reservations (reservation_id, equipment_name, equipment_size, equipment_quantity, additional_details, reservation_date, reservation_date_end, start_time, end_time)
+                                        VALUES ($reservation_id, '$equipment_full_name', '$size', $qty, '$details', '$eq_date', '$reservation_date_end', '$eq_start_time', '$eq_end_time')";
                 $conn->query($sql_insert_equipment);
             }
         }

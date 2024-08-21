@@ -388,13 +388,15 @@
       flatpickr('#start_time', {
           enableTime: true,
           noCalendar: true,
-          dateFormat: "H:i",
+          altFormat: "H:i",
+          dateFormat: "H:i:s",
           time_24hr: true
       });
       flatpickr('#end_time', {
           enableTime: true,
           noCalendar: true,
-          dateFormat: "H:i",
+          altFormat: "H:i",
+          dateFormat: "H:i:s",
           time_24hr: true
       });
     });

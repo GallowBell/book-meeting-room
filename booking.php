@@ -378,20 +378,24 @@
     document.addEventListener('DOMContentLoaded', function() {
       flatpickr('#reservation_date', {
         altInput: true,
-        enableTime: true,
-        altFormat: "j F Y ",
+        //enableTime: true,
+        altFormat: "j F Y",
         mode: "range",
         dateFormat: "Y-m-d",
         locale: "th",
-        minDate: "today",
-        onClose: function(selectedDates, dateStr, instance) {
-          console.log(selectedDates);
-          console.log('instance.altInput', instance.altInput);
-          console.log('object');
-          if (selectedDates.length > 0) {
-            instance.altInput.value = selectedDates[0].toLocaleDateString("th-TH", { year: 'numeric', month: 'long', day: 'numeric' });
-          }
-        }
+        minDate: "today"
+      });
+      flatpickr('#start_time', {
+          enableTime: true,
+          noCalendar: true,
+          dateFormat: "H:i",
+          time_24hr: true
+      });
+      flatpickr('#end_time', {
+          enableTime: true,
+          noCalendar: true,
+          dateFormat: "H:i",
+          time_24hr: true
       });
     });
   </script>

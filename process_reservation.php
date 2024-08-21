@@ -18,7 +18,13 @@ $meeting_type = $_POST['meeting_type'];
 $participant_count = $_POST['participant_count'];
 $organizer_name = $_POST['organizer_name'];
 $contact_number = $_POST['contact_number'];
-$reservation_date = $_POST['reservation_date'];
+$r_date = explode(" ถึง ", $_POST['reservation_date']);
+$reservation_date = $r_date[0];
+/**
+ * เอาไปใส่ database วันที่สิ้นสุด
+ * @var string $reservation_date_end
+ */
+$reservation_date_end = $r_date[1];
 $start_time = $_POST['start_time'];
 $end_time = $_POST['end_time'];
 $equipment = isset($_POST['equipment']) ? $_POST['equipment'] : [];

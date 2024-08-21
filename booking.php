@@ -31,6 +31,7 @@
   
   </style>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
@@ -124,7 +125,7 @@
 
               <div class="col-md-6">
                 <label for="reservation_date" class="form-label">วันที่จอง</label>
-                <input type="date" id="reservation_date" name="reservation_date" class="form-control" maxlength="10" required>
+                <input type="text" id="reservation_date" name="reservation_date" class="form-control" required>
                 <div class="invalid-feedback">
                   โปรดกรอกวันที่จอง
                 </div>
@@ -370,6 +371,25 @@
         } */
     </style>
 
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://npmcdn.com/flatpickr@4.6.13/dist/l10n/th.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      flatpickr('#reservation_date', {
+        altInput: true,
+        altFormat: "j F Y",
+        dateFormat: "Y-m-d",
+        locale: "th",
+        minDate: "today",
+        disable: [
+          function(date) {
+            return (date.getDay() === 0 || date.getDay() === 6);
+          }
+        ]
+      });
+    });
+  </script>
 </body>
 
 

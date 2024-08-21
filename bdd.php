@@ -2,7 +2,7 @@
 //test
 // tar
 // test xd
-// test tar
+
 try
 {
         $bdd = new PDO('mysql:host=localhost;dbname=calendar;charset=utf8', 'root', '');

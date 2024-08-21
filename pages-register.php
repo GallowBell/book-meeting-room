@@ -1,36 +1,60 @@
 <?php
-include 'connection.php'; // รวมไฟล์ที่ใช้สำหรับเชื่อมต่อฐานข้อมูล
+include 'connection.php';
 
-if (isset($_POST['submit'])) {
-        // รับข้อมูลจากฟอร์ม
+//เรียกใช้งาน sweetalert 
+echo '
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+  	';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // เข้ารหัสผ่าน
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $phone_number = $_POST['phone_number'];
+    $userlevel = "user"; // ค่าเริ่มต้นคือ user
 
-    // ตรวจสอบว่าชื่อผู้ใช้ซ้ำกันหรือไม่
-    $sql = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
-    $result = $mysqli->query($conn, $sql);
-    $user = mysqli_fetch_assoc($result);
+    // ตรวจสอบว่ามี username ซ้ำหรือไม่
+    $sql_check = "SELECT * FROM user WHERE username='$username'";
+    $result = $conn->query($sql_check);
 
-    if ($user['username'] === $username) {
-        echo "<script>alert('ชื่อผู้ใช้นี้มีอยู่แล้ว');</script>";
+    if ($result->num_rows > 0) {
+        echo "<script>
+                Swal.fire({
+                    title: 'Username นี้ถูกใช้แล้ว',
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง'
+                });
+              </script>";
     } else {
-        $passwordenc = md5($password);
+        // เพิ่มข้อมูลผู้ใช้ใหม่
+        $sql = "INSERT INTO user (username, password, first_name, last_name, phone_number, userlevel)
+                VALUES ('$username', '$password', '$first_name', '$last_name', '$phone_number', '$userlevel')";
 
-        $query = "INSERT INTO user (username, password, first_name, last_name, phone_number, userlevel)
-            VALUES ('$username', '$password', '$first_name', '$last_name', '$phone_number', 'm')";
-
-        $result = mysqli_query($conn, $query);
-
-        if ($result) {
-            $_SESSION['success'] = "เพิ่มข้อมูลสําเร็จ";
-            header("location: index.php");
+        if ($conn->query($sql) === TRUE) {
+            echo "<script>
+                    Swal.fire({
+                        title: 'ลงทะเบียนสำเร็จ!',
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                    }).then(function() {
+                        window.location.href = 'index.php';
+                    });
+                  </script>";
         } else {
-            $_SESSION['error'] = "เพิ่มข้อมูลไม่สําเร็จ";
-            header("location: index.php");
-        }
+            echo "<script>
+                    Swal.fire({
+                        title: 'เกิดข้อผิดพลาด: " . $conn->error . "',
+                        icon: 'error',
+                        confirmButtonText: 'ตกลง'
+                    });
+                  </script>";
         }
     }
+
+    closeConnection($conn);
+}
 ?>

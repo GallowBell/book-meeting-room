@@ -1,34 +1,59 @@
 <?php
-session_start(); // เริ่มเซสชัน
+include 'connection.php';
 
-include 'connection.php'; // รวมไฟล์ที่ใช้สำหรับเชื่อมต่อฐานข้อมูล
+echo '
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+  	';
 
-// รับข้อมูลจากฟอร์ม
-$username = $_POST['username'];
-$password = $_POST['password'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-// ดึงข้อมูลผู้ใช้จากฐานข้อมูล
-$sql = "SELECT * FROM users WHERE username = '$username'";
-$result = $mysqli->query($sql);
+    // ตรวจสอบข้อมูลผู้ใช้
+    $sql = "SELECT * FROM user WHERE username='$username'";
+    $result = $conn->query($sql);
 
-if ($result && $result->num_rows > 0) {
-    $user = $result->fetch_assoc();
-    
-    // ตรวจสอบรหัสผ่าน
-    if (password_verify($password, $user['password_hash'])) {
-        // ตั้งค่าเซสชัน
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        
-        // ย้ายไปยังหน้าเว็บหลักหรือหน้าอื่น ๆ
-        header("Location: index.php"); // เปลี่ยนเป็นหน้าเว็บหลักของคุณ
-        exit();
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        // ตรวจสอบรหัสผ่าน
+        if (password_verify($password, $row['password'])) {
+            session_start();
+            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['userlevel'] = $row['userlevel'];
+
+            // แสดง SweetAlert และเปลี่ยนเส้นทางไปยัง index.php
+            echo "<script>
+                    Swal.fire({
+                        title: 'เข้าสู่ระบบสำเร็จ!',
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                    }).then(function() {
+                        window.location.href = 'index.php';
+                    });
+                  </script>";
+        } else {
+            echo "<script>
+                    Swal.fire({
+                        title: 'รหัสผ่านไม่ถูกต้อง',
+                        icon: 'error',
+                        confirmButtonText: 'ตกลง'
+                    });
+                  </script>";
+        }
     } else {
-        echo "รหัสผ่านไม่ถูกต้อง";
+        echo "<script>
+                Swal.fire({
+                    title: 'ไม่พบผู้ใช้นี้',
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง'
+                });
+              </script>";
     }
-} else {
-    echo "ไม่พบผู้ใช้";
-}
 
-$mysqli->close(); // ปิดการเชื่อมต่อฐานข้อมูล
+    closeConnection($conn);
+}
 ?>

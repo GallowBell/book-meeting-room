@@ -1,3 +1,15 @@
+<?php
+session_start();
+// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
+if (!isset($_SESSION['username'])) {
+    header("Location: pages-login.html");
+    exit();
+}
+
+$username = $_SESSION['username'];
+$userlevel = $_SESSION['userlevel'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,11 +49,11 @@
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
-        <li class="nav-item d-block d-lg-none">
+        <!-- <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
           </a>
-        </li><!-- End Search Icon-->
+        </li>End Search Icon -->
 
         <li class="nav-item dropdown">
 
@@ -184,17 +196,18 @@
 
         </li>End Messages Nav -->
 
+
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/userdf.png" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2 text-light">ผู้ดูแล</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2 text-light"><?php echo $username; ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>ผู้ดูแล</h6>
-              <span>ผู้พัฒนาระบบ</span>
+              <h6><?php echo $username; ?></h6>
+              <span><?php echo $userlevel; ?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -230,14 +243,18 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+            <!-- <li>
+              <a class="dropdown-item d-flex align-items-center" href="pages-logout.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
-            </li>
+            </li> -->
 
           </ul><!-- End Profile Dropdown Items -->
+        </li>
+        
+        <li class="nav-item dropdown pe-3">
+        <a href="pages-logout.php" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
         </li><!-- End Profile Nav -->
 
       </ul>

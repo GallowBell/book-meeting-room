@@ -1,3 +1,10 @@
+  <!-- Header -->
+  <?php
+    include 'head.php';
+    include 'header.php';
+    include 'sidebar.php';
+  ?>
+
 <?php 
   require_once  "connection.php";
 
@@ -15,6 +22,7 @@
   $data = $query -> fetch_all(MYSQLI_ASSOC);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,9 +31,6 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
   <title>Pakkret Municipality Booking Meeting Room</title>
-  <?php
-    include 'head.php';
-  ?>
   
   <style>
     .hide-calendar .ui-datepicker-calendar{
@@ -49,6 +54,7 @@
         max-width: 100%;
         margin: 0 auto;
     }
+
   
   </style>
 
@@ -156,11 +162,7 @@
 
 <body>
   
-  <!-- Header -->
-  <?php
-    include 'header.php';
-    include 'sidebar.php';
-  ?>
+
 
   <main id="main" class="main">
 

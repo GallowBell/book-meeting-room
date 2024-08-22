@@ -1,13 +1,6 @@
 <?php
 include 'connection.php';
 
-//เรียกใช้งาน sweetalert 
-echo '
-	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
-  	';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // เข้ารหัสผ่าน
@@ -22,11 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         echo "<script>
-                Swal.fire({
-                    title: 'Username นี้ถูกใช้แล้ว',
-                    icon: 'error',
-                    confirmButtonText: 'ตกลง'
-                });
+                alert('Username นี้ถูกใช้แล้ว');
               </script>";
     } else {
         // เพิ่มข้อมูลผู้ใช้ใหม่
@@ -35,26 +24,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($conn->query($sql) === TRUE) {
             echo "<script>
-                    Swal.fire({
-                        title: 'ลงทะเบียนสำเร็จ!',
-                        icon: 'success',
-                        timer: 2000,
-                        showConfirmButton: false
-                    }).then(function() {
-                        window.location.href = 'index.php';
-                    });
+                    alert('ลงทะเบียนสำเร็จ!');
+                    window.location.href = 'index.php';
                   </script>";
         } else {
             echo "<script>
-                    Swal.fire({
-                        title: 'เกิดข้อผิดพลาด: " . $conn->error . "',
-                        icon: 'error',
-                        confirmButtonText: 'ตกลง'
-                    });
+                    alert('เกิดข้อผิดพลาด: " . $conn->error . "');
                   </script>";
         }
     }
 
-    closeConnection($conn);
+    // ปิดการเชื่อมต่อกับฐานข้อมูล
+    $conn->close();
 }
 ?>

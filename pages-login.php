@@ -23,37 +23,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['userlevel'] = $row['userlevel'];
-
-            // แสดง SweetAlert และเปลี่ยนเส้นทางไปยัง index.php
-            echo "<script>
-                    Swal.fire({
-                        title: 'เข้าสู่ระบบสำเร็จ!',
-                        icon: 'success',
-                        timer: 2000,
-                        showConfirmButton: false
-                    }).then(function() {
-                        window.location.href = 'index.php';
-                    });
-                  </script>";
+            header("Location: index.php");
+            exit();
         } else {
+            // รหัสผ่านไม่ถูกต้อง
             echo "<script>
-                    Swal.fire({
-                        title: 'รหัสผ่านไม่ถูกต้อง',
-                        icon: 'error',
-                        confirmButtonText: 'ตกลง'
-                    });
+                    alert('รหัสผ่านไม่ถูกต้อง');
+                    window.location.href = 'pages-login.html';
                   </script>";
         }
     } else {
+        // ไม่พบ username
         echo "<script>
-                Swal.fire({
-                    title: 'ไม่พบผู้ใช้นี้',
-                    icon: 'error',
-                    confirmButtonText: 'ตกลง'
-                });
+                alert('ไม่พบ Username นี้');
+                window.location.href = 'pages-login.html';
               </script>";
     }
-
-    closeConnection($conn);
 }
+
+$conn->close();
 ?>

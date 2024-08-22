@@ -276,7 +276,7 @@
                 </div>
                 <div class="col-12 mb-2">
                 <input class="form-check-input" type="checkbox"  id="equipment16" name="equipment[15]" value="ที่จอดรถชั้น">
-                    <label class="form-check-label" for="group1Check16">
+                    <label class="form-check-label" for="equipment16">
                       ที่จอดรถ ชั้น
                     <input class="inputint d-inline-block" type="number" name="equipment_qty[15][floor]" size="1" height="20"> 
                       จำนวน
@@ -389,14 +389,14 @@
           enableTime: true,
           noCalendar: true,
           altFormat: "H:i",
-          dateFormat: "H:i:s",
+          dateFormat: "H:i:ss",
           time_24hr: true
       });
       flatpickr('#end_time', {
           enableTime: true,
           noCalendar: true,
           altFormat: "H:i",
-          dateFormat: "H:i:s",
+          dateFormat: "H:i:ss",
           time_24hr: true
       });
     });

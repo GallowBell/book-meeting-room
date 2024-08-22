@@ -1,6 +1,8 @@
 <?php
 include 'connection.php';
 
+//echo $password = password_hash($_GET['password'], PASSWORD_DEFAULT);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // เข้ารหัสผ่าน
@@ -16,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         echo "<script>
                 alert('Username นี้ถูกใช้แล้ว');
+                window.location.href = 'pages-register.html';
               </script>";
     } else {
         // เพิ่มข้อมูลผู้ใช้ใหม่

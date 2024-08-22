@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `equipment_reservations`
 --
 
-CREATE TABLE `equipment_reservations` (
+CREATE TABLE IF NOT EXISTS  `equipment_reservations` (
   `equipment_reservation_id` int(11) NOT NULL,
   `reservation_id` int(11) DEFAULT NULL,
   `equipment_name` varchar(255) DEFAULT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `equipment_reservations` (
 -- Table structure for table `reservations`
 --
 
-CREATE TABLE `reservations` (
+CREATE TABLE IF NOT EXISTS  `reservations` (
   `reservation_id` int(11) NOT NULL,
   `meeting_room` varchar(255) DEFAULT NULL,
   `meeting_name` varchar(255) DEFAULT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `reservations` (
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS  `user` (
   `user_id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,

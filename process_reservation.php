@@ -1,11 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "meeting_reservation";
 
-// สร้างการเชื่อมต่อ
-$conn = new mysqli($servername, $username, $password, $dbname);
+include 'connection.php';
 
 // ตรวจสอบการเชื่อมต่อ
 if ($conn->connect_error) {

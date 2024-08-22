@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 // Query ข้อมูลจากตาราง reservations
 $sql = "SELECT reservation_id, meeting_room, meeting_name, meeting_type, participant_count, organizer_name, contact_number, reservation_date, start_time, end_time, notes
         FROM reservations
-        ORDER BY reservation_date, start_time";
+        ORDER BY reservation_id DESC";
 
 $result = $conn->query($sql);
 

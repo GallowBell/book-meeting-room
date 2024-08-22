@@ -69,7 +69,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   
   </style>
 
-  
+<script src='fullcalendar/dist/index.global.js'></script>
 
   <script>
 
@@ -271,23 +271,28 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                 <!-- <div class="col-6 mt-4 d-flex justify-content-end">
                   <a href="booking.php"><button class="btn btn-primary btn-lg">จองห้อง</button></a>
                 </div> -->
-                <div class="col-xxl-4 col-xl-12 d-flex align-items-center justify-content-center">
-                <i class="fs-1 bi bi-dot text-success"></i>
-                <span class="fs-5">ห้องประชุมชั้น 4</span>
-                  </div>
-                <div class="col-xxl-4 col-xl-12 d-flex align-items-center justify-content-center">
-                  <i class="fs-1 bi bi-dot text-primary"></i>
-                  <span class="fs-5">ห้องประชุมชั้น 5</span>
-                </div>
-                <div class="col-xxl-4 col-xl-12 d-flex align-items-center justify-content-center">
-                  <i class="fs-1 bi bi-dot text-danger"></i>
-                  <span class="fs-5">ห้องประชุมชั้น 9</span>
-                </div>
-                </div>
-                </div>
-                  
-                  <div id='calendar'></div>
 
+                <div class="row m-4">
+                <div class="col-md-12 col-xl-4 d-flex align-items-center justify-content-center">
+                <i class="fs-5 bi bi-square-fill text-success"></i>
+                <span class="fs-5 ms-2">ห้องประชุมชั้น 4</span>
+                  </div>
+                <div class="col-md-12 col-xl-4 d-flex align-items-center justify-content-center">
+                  <i class="fs-5 bi bi-square-fill text-primary"></i>
+                  <span class="fs-5 ms-2">ห้องประชุมชั้น 5</span>
+                </div>
+                <div class="col-md-12 col-xl-4 d-flex align-items-center justify-content-center">
+                  <i class="fs-5 bi bi-square-fill text-danger"></i>
+                  <span class="fs-5 ms-2">ห้องประชุมชั้น 9</span>
+                </div>
+                </div>
+                </div>
+
+
+                <div id='calendar'></div>
+
+
+                </div>
                 </div>
               </div>
             </div><!-- End Reports -->
@@ -295,7 +300,6 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
         </div><!-- End Left side columns -->
         </div><!-- End Right side columns -->
 
-      </div>
     </section>
 
   </main><!-- End #main -->

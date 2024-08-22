@@ -162,7 +162,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-6">
                   <label for="reservation_date" class="form-label">วันที่จอง</label>
-                  <input type="text" id="reservation_date" name="reservation_date" class="form-control" required>
+                  <input type="text" id="reservation_date" name="reservation_date" class="form-control bg-white" required>
                   <div class="invalid-feedback">
                     โปรดกรอกวันที่จอง
                   </div>
@@ -170,7 +170,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-3">
                   <label for="start_time" class="form-label">เวลาเริ่มต้น</label>
-                  <input type="time" id="start_time" name="start_time" class="form-control" required>
+                  <input type="time" id="start_time" name="start_time" class="form-control bg-white" required>
                   <div class="invalid-feedback">
                     โปรดกรอกเวลาจอง
                   </div>
@@ -178,7 +178,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-3">
                   <label for="end_time" class="form-label">เวลาสิ้นสุด</label>
-                  <input type="time" id="end_time" name="end_time" class="form-control" required>
+                  <input type="time" id="end_time" name="end_time" class="form-control bg-white" required>
                   <div class="invalid-feedback">
                     โปรดกรอกเวลาจอง
                   </div>

@@ -649,6 +649,19 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+  <script>
+    // add the responsive classes after page initialization
+    function addResponsiveClasses() {
+        if (window.innerWidth <= 465) {
+            $('.fc-toolbar.fc-header-toolbar').addClass('row col-lg-12 text-center');
+        } else {
+            $('.fc-toolbar.fc-header-toolbar').removeClass('row col-lg-12 text-center');
+        }
+    }
+    window.onload = addResponsiveClasses;
+    window.onresize = addResponsiveClasses;
+
+  </script>
 
 
 </body>

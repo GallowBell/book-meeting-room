@@ -1,11 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "meeting_reservation";
 
-// สร้างการเชื่อมต่อ
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once __DIR__ . '/connection.php';
 
 // ตรวจสอบการเชื่อมต่อ
 if ($conn->connect_error) {
@@ -156,12 +151,18 @@ $userlevel = $_SESSION['userlevel'];
                         <td><?= htmlspecialchars($row["organizer_name"]) ?></td>
                         <td><?= htmlspecialchars($formatted_date . $thai_year) ?></td>
                         <td><?= htmlspecialchars($row["start_time"]) ?> น. - <?= htmlspecialchars($row["end_time"]) ?> น.</td>
-                        <td><span class="badge rounded-pill bg-success fs-6">อนุมัติ</span></td>
+                        <td>
+                          <span class="badge rounded-pill bg-success fs-6">อนุมัติ</span>
+                        </td>
                         <td><?= htmlspecialchars($row["notes"]) ?></td>
                         <td>
                           <div class="btn-group-sm" role="group">
-                              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reportModal">✔</button>
-                              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reportModal">✖</button>
+                              <button type="button" class="btn btn-success">
+                                ✔
+                              </button>
+                              <button type="button" class="btn btn-danger">
+                                ✖
+                              </button>
                               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="bi bi-eye"></i></button>
                           </div>
                       </td>
@@ -243,10 +244,20 @@ $userlevel = $_SESSION['userlevel'];
   </div>
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
   include 'footer.php';
   ?>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      Swal.fire({
+          title: "กรุณาเข้าสู่ระบบ",
+          icon: "warning",
+          confirmButtonText: "ตกลง"
+      })
+    });
+  </script>
 
 </body>
 

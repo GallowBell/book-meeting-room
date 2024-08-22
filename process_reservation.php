@@ -7,6 +7,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+session_start();
+$user_id = $_SESSION['user_id'];
+
 $meeting_room = $_POST['meeting_room'];
 $meeting_name = $_POST['meeting_name'];
 $meeting_type = $_POST['meeting_type'];
@@ -115,7 +118,8 @@ if ($result->num_rows > 0) {
                                             reservation_date_end,
                                             start_time,
                                             end_time,
-                                            notes
+                                            notes,
+                                            user_id
                                         ) VALUES (
                                             '$meeting_room',
                                             '$meeting_name',
@@ -127,7 +131,8 @@ if ($result->num_rows > 0) {
                                             '$reservation_date_end',
                                             '$start_time',
                                             '$end_time',
-                                            '$notes'
+                                            '$notes',
+                                            '$user_id'
                                         )";
 
 

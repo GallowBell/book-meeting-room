@@ -255,7 +255,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
         </li><!-- End Profile Nav -->
         <?php else: ?>
           <li class="nav-item dropdown pe-3">
-        <a href="pages-login.html" class="btn btn-info"><i class="bi bi-box-arrow-right"></i> Login</a>
+        <a href="pages-login.html" class="btn btn-primary text-white "><i class="bi bi-box-arrow-right"></i> Login</a>
         </li>
         <?php endif; ?>
 

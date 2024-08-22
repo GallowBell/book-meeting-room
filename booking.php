@@ -188,8 +188,8 @@ $userlevel = $_SESSION['userlevel'];
                 <div class="container mt-2">
                   <div class="col-md-12">
                     <label for="equipment" class="form-label mt-2">อุปกรณ์</label>
-                    <div class="border p-3">
-                      <div class="row">
+                    <div>
+                      <div class="border p-3 row">
                         <div class="col-md-6 col-xs-12 mb-2">
                           <input class="form-check-input" type="checkbox" id="equipment1" name="equipment[0]" value="ชุดโต๊ะหมู่บูชา">
                           <label class="form-check-label" for="equipment1">

@@ -14,6 +14,10 @@
     <!-- Favicons -->
     <link href="assets/img/logopakk_up.png" rel="icon">
 
+    <!-- sweetalert -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 
     <!-- Google Fonts -->

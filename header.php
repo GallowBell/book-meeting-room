@@ -1,13 +1,9 @@
 <?php
-session_start();
-// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
-if (!isset($_SESSION['username'])) {
-    header("Location: pages-login.html");
-    exit();
-}
 
-$username = $_SESSION['username'];
-$userlevel = $_SESSION['userlevel'];
+// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
+$is_logged_in = isset($_SESSION['username']);
+$username = $is_logged_in ? $_SESSION['username'] : 'Guest';
+$userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 ?>
 
 <!DOCTYPE html>
@@ -196,7 +192,7 @@ $userlevel = $_SESSION['userlevel'];
 
         </li>End Messages Nav -->
 
-
+<?php if ($is_logged_in): ?>
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -253,9 +249,15 @@ $userlevel = $_SESSION['userlevel'];
           </ul><!-- End Profile Dropdown Items -->
         </li>
         
+        
         <li class="nav-item dropdown pe-3">
         <a href="pages-logout.php" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
         </li><!-- End Profile Nav -->
+        <?php else: ?>
+          <li class="nav-item dropdown pe-3">
+        <a href="pages-login.html" class="btn btn-info"><i class="bi bi-box-arrow-right"></i> Login</a>
+        </li>
+        <?php endif; ?>
 
       </ul>
     </nav><!-- End Icons Navigation -->

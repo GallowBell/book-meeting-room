@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
+if (!isset($_SESSION['username'])) {
+    header("Location: pages-login.html");
+    exit();
+}
+
+$username = $_SESSION['username'];
+$userlevel = $_SESSION['userlevel'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

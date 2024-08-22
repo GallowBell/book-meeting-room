@@ -23,6 +23,43 @@ $result = $conn->query($sql);
 $data = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
+<?php
+session_start();
+
+// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
+if (!isset($_SESSION['username'])) {
+    // Output SweetAlert2 JavaScript code
+    echo '<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Redirecting</title>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    title: "กรุณาเข้าสู่ระบบ",
+                    icon: "warning",
+                    confirmButtonText: "ตกลง"
+                }).then(function() {
+                    window.location.href = "pages-login.html";
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Empty body, JavaScript will handle redirection -->
+    </body>
+    </html>';
+    exit();
+}
+
+// โค้ดสำหรับผู้ที่เข้าสู่ระบบแล้ว
+$username = $_SESSION['username'];
+$userlevel = $_SESSION['userlevel'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,16 +71,17 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
 
-
-  
-
 <body>
+  
 
   <?php
     include 'header.php';

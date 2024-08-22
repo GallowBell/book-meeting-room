@@ -117,92 +117,92 @@ $userlevel = $_SESSION['userlevel'];
                 <div class="card-body">
                   <h5 class="card-title">รายงาน <span>| การจอง</span></h5>
 
-                  <table class="table table-striped datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">เรื่อง</th>
-                        <th scope="col">ห้องที่จอง</th>
-                        <th scope="col">ชื่อผู้จอง</th>
-                        <th scope="col">วันที่</th>
-                        <th scope="col">เวลาที่จอง</th>
-                        <th scope="col">สถานะ</th>
-                        <th scope="col">หมายเหตุ</th>
-                        <th scope="col">Actions</th>
+                  <div class="table-responsive w-100">
+                    <table class="table table-striped datatable">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="text-truncate">#</th>
+                          <th scope="col" class="text-truncate">เรื่อง</th>
+                          <th scope="col" class="text-truncate">ห้องที่จอง</th>
+                          <th scope="col" class="text-truncate">ชื่อผู้จอง</th>
+                          <th scope="col" class="text-truncate">วันที่</th>
+                          <th scope="col" class="text-truncate">เวลาที่จอง</th>
+                          <th scope="col" class="text-truncate">สถานะ</th>
+                          <th scope="col" class="text-truncate">หมายเหตุ</th>
+                          <th scope="col" class="text-truncate">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php foreach ($data as $row): 
+                                $date = new DateTime($row["reservation_date"]);
 
+                                // แปลงวันที่ให้เป็นรูปแบบ dd:mm:yyyy
+                                $formatted_date = $date->format('d-m-');
 
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php foreach ($data as $row): 
-                            $date = new DateTime($row["reservation_date"]);
-
-                            // แปลงวันที่ให้เป็นรูปแบบ dd:mm:yyyy
-                            $formatted_date = $date->format('d-m-');
-
-                            // แปลงปีเป็น พ.ศ.
-                            $thai_year = $date->format('Y') + 543;?>
-                      <tr>
-                        <th scope="row"><a href="#"><?= htmlspecialchars($row["reservation_id"]) ?></a></th>
-                        <td><?= htmlspecialchars($row["meeting_name"]) ?></td>
-                        <td><a href="#" class="text-primary"><?= htmlspecialchars($row["meeting_room"]) ?></a></td>
-                        <td><?= htmlspecialchars($row["organizer_name"]) ?></td>
-                        <td><?= htmlspecialchars($formatted_date . $thai_year) ?></td>
-                        <td><?= htmlspecialchars($row["start_time"]) ?> น. - <?= htmlspecialchars($row["end_time"]) ?> น.</td>
-                        <td>
-                          <?php 
-                          $is_disabled = false;
-                          if($row["is_approve"] == -1) :
-                          ?>
-                            <span class="badge rounded-pill bg-warning fs-6">รออนุมัติ</span>
-                          <?php
-                          elseif($row["is_approve"] == 0) :
-                            $is_disabled = true;
-                          ?>
-                            <span class="badge rounded-pill bg-danger fs-6">ไม่อนุมัติ</span>
-                          <?php
-                          elseif($row["is_approve"] == 1) :
-                            $is_disabled = true;
-                          ?>
-                            <span class="badge rounded-pill bg-success fs-6">อนุมัติ</span>
-                          <?php
-                          endif;
-                          ?>
-                        </td>
-                        <td><?= htmlspecialchars($row["notes"]) ?></td>
-                        <td>
-                          <div class="btn-group-sm" role="group">
-                            <?php 
-                              if($_SESSION['userlevel'] == 'admin') :
-                            ?>
-                                <button type="button" class="btn btn-success" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerApprove(`<?= $row['reservation_id'] ?>`)" >
-                                  ✔
-                                </button>
-                                <button type="button" class="btn btn-danger" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerReject(`<?= $row['reservation_id'] ?>`)" >
-                                  ✖
-                                </button>
-                            <?php 
+                                // แปลงปีเป็น พ.ศ.
+                                $thai_year = $date->format('Y') + 543;?>
+                          <tr>
+                            <th scope="row"><a href="#"><?= htmlspecialchars($row["reservation_id"]) ?></a></th>
+                            <td class="text-truncate"><?= htmlspecialchars($row["meeting_name"]) ?></td>
+                            <td class="text-truncate"><a href="#" class="text-primary"><?= htmlspecialchars($row["meeting_room"]) ?></a></td>
+                            <td class="text-truncate"><?= htmlspecialchars($row["organizer_name"]) ?></td>
+                            <td class="text-truncate"><?= htmlspecialchars($formatted_date . $thai_year) ?></td>
+                            <td class="text-truncate"><?= htmlspecialchars($row["start_time"]) ?> น. - <?= htmlspecialchars($row["end_time"]) ?> น.</td>
+                            <td class="text-truncate">
+                              <?php 
+                              $is_disabled = false;
+                              if($row["is_approve"] == -1) :
+                              ?>
+                                <span class="badge rounded-pill bg-warning fs-6">รออนุมัติ</span>
+                              <?php
+                              elseif($row["is_approve"] == 0) :
+                                $is_disabled = true;
+                              ?>
+                                <span class="badge rounded-pill bg-danger fs-6">ไม่อนุมัติ</span>
+                              <?php
+                              elseif($row["is_approve"] == 1) :
+                                $is_disabled = true;
+                              ?>
+                                <span class="badge rounded-pill bg-success fs-6">อนุมัติ</span>
+                              <?php
                               endif;
-                            ?>
-                                <button type="button" class="btn btn-primary" <?php echo $is_disabled ? ' disabled ' : ''; ?> data-bs-toggle="modal" data-bs-target="#reportModal"><i class="bi bi-eye"></i></button>
-                          </div>
-                      </td>
+                              ?>
+                            </td>
+                            <td class="text-truncate"><?= htmlspecialchars($row["notes"]) ?></td>
+                            <td class="text-truncate">
+                              <div class="btn-group-sm" role="group">
+                                <?php 
+                                  if($_SESSION['userlevel'] == 'admin') :
+                                ?>
+                                    <button type="button" class="btn btn-success" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerApprove(`<?= $row['reservation_id'] ?>`)" >
+                                      ✔
+                                    </button>
+                                    <button type="button" class="btn btn-danger" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerReject(`<?= $row['reservation_id'] ?>`)" >
+                                      ✖
+                                    </button>
+                                <?php 
+                                  endif;
+                                ?>
+                                    <button type="button" class="btn btn-primary" <?php echo $is_disabled ? ' disabled ' : ''; ?> data-bs-toggle="modal" data-bs-target="#reportModal"><i class="bi bi-eye"></i></button>
+                              </div>
+                          </td>
 
-                        <!-- <td>
-                          <div class="btn-group btn-group" role="group" aria-label="">
-                          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reportModal"">✔</button>
-                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reportModal"">✖</button>
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportModal""><i class="fw-bold bi bi-eye"></i></button>
-                        </div>
-                        </td> -->
+                            <!-- <td>
+                              <div class="btn-group btn-group" role="group" aria-label="">
+                              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reportModal"">✔</button>
+                              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reportModal"">✖</button>
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportModal""><i class="fw-bold bi bi-eye"></i></button>
+                            </div>
+                            </td> -->
 
-                        <!-- <td><button type="button" class="btn btn-success btn-sm text-white" data-bs-toggle="modal" data-bs-target="#reportModal">✔</button></td>
-                        <td><button type="button" class="btn btn-danger btn-sm text-white" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fw-bold bi bi-x"></i></button></td>
-                        <td><button type="button" class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fw-bold bi bi-eye"></i></button></td> -->
-                      </tr>
-                      <?php endforeach; ?>
-                    </tbody>
-                  </table>
+                            <!-- <td><button type="button" class="btn btn-success btn-sm text-white" data-bs-toggle="modal" data-bs-target="#reportModal">✔</button></td>
+                            <td><button type="button" class="btn btn-danger btn-sm text-white" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fw-bold bi bi-x"></i></button></td>
+                            <td><button type="button" class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fw-bold bi bi-eye"></i></button></td> -->
+                          </tr>
+                        <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
 
                 </div>
 

@@ -105,7 +105,7 @@ $userlevel = $_SESSION['userlevel'];
                 <div class="col-md-6">
                   <label for="meeting_room" class="form-label">ชื่อห้อง</label>
                   <select class="form-select" id="meeting_room" name="meeting_room" required>
-                    <option selected disabled value="">เลือกห้อง...</option>
+                    <option selected disabled hidden value="" >เลือกห้อง...</option>
                     <option value="ห้องประชุมชั้น 4">ห้องประชุมชั้น 4</option>
                     <option value="ห้องประชุมชั้น 5">ห้องประชุมชั้น 5</option>
                     <option value="ห้องประชุมชั้น 9">ห้องประชุมชั้น 9</option>
@@ -126,7 +126,7 @@ $userlevel = $_SESSION['userlevel'];
                 <div class="col-md-6">
                   <label for="meeting_type" class="form-label">ใช้สำหรับ</label>
                   <select id="meeting_type" name="meeting_type" class="form-select" required>
-                    <option selected disabled value="">ใช้สำหรับการ...</option>
+                    <option selected disabled hidden value="">ใช้สำหรับการ...</option>
                     <option value="ฝึกอาชีพ">ฝึกอาชีพ</option>
                     <option value="อบรม">อบรม</option>
                     <option value="ประชุม">ประชุม</option>
@@ -400,6 +400,11 @@ $userlevel = $_SESSION['userlevel'];
       box-shadow: 0 0 2px black;
       margin: 0px 5px 0px 5px;
       width: 20rem;
+    }
+
+    .inputtext:focus {
+      border-color: #80bdff;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
 
     /* .form-check.form-check-inline {

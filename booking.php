@@ -3,7 +3,30 @@ session_start();
 
 // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
 if (!isset($_SESSION['username'])) {
-    header("Location: pages-login.html");
+    // Output SweetAlert2 JavaScript code
+    echo '<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Redirecting</title>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    title: "กรุณาเข้าสู่ระบบ",
+                    icon: "warning",
+                    confirmButtonText: "ตกลง"
+                }).then(function() {
+                    window.location.href = "pages-login.html";
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Empty body, JavaScript will handle redirection -->
+    </body>
+    </html>';
     exit();
 }
 

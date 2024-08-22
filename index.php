@@ -104,7 +104,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           left: 'prev,next today',
           center: 'title',
           // right : ''
-          right: 'dayGridMonth,dayGridWeek,dayGridDay'
+          right: 'dayGridMonth,dayGridWeek,dayGridDay,listMonth'
         },
         buttonText: {
             today:    'วันนี้',         // Today

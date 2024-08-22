@@ -43,7 +43,7 @@ if (!isset($_SESSION['username'])) {
                     icon: "warning",
                     confirmButtonText: "ตกลง"
                 }).then(function() {
-                    window.location.href = "index.php";
+                    window.location.href = "pages-login.html";
                 });
             });
         </script>

@@ -15,8 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $notes = $_POST['notes'];
 
     // เชื่อมต่อกับฐานข้อมูล
-    $conn = new mysqli('localhost', 'username', 'password', 'database');
-
+    include 'connection.php';
     // ตรวจสอบการเชื่อมต่อ
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);

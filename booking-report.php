@@ -8,9 +8,7 @@ if ($conn->connect_error) {
 }
 
 // Query ข้อมูลจากตาราง reservations
-$sql = "SELECT reservation_id, meeting_room, meeting_name, meeting_type, participant_count, organizer_name, contact_number, reservation_date, start_time, end_time, notes
-        FROM reservations
-        ORDER BY reservation_id DESC";
+$sql = "SELECT * FROM reservations ORDER BY reservation_id DESC";
 
 $result = $conn->query($sql);
 
@@ -152,18 +150,41 @@ $userlevel = $_SESSION['userlevel'];
                         <td><?= htmlspecialchars($formatted_date . $thai_year) ?></td>
                         <td><?= htmlspecialchars($row["start_time"]) ?> น. - <?= htmlspecialchars($row["end_time"]) ?> น.</td>
                         <td>
-                          <span class="badge rounded-pill bg-success fs-6">อนุมัติ</span>
+                          <?php 
+                          $is_disabled = false;
+                          if($row["is_approve"] == -1) :
+                          ?>
+                            <span class="badge rounded-pill bg-warning fs-6">รออนุมัติ</span>
+                          <?php
+                          elseif($row["is_approve"] == 0) :
+                            $is_disabled = true;
+                          ?>
+                            <span class="badge rounded-pill bg-danger fs-6">ไม่อนุมัติ</span>
+                          <?php
+                          elseif($row["is_approve"] == 1) :
+                            $is_disabled = true;
+                          ?>
+                            <span class="badge rounded-pill bg-success fs-6">อนุมัติ</span>
+                          <?php
+                          endif;
+                          ?>
                         </td>
                         <td><?= htmlspecialchars($row["notes"]) ?></td>
                         <td>
                           <div class="btn-group-sm" role="group">
-                              <button type="button" class="btn btn-success">
-                                ✔
-                              </button>
-                              <button type="button" class="btn btn-danger">
-                                ✖
-                              </button>
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="bi bi-eye"></i></button>
+                            <?php 
+                              if($_SESSION['userlevel'] == 'admin') :
+                            ?>
+                                <button type="button" class="btn btn-success" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerApprove(`<?= $row['reservation_id'] ?>`)" >
+                                  ✔
+                                </button>
+                                <button type="button" class="btn btn-danger" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerReject(`<?= $row['reservation_id'] ?>`)" >
+                                  ✖
+                                </button>
+                            <?php 
+                              endif;
+                            ?>
+                                <button type="button" class="btn btn-primary" <?php echo $is_disabled ? ' disabled ' : ''; ?> data-bs-toggle="modal" data-bs-target="#reportModal"><i class="bi bi-eye"></i></button>
                           </div>
                       </td>
 
@@ -251,12 +272,112 @@ $userlevel = $_SESSION['userlevel'];
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      Swal.fire({
+      /* Swal.fire({
           title: "กรุณาเข้าสู่ระบบ",
           icon: "warning",
           confirmButtonText: "ตกลง"
-      })
+      }) */
     });
+
+    function handlerApprove(reservation_id) {
+      console.log('handlerApprove id', reservation_id) 
+      Swal.fire({
+        icon: 'question',
+        title: 'ยืนยันการการจอง',
+        showCancelButton: true,
+        confirmButtonText: 'ยืนยัน',
+        cancelButtonText: 'ย้อนกลับ',
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          return;
+        }
+        SendApprove(reservation_id, 'approve')
+        .then((result) => {
+          console.log('result', result);
+          if(result.status == 200){
+            Swal.fire({
+              icon: 'success',
+              title: 'อนุมัติการจองเรียบร้อยแล้ว'
+            }).then(() => {
+              location.reload();
+            });
+            return;
+          }
+          throw new Error(result?.message ? result?.message : 'มีบางอย่างผิดพลาด')
+        }).catch((err) => {
+          console.log('err', err);
+          Swal.fire({
+            title: 'เกิดข้อผิดพลาด',
+            text: 'โปรดลองใหม่อีกครั้ง '+error,
+            icon: 'error',
+            confirmButtonText: 'ตกลง'
+          })
+        });
+      });
+    }
+
+    function handlerReject(reservation_id) {
+      console.log('handlerReject id', reservation_id) 
+      Swal.fire({
+        icon: 'question',
+        title: 'ไม่อนุมัติการจอง',
+        showCancelButton: true,
+        confirmButtonText: 'ยืนยัน',
+        cancelButtonText: 'ย้อนกลับ',
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          return;
+        }
+        SendApprove(reservation_id, 'reject')
+        .then((result) => {
+          console.log('result', result);
+          if(result.status == 200){
+            Swal.fire({
+              icon: 'success',
+              title: 'ไม่อนุมัติการจองเรียบร้อยแล้ว'
+            }).then(() => {
+              location.reload();
+            });
+            return;
+          }
+          throw new Error(result?.message ? result?.message : 'มีบางอย่างผิดพลาด')
+        }).catch((err) => {
+          console.log('err', err);
+          Swal.fire({
+            title: 'เกิดข้อผิดพลาด',
+            text: 'โปรดลองใหม่อีกครั้ง '+error,
+            icon: 'error',
+            confirmButtonText: 'ตกลง'
+          })
+        });
+      });
+    }
+
+    async function SendApprove(reservation_id, status) {
+      try {
+        const form = new FormData()
+        form.append('reservation_id', reservation_id)
+        form.append('status', status)
+        const response = await fetch('approve.php', {
+          method: 'POST',
+          body: form
+        })
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+        const data = await response.json()
+        return data;
+        console.log('SendApprove data', data)
+      } catch (error) {
+        console.error('SendApprove error', error)
+        Swal.fire({
+          title: 'เกิดข้อผิดพลาด',
+          text: 'โปรดลองใหม่อีกครั้ง '+error,
+          icon: 'error',
+          confirmButtonText: 'ตกลง'
+        })
+      }
+    }
   </script>
 
 </body>

@@ -20,7 +20,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   require_once  "connection.php";
 
   $query = $conn->query("SELECT 
-    meeting_name as title,
+    CONCAT(meeting_name, ' - ', meeting_room) as title,
     CONCAT(reservation_date, ' ', start_time) as `start`,
     CONCAT(reservation_date_end, ' ', end_time) as `end`,
     reservation_id,

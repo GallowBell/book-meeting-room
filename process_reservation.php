@@ -72,17 +72,16 @@ function InsertCar($equipment_qty = [], $equipment = '')
                                                                         reservation_date_end,
                                                                         start_time,
                                                                         end_time
-                                                                    )
-                                     VALUES (
-                                            $reservation_id,
-                                            '$equipment_full_name',
-                                            '',
-                                            '$value',
-                                            '',
-                                            '$eq_date',
-                                            '$reservation_date_end',
-                                            '$eq_start_time',
-                                            '$eq_end_time')";
+                                                                )  VALUES (
+                                                                    $reservation_id,
+                                                                    '$equipment_full_name',
+                                                                    '',
+                                                                    '$value',
+                                                                    '',
+                                                                    '$eq_date',
+                                                                    '$reservation_date_end',
+                                                                    '$eq_start_time',
+                                                                    '$eq_end_time')";
 
             $conn->query($sql_insert_equipment);
             $r[] = $sql_insert_equipment;
@@ -92,8 +91,12 @@ function InsertCar($equipment_qty = [], $equipment = '')
 }
 
 // ตรวจสอบการจองซ้อนทับ
-$sql_check = "SELECT * FROM reservations WHERE meeting_room = '$meeting_room' AND reservation_date = '$reservation_date' 
-              AND ((start_time <= '$end_time' AND end_time >= '$start_time'))";
+$sql_check = "SELECT * FROM reservations 
+              WHERE meeting_room = '$meeting_room' 
+              AND (
+                  (reservation_date <= '$reservation_date_end' AND reservation_date_end >= '$reservation_date') 
+                  AND ((start_time <= '$end_time' AND end_time >= '$start_time'))
+              )";
 
 $result = $conn->query($sql_check);
 //echo "row".$result->num_rows;

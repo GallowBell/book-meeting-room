@@ -22,7 +22,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   $query = $conn->query("SELECT 
     meeting_name as title,
     CONCAT(reservation_date, ' ', start_time) as `start`,
-    CONCAT(reservation_date, ' ', end_time) as `end`,
+    CONCAT(reservation_date_end, ' ', end_time) as `end`,
     reservation_id,
     CASE
       WHEN meeting_room = 'ห้องประชุมชั้น 4' THEN 'bg-success'
@@ -650,6 +650,8 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <script>
+
+
     // add the responsive classes after page initialization
     function addResponsiveClasses() {
         if (window.innerWidth <= 465) {
@@ -658,8 +660,12 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
             $('.fc-toolbar.fc-header-toolbar').removeClass('row col-lg-12 text-center');
         }
     }
-    window.onload = addResponsiveClasses;
     window.onresize = addResponsiveClasses;
+    let data_json = `<?php echo json_encode($data); ?>`;
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log(JSON.parse(data_json));
+      addResponsiveClasses();
+    })
 
   </script>
 

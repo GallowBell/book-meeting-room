@@ -38,24 +38,25 @@ $notes = $_POST['notes'];
 $equipment_size_1 = isset($_POST['equipment_size_1']) ? $_POST['equipment_size_1'] : "";
 $equipment_size_2 = isset($_POST['equipment_size_2']) ? $_POST['equipment_size_2'] : "";
 
-function InsertCar($equipment_qty = [], $equipment=''){
-    global $conn, 
-    $eq_date,
-    $eq_start_time,
-    $eq_end_time,
-    $reservation_date_end,
-    $reservation_id;
-    
+function InsertCar($equipment_qty = [], $equipment = '')
+{
+    global $conn,
+        $eq_date,
+        $eq_start_time,
+        $eq_end_time,
+        $reservation_date_end,
+        $reservation_id;
+
     $r = [];
     foreach ($equipment_qty as $key => $value) {
 
-        if($key == 'floor'){
+        if ($key == 'floor') {
             $equipment = 'ที่จอดรถชั้น';
         }
-        if($key == 'qty'){
+        if ($key == 'qty') {
             $equipment = 'จำนวนคัน';
         }
-        if($key == 'car_no'){
+        if ($key == 'car_no') {
             $equipment = 'เลขทะเบียนรถ';
         }
 
@@ -82,7 +83,7 @@ function InsertCar($equipment_qty = [], $equipment=''){
                                             '$reservation_date_end',
                                             '$eq_start_time',
                                             '$eq_end_time')";
-            
+
             $conn->query($sql_insert_equipment);
             $r[] = $sql_insert_equipment;
         }
@@ -105,35 +106,58 @@ if ($result->num_rows > 0) {
           </script>";
 } else {
     // ถ้าไม่มีการจองซ้อนทับ ให้บันทึกการจองใหม่ในตาราง reservations
-    $sql_insert = "INSERT INTO reservations (meeting_room, meeting_name, meeting_type, participant_count, organizer_name, contact_number, reservation_date, start_time, end_time, notes)
-    VALUES ('$meeting_room', '$meeting_name', '$meeting_type', $participant_count, '$organizer_name', '$contact_number', '$reservation_date', '$start_time', '$end_time', '$notes')";
+    $sql_insert = "INSERT INTO reservations (
+                                            meeting_room,
+                                            meeting_name,
+                                            meeting_type,
+                                            participant_count,
+                                            organizer_name,
+                                            contact_number,
+                                            reservation_date,
+                                            reservation_date_end,
+                                            start_time,
+                                            end_time,
+                                            notes
+                                        ) VALUES (
+                                            '$meeting_room',
+                                            '$meeting_name',
+                                            '$meeting_type',
+                                            $participant_count,
+                                            '$organizer_name',
+                                            '$contact_number',
+                                            '$reservation_date',
+                                            '$reservation_date_end',
+                                            '$start_time',
+                                            '$end_time',
+                                            '$notes'
+                                        )";
 
-   
-        if ($conn->query($sql_insert) === TRUE) {
-            $success = true; // การจองสำเร็จ
+
+    if ($conn->query($sql_insert) === TRUE) {
+        $success = true; // การจองสำเร็จ
 
         // รับค่า reservation_id ของการจองที่เพิ่งบันทึก
         $reservation_id = $conn->insert_id;
 
-        
+
         // Ensure that all arrays have the same count
         $equipmentCount = count($equipment);
 
         // Iterate over the arrays using foreach
         foreach ($equipment as $i => $equipment_name) {
             $size = "";
-            
+
             // Check if the current index is 15
             if ($i == 15) {
                 // Output equipment quantity as JSON and exit
                 InsertCar($equipment_qty[$i], $equipment[$i]);
                 continue;
             }
-            
+
             // Retrieve other details, ensuring they are properly set
             $qty = !empty($equipment_qty[$i]) ? $equipment_qty[$i] : 0;
             $details = !empty($equipment_details[$i]) ? $equipment_details[$i] : '';
-            
+
             // Determine the size based on equipment type
             $size =  ($equipment_name == "จานแก้วใส" || $equipment_name == "ถ้วย") ? $equipment_size_1 : ($equipment_name == "ถ้วย" ? $equipment_size_2 : '');
 
@@ -157,8 +181,6 @@ if ($result->num_rows > 0) {
             window.location.href = 'index.php';
         };
       </script>";
-
-
     } else {
         echo "Error: " . $sql_insert . "<br>" . $conn->error;
     }
@@ -167,4 +189,3 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
-?>

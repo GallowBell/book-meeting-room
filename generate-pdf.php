@@ -5,8 +5,27 @@ require_once __DIR__ . '/vendor/autoload.php';
 // Create an instance of the class:
 $mpdf = new \Mpdf\Mpdf();
 
+$html = "<table border='0'>
+    <tr>
+        <td>
+            TEST1
+        </td>
+        <td>
+            TEST2
+        </td>
+    </tr>
+    <tr>
+        <td>
+            TEST3
+        </td>
+        <td>
+            TEST4
+        </td>
+    </tr>
+</table>";
+
 // Write some HTML code:
-$mpdf->WriteHTML('Hello World');
+$mpdf->WriteHTML($html);
 
 // Output a PDF file directly to the browser
 $mpdf->Output();

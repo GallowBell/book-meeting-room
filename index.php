@@ -29,7 +29,8 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
       WHEN meeting_room = 'ห้องประชุมชั้น 5' THEN 'bg-primary'
           ELSE 'bg-danger'
     END as color_1
-    FROM `reservations`");
+    FROM `reservations`
+    WHERE is_approve = 1");
   $data = $query -> fetch_all(MYSQLI_ASSOC);
 
 ?>

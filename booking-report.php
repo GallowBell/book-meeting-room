@@ -1,6 +1,41 @@
 <?php
 
+session_start();
+
 require_once __DIR__ . '/connection.php';
+
+// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
+if (!isset($_SESSION['username'])) {
+  // Output SweetAlert2 JavaScript code
+  echo '<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Redirecting</title>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              Swal.fire({
+                  title: "กรุณาเข้าสู่ระบบ",
+                  icon: "warning",
+                  confirmButtonText: "ตกลง"
+              }).then(function() {
+                  window.location.href = "pages-login.html";
+              });
+          });
+      </script>
+  </head>
+  <body>
+      <!-- Empty body, JavaScript will handle redirection -->
+  </body>
+  </html>';
+  exit();
+}
+
+// โค้ดสำหรับผู้ที่เข้าสู่ระบบแล้ว
+$username = $_SESSION['username'];
+$userlevel = $_SESSION['userlevel'];
 
 // ตรวจสอบการเชื่อมต่อ
 if ($conn->connect_error) {
@@ -8,49 +43,19 @@ if ($conn->connect_error) {
 }
 
 // Query ข้อมูลจากตาราง reservations
-$sql = "SELECT * FROM reservations ORDER BY reservation_id DESC";
+$sql = "SELECT * FROM `reservations` ";
+
+if($userlevel == 'user'){
+  $sql .= " WHERE user_id = '$_SESSION['user_id']' ";
+}
+
+$sql .= " ORDER BY `reservation_id` DESC ";
 
 $result = $conn->query($sql);
 
 // ดึงข้อมูลทั้งหมดเป็นอาเรย์
 $data = $result->fetch_all(MYSQLI_ASSOC);
-?>
 
-<?php
-session_start();
-
-// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
-if (!isset($_SESSION['username'])) {
-    // Output SweetAlert2 JavaScript code
-    echo '<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Redirecting</title>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                Swal.fire({
-                    title: "กรุณาเข้าสู่ระบบ",
-                    icon: "warning",
-                    confirmButtonText: "ตกลง"
-                }).then(function() {
-                    window.location.href = "pages-login.html";
-                });
-            });
-        </script>
-    </head>
-    <body>
-        <!-- Empty body, JavaScript will handle redirection -->
-    </body>
-    </html>';
-    exit();
-}
-
-// โค้ดสำหรับผู้ที่เข้าสู่ระบบแล้ว
-$username = $_SESSION['username'];
-$userlevel = $_SESSION['userlevel'];
 ?>
 
 <!DOCTYPE html>

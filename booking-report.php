@@ -46,7 +46,7 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM `reservations` ";
 
 if($userlevel == 'user'){
-  $sql .= " WHERE user_id = '$_SESSION['user_id']' ";
+  $sql .= " WHERE user_id = '".$_SESSION['user_id']."' ";
 }
 
 $sql .= " ORDER BY `reservation_id` DESC ";

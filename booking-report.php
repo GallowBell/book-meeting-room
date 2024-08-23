@@ -46,7 +46,7 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM `reservations` ";
 
 if($userlevel == 'user'){
-  $sql .= " WHERE user_id = '".$_SESSION['user_id']."' ";
+  $sql .= " WHERE `user_id` = '".$_SESSION['user_id']."' ";
 }
 
 $sql .= " ORDER BY `reservation_id` DESC ";
@@ -276,14 +276,15 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
   ?>
 
   <script>
+    var data_json = `<?php echo json_encode($data, JSON_UNESCAPED_UNICODE); ?>`
     document.addEventListener("DOMContentLoaded", function() {
       /* Swal.fire({
           title: "กรุณาเข้าสู่ระบบ",
           icon: "warning",
           confirmButtonText: "ตกลง"
       }) */
-    });
-
+      console.table(JSON.parse(data_json))
+    })
     function handlerApprove(reservation_id) {
       console.log('handlerApprove id', reservation_id) 
       Swal.fire({

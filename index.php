@@ -23,6 +23,8 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
     CONCAT(meeting_name, ' - ', meeting_room) as title,
     CONCAT(reservation_date, ' ', start_time) as `start`,
     CONCAT(reservation_date_end, ' ', end_time) as `end`,
+    CONCAT(reservation_date, ' ', start_time) as `start_d`,
+    CONCAT(reservation_date_end, ' ', end_time) as `end_d`,
     reservation_date,
     start_time,
     reservation_date_end,
@@ -108,19 +110,29 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
       function Render_equipment_reservations(data = {}){
         const body = document.getElementById('myModal2_body');
         const title = document.getElementById('myModal2_header');
-        //console.log('data', data);
+        console.log('data', data);
         const arr = data?.equipment_reservations;
         const meeting_name = data?.meeting_name;
         body.innerHTML = '';
         title.innerHTML = `จองห้อง: ${meeting_name}`;
-        const start_d = (new Date(data?.start)).toLocaleDateString('th-TH', {
+        const start_d = (new Date(data?.start_d)).toLocaleString('th-TH', {
           dateStyle: 'full',
+        });
+        const end_d = (new Date(data?.end_d)).toLocaleString('th-TH', {
+          dateStyle: 'full',
+        });
+        const start_t = (new Date(data?.start_d)).toLocaleString('th-TH', {
           timeStyle: 'short'
         });
-        const end_d = (new Date(data?.end)).toLocaleDateString('th-TH', {
-          dateStyle: 'full',
+        const end_t = (new Date(data?.end_d)).toLocaleString('th-TH', {
           timeStyle: 'short'
         });
+        console.log({
+          start: data?.start,
+          end: data?.end,
+        }); 
+
+        // set ข้อมูลจาก reservations
         let html = `
         <div class="row">
           <div class="col-12">
@@ -130,14 +142,14 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                   <p class="card-text">หัวข้อ: ${data?.meeting_name}</p>
                   <p class="card-text">ใช้สำหรับ: ${data?.meeting_type}</p>
                   <p class="card-text">จำนวนคน: ${data?.participant_count}</p>
-                  <p class="card-text">เวลา: ${start_d} ถึง ${end_d}</p>
+                  <p class="card-text">วันที่: ${start_d} ถึง ${end_d}</p>
+                  <p class="card-text">เวลา: ${start_t} ถึง ${end_t}</p>
                 </div>
             </div>
           </div>
         </div>`;
 
-
-        // ข้อมูลจาก equipment_reservations loop
+       // หัวตาราง
         html += `
           <table class="table">
             <thead>
@@ -152,6 +164,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
             <tbody>
         `;
 
+         // ข้อมูลจาก equipment_reservations loop
         arr?.forEach((item, index) => {
           html += `
             <tr>

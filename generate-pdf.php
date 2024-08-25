@@ -22,7 +22,7 @@ $mpdf->SetRightMargin(0);
 $mpdf->SetDisplayMode('fullwidth');
 $mpdf->SetAutoPageBreak(false, 5);
 // Define the path to the image (use forward slashes)
-$imagePath = 'assets/img/report_page_0001.jpg';
+$imagePath = 'assets/img/report_page_0002.jpg';
 
 // Get the dimensions of the A4 page
 $pageWidth = 210; // Width in mm
@@ -30,11 +30,9 @@ $pageHeight = 297; // Height in mm
 
 $html = '<img style="width: '.$pageWidth.'mm; height: '.$pageHeight.'mm; margin: 0; padding: 0; border: none;" src="'.$imagePath.'"></img>';
 
-
 $mpdf->WriteHTML($html);
 
-
 // Output the PDF to the browser
-$mpdf->Output('output.pdf', 'I');
+$mpdf->Output('', 'I');
 
 ?>

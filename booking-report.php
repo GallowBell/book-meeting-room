@@ -127,6 +127,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                       <thead>
                         <tr>
                           <th scope="col" class="text-truncate">#</th>
+                          <th scope="col" class="text-truncate">ส่วนราชการ</th>
                           <th scope="col" class="text-truncate">เรื่อง</th>
                           <th scope="col" class="text-truncate">ห้องที่จอง</th>
                           <th scope="col" class="text-truncate">ชื่อผู้จอง</th>
@@ -145,14 +146,35 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                 $formatted_date = $date->format('d-m-');
 
                                 // แปลงปีเป็น พ.ศ.
-                                $thai_year = $date->format('Y') + 543;?>
+                                $thai_year = $date->format('Y') + 543;
+                                
+                                // แปลงวันที่ reservation_date_end
+                                $end_date = new DateTime($row["reservation_date_end"]);
+                                $formatted_end_date = $end_date->format('d-m-');
+                                $thai_year_end = $end_date->format('Y') + 543;
+
+                                // ตรวจสอบว่าเวลาเป็น 00:00:00 หรือไม่
+                                $is_midnight = $end_date->format('H:i:s') === '00:00:00';
+                                ?>
+
+                                
                           <tr>
                             <th scope="row"><a href="#"><?= htmlspecialchars($row["reservation_id"]) ?></a></th>
+                            <td class="text-truncate"><?= htmlspecialchars($row["government_sector"]) ?></td>
                             <td class="text-truncate"><?= htmlspecialchars($row["meeting_name"]) ?></td>
                             <td class="text-truncate"><a href="#" class="text-primary"><?= htmlspecialchars($row["meeting_room"]) ?></a></td>
                             <td class="text-truncate"><?= htmlspecialchars($row["organizer_name"]) ?></td>
-                            <td class="text-truncate"><?= htmlspecialchars($formatted_date . $thai_year) ?></td>
-                            <td class="text-truncate"><?= htmlspecialchars($row["start_time"]) ?> น. - <?= htmlspecialchars($row["end_time"]) ?> น.</td>
+
+                            <td class="text-truncate"><?= htmlspecialchars($formatted_date . $thai_year) ?>
+                            ถึง <?= htmlspecialchars($formatted_end_date . $thai_year_end) ?>
+                            </td>
+
+                            <td class="text-truncate">
+                            <?php
+                              $start_time = new DateTime($row["start_time"]);
+                              $end_time = new DateTime($row["end_time"]);
+                            ?>  
+                            <?= htmlspecialchars($start_time->format('H:i')) ?> น. ถึง <?= htmlspecialchars($end_time->format('H:i')) ?> น.</td>
                             <td class="text-truncate">
                               <?php 
                               $is_disabled = false;

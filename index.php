@@ -67,6 +67,17 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
         margin: 0 auto;
     }
 
+    .card-link{
+      background-image: linear-gradient(#00079C,#00079C);
+  background-size: 0 100%;
+  background-repeat: no-repeat;
+  transition: .4s;
+    }
+
+   .card-link:hover{
+    background-size: 100% 100%;
+    }
+
   
   </style>
 
@@ -196,30 +207,33 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           <div class="row">
 
             <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card bg-dark">
+            <div class="col-12">
+              <div class="card-link mb-4 rounded-3 bg-dark">
 
                 <div class="card-body">
-                  <h5 class="card-title text-white fw-bold">ห้องประชุม <span class="text-light">| ทั้งหมด</span></h5>
+                  <a href="booking.php">
+                  <h5 class="card-title text-white fw-bold"></h5>
 
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-grid-fill"></i>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <!-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-feather"></i>
+                    </div> -->
+                    <div class="p-3">
+                      <h1 class="text-white">จองห้องประชุม</h1>
                     </div>
-                    <div class="ps-3">
-                      <h6 class="text-white">3</h6>
-                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> 
-                      <span class="text-muted small pt-2 ps-1">increase</span> -->
-
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-feather text-white"></i>
                     </div>
                   </div>
                 </div>
+                </a>
 
               </div>
-            </div><!-- End Sales Card -->
+            </div>
+            <!-- End Sales Card -->
 
             <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
+            <!-- <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card bg-dark">
                 <div class="card-body">
                   <h5 class="card-title text-white fw-bold">ห้องประชุม <span class="text-white">| ที่ว่าง</span></h5>
@@ -229,17 +243,17 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                     </div>
                     <div class="ps-3">
                       <h6 class="text-white">3</h6>
-                      <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
 
                     </div>
                   </div>
                 </div>
 
               </div>
-            </div><!-- End Revenue Card -->
+            </div> -->
+            <!-- End Revenue Card -->
 
             <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
+            <!-- <div class="col-xxl-4 col-xl-12">
 
               <div class="card info-card customers-card bg-dark">
                 <div class="card-body">
@@ -251,7 +265,6 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                     </div>
                     <div class="ps-3">
                       <h6 class="text-white">10</h6>
-                      <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> -->
 
                     </div>
                   </div>
@@ -259,7 +272,8 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                 </div>
               </div>
 
-            </div><!-- End Customers Card -->
+            </div> -->
+            <!-- End Customers Card -->
 
             <!-- Reports -->
             <div class="col-12">
@@ -274,15 +288,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                 </div> -->
 
                 <div class="row m-4">
-                <div class="col-md-12 col-xl-4 d-flex align-items-center justify-content-center">
+                <div class="col-xxl-4 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
                 <i class="fs-5 bi bi-square-fill text-success"></i>
                 <span class="fs-5 ms-2">ห้องประชุมชั้น 4</span>
                   </div>
-                <div class="col-md-12 col-xl-4 d-flex align-items-center justify-content-center">
+                <div class="col-xxl-4 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
                   <i class="fs-5 bi bi-square-fill text-primary"></i>
                   <span class="fs-5 ms-2">ห้องประชุมชั้น 5</span>
                 </div>
-                <div class="col-md-12 col-xl-4 d-flex align-items-center justify-content-center">
+                <div class="col-xxl-4 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
                   <i class="fs-5 bi bi-square-fill text-danger"></i>
                   <span class="fs-5 ms-2">ห้องประชุมชั้น 9</span>
                 </div>

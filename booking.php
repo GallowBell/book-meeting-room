@@ -326,17 +326,18 @@ $userlevel = $_SESSION['userlevel'];
                           <label class="form-check-label" for="equipment17">อื่นๆ ระบุ </label>
                           <input class="inputtext" type="text" id="equipment17" name="equipment_details[16]" size="1" height="20">
                         </div>
-                        <div class="col-12">
-                          <div class="input-group mt-3 mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default" for="notes">หมายเหตุ</span>
-                            <input type="text" class="form-control" id="notes" name="notes">
-                          </div>
-                        </div>
+                       
                       </div>
                     </div>
                   </div>
                 </div>
                 <!-- End CheckBox1 -->
+                <div class="col-12">
+                          <div class="input-group mt-3 mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default" for="notes">หมายเหตุ</span>
+                            <input type="text" class="form-control" id="notes" name="notes">
+                          </div>
+                        </div>
                 <div class="col-6 mt-3">
                   <a href="index.php" class="btn btn-danger">ย้อนกลับ</a>
                 </div>

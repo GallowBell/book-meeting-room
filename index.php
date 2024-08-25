@@ -69,9 +69,9 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
     .card-link{
       background-image: linear-gradient(#00079C,#00079C);
-  background-size: 0 100%;
-  background-repeat: no-repeat;
-  transition: .4s;
+      background-size: 0 100%;
+      background-repeat: no-repeat;
+      transition: .4s;
     }
 
    .card-link:hover{
@@ -210,9 +210,9 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
             <div class="col-12">
               <div class="card-link mb-4 rounded-3 bg-dark">
 
-                <div class="card-body">
+                <div class="card-body p-0">
                   <a href="booking.php">
-                  <h5 class="card-title text-white fw-bold"></h5>
+                  <h5 class="card-title"></h5>
 
                   <div class="d-flex align-items-center justify-content-center">
                     <!-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -225,6 +225,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                       <i class="bi bi-feather text-white"></i>
                     </div>
                   </div>
+                  <h5 class="card-title"></h5>
                 </div>
                 </a>
 

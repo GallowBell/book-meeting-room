@@ -102,8 +102,20 @@ $userlevel = $_SESSION['userlevel'];
 
               <!-- General Form Elements -->
               <form action="process_reservation.php" method="post" class="row g-3 needs-validation" novalidate>
+              <div class="col-md-12">
+                  <label for="government_sector" class="form-label fw-bold fw-bold">ส่วนราชการ</label>
+                  <select class="form-select" id="government_sector" name="government_sector" required>
+                    <option selected disabled hidden value="" >เลือกส่วนราชการ...</option>
+                    <option value="กองสาธารณสุขฯ">กองสาธารณสุขฯ</option>
+                    <option value="ห้องประชุมชั้น 5">ห้องประชุมชั้น 5</option>
+                    <option value="ห้องประชุมชั้น 9">ห้องประชุมชั้น 9</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    โปรดเลือกห้อง
+                  </div>
+                </div>
                 <div class="col-md-6">
-                  <label for="meeting_room" class="form-label">ชื่อห้อง</label>
+                  <label for="meeting_room" class="form-label fw-bold">ชื่อห้อง</label>
                   <select class="form-select" id="meeting_room" name="meeting_room" required>
                     <option selected disabled hidden value="" >เลือกห้อง...</option>
                     <option value="ห้องประชุมชั้น 4">ห้องประชุมชั้น 4</option>
@@ -116,7 +128,7 @@ $userlevel = $_SESSION['userlevel'];
                 </div>
 
                 <div class="col-md-6">
-                  <label for="meeting_name" class="form-label">หัวข้อ</label>
+                  <label for="meeting_name" class="form-label fw-bold">หัวข้อ</label>
                   <input type="text" id="meeting_name" name="meeting_name" class="form-control" required>
                   <div class="invalid-feedback">
                     โปรดกรอกหัวข้อ
@@ -124,7 +136,7 @@ $userlevel = $_SESSION['userlevel'];
                 </div>
 
                 <div class="col-md-6">
-                  <label for="meeting_type" class="form-label">ใช้สำหรับ</label>
+                  <label for="meeting_type" class="form-label fw-bold">ใช้สำหรับ</label>
                   <select id="meeting_type" name="meeting_type" class="form-select" required>
                     <option selected disabled hidden value="">ใช้สำหรับการ...</option>
                     <option value="ฝึกอาชีพ">ฝึกอาชีพ</option>
@@ -137,7 +149,7 @@ $userlevel = $_SESSION['userlevel'];
                 </div>
 
                 <div class="col-md-6">
-                  <label for="participant_count" class="form-label">จำนวนผู้เข้าร่วม</label>
+                  <label for="participant_count" class="form-label fw-bold">จำนวนผู้เข้าร่วม</label>
                   <input type="number" id="participant_count" name="participant_count" class="form-control" required>
                   <div class="invalid-feedback">
                     โปรดกรอกจำนวนผู้เข้าร่วม
@@ -145,7 +157,7 @@ $userlevel = $_SESSION['userlevel'];
                 </div>
 
                 <div class="col-md-6">
-                  <label for="organizer_name" class="form-label">ชื่อผู้จอง</label>
+                  <label for="organizer_name" class="form-label fw-bold">ชื่อผู้จอง</label>
                   <input type="text" id="organizer_name" name="organizer_name" class="form-control" required>
                   <div class="invalid-feedback">
                     โปรดกรอกชื่อผู้จอง
@@ -153,7 +165,7 @@ $userlevel = $_SESSION['userlevel'];
                 </div>
 
                 <div class="col-md-6">
-                  <label for="contact_number" class="form-label">เบอร์ติดต่อ</label>
+                  <label for="contact_number" class="form-label fw-bold">เบอร์ติดต่อ</label>
                   <input type="number" id="contact_number" name="contact_number" maxlength="10" class="form-control" required>
                   <div class="invalid-feedback">
                     โปรดกรอกเบอร์โทรศัพท์
@@ -161,7 +173,7 @@ $userlevel = $_SESSION['userlevel'];
                 </div>
 
                 <div class="col-md-6">
-                  <label for="reservation_date" class="form-label">วันที่จอง</label>
+                  <label for="reservation_date" class="form-label fw-bold">วันที่จอง</label>
                   <input type="text" id="reservation_date" name="reservation_date" class="form-control bg-white" required>
                   <div class="invalid-feedback">
                     โปรดกรอกวันที่จอง
@@ -169,7 +181,7 @@ $userlevel = $_SESSION['userlevel'];
                 </div>
 
                 <div class="col-md-3">
-                  <label for="start_time" class="form-label">เวลาเริ่มต้น</label>
+                  <label for="start_time" class="form-label fw-bold">เวลาเริ่มต้น</label>
                   <input type="time" id="start_time" name="start_time" class="form-control bg-white" required>
                   <div class="invalid-feedback">
                     โปรดกรอกเวลาจอง
@@ -177,7 +189,7 @@ $userlevel = $_SESSION['userlevel'];
                 </div>
 
                 <div class="col-md-3">
-                  <label for="end_time" class="form-label">เวลาสิ้นสุด</label>
+                  <label for="end_time" class="form-label fw-bold">เวลาสิ้นสุด</label>
                   <input type="time" id="end_time" name="end_time" class="form-control bg-white" required>
                   <div class="invalid-feedback">
                     โปรดกรอกเวลาจอง
@@ -187,7 +199,7 @@ $userlevel = $_SESSION['userlevel'];
                 <!-- CheckBox1 -->
                 <div class="container mt-2">
                   <div class="col-md-12">
-                    <label for="equipment" class="form-label mt-2">อุปกรณ์</label>
+                    <label for="equipment" class="form-label fw-bold mt-2">อุปกรณ์</label>
                     <div>
                       <div class="border p-3 row">
                         <div class="col-md-6 col-xs-12 mb-2">

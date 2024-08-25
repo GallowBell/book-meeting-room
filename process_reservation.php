@@ -9,7 +9,7 @@ if ($conn->connect_error) {
 
 session_start();
 $user_id = $_SESSION['user_id'];
-
+$government_sector = $_POST['government_sector'];
 $meeting_room = $_POST['meeting_room'];
 $meeting_name = $_POST['meeting_name'];
 $meeting_type = $_POST['meeting_type'];
@@ -108,6 +108,7 @@ if ($result->num_rows > 0) {
 } else {
     // ถ้าไม่มีการจองซ้อนทับ ให้บันทึกการจองใหม่ในตาราง reservations
     $sql_insert = "INSERT INTO reservations (
+                                            government_sector,
                                             meeting_room,
                                             meeting_name,
                                             meeting_type,
@@ -121,6 +122,7 @@ if ($result->num_rows > 0) {
                                             notes,
                                             user_id
                                         ) VALUES (
+                                            '$government_sector',
                                             '$meeting_room',
                                             '$meeting_name',
                                             '$meeting_type',

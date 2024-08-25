@@ -107,8 +107,8 @@ $userlevel = $_SESSION['userlevel'];
                   <select class="form-select" id="government_sector" name="government_sector" required>
                     <option selected disabled hidden value="" >เลือกส่วนราชการ...</option>
                     <option value="กองสาธารณสุขฯ">กองสาธารณสุขฯ</option>
-                    <option value="ห้องประชุมชั้น 5">ห้องประชุมชั้น 5</option>
-                    <option value="ห้องประชุมชั้น 9">ห้องประชุมชั้น 9</option>
+                    <option value="กองช่าง">กองช่าง</option>
+                    <option value="กองปลัด">กองปลัด</option>
                   </select>
                   <div class="invalid-feedback">
                     โปรดเลือกห้อง

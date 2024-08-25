@@ -27,6 +27,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
     start_time,
     reservation_date_end,
     end_time,
+    government_sector,
+    meeting_room,
+    meeting_name,
+    meeting_type,
+    participant_count,
+    organizer_name,
+    contact_number,
+    notes,
+    is_approve,
     reservation_id,
     CASE
       WHEN meeting_room = 'ห้องประชุมชั้น 4' THEN 'bg-success'
@@ -34,8 +43,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           ELSE 'bg-danger'
     END as color_1
     FROM `reservations`
+  
     WHERE is_approve = 1");
-  $data = $query -> fetch_all(MYSQLI_ASSOC);
+  $data = $query->fetch_all(MYSQLI_ASSOC);
+
+  foreach ($data as $key => $value) {
+    $sql2 = "SELECT * FROM `equipment_reservations` WHERE reservation_id = ".$value['reservation_id'];
+    $query = $conn->query($sql2);
+    $data[$key]['equipment_reservations'] = $query->fetch_all(MYSQLI_ASSOC);
+  }
 
 ?>
 
@@ -89,18 +105,81 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
   <script>
 
-       var myModal2;
-    
+      function Render_equipment_reservations(data = {}){
+        const body = document.getElementById('myModal2_body');
+        const title = document.getElementById('myModal2_header');
+        //console.log('data', data);
+        const arr = data?.equipment_reservations;
+        const meeting_name = data?.meeting_name;
+        body.innerHTML = '';
+        title.innerHTML = `จองห้อง: ${meeting_name}`;
+        const start_d = (new Date(data?.start)).toLocaleDateString('th-TH', {
+          dateStyle: 'full',
+          timeStyle: 'short'
+        });
+        const end_d = (new Date(data?.end)).toLocaleDateString('th-TH', {
+          dateStyle: 'full',
+          timeStyle: 'short'
+        });
+        let html = `
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">ห้องประชุม: ${data?.meeting_room}</h5>
+                  <p class="card-text">หัวข้อ: ${data?.meeting_name}</p>
+                  <p class="card-text">ใช้สำหรับ: ${data?.meeting_type}</p>
+                  <p class="card-text">จำนวนคน: ${data?.participant_count}</p>
+                  <p class="card-text">เวลา: ${start_d} ถึง ${end_d}</p>
+                </div>
+            </div>
+          </div>
+        </div>`;
+
+
+        // ข้อมูลจาก equipment_reservations loop
+        html += `
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ชื่ออุปกรณ์</th>
+                <th scope="col">จำนวน</th>
+                <th scope="col">ขนาด</th>
+                <th scope="col">รายละเอียด</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        arr?.forEach((item, index) => {
+          html += `
+            <tr>
+              <th scope="row">${index + 1}</th>
+              <td>${item?.equipment_name}</td>
+              <td>${item?.equipment_quantity}</td>
+              <td>${item?.equipment_size}</td>
+              <td>${item?.additional_details}</td>
+            </tr>
+          `;
+        });
+
+        html += `
+            </tbody>
+          </table>
+        `;
+        body.innerHTML = html;
+      }
+
+      var myModal2;
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         const myModal = new bootstrap.Modal('#myModal', {
           keyboard: false
-        })  
-
-         myModal2 = new bootstrap.Modal('#myModal2', {
+        })
+        myModal2 = new bootstrap.Modal('#myModal2', {
           keyboard: false
-        }) 
-        
+        })
         
         $('#time').daterangepicker({
           timePicker: true,
@@ -151,6 +230,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           var event = arg.event;
           var eventTitle = event.title;
           var reservations_id = event.extendedProps?.reservation_id; // Custom property
+          Render_equipment_reservations(event?.extendedProps);
           myModal2.show();
           //console.log('arg', arg)
           console.log('reservations_id', reservations_id)
@@ -384,15 +464,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel2">จองห้อง</h1>
+        <h1 class="modal-title fs-5" id="myModal2_header">จองห้อง</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        sd
+      <div class="modal-body" id="myModal2_body"><!-- ห้ามลบ -->
+        <
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
-        <button type="submit" class="btn btn-success">บันทึก</button>
+        <!-- <button type="submit" class="btn btn-success">บันทึก</button> -->
       </div>
     </div>
   </div>
@@ -670,7 +750,6 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <script>
-
 
     // add the responsive classes after page initialization
     function addResponsiveClasses() {

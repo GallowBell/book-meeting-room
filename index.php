@@ -127,10 +127,6 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
         const end_t = (new Date(data?.end_d)).toLocaleString('th-TH', {
           timeStyle: 'short'
         });
-        console.log({
-          start: data?.start,
-          end: data?.end,
-        }); 
 
         // set ข้อมูลจาก reservations
         let html = `

@@ -7,6 +7,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+/* header('Content-Type: application/json');
+
+echo json_encode($_POST);
+return; */
+
 session_start();
 $user_id = $_SESSION['user_id'];
 $government_sector = $_POST['government_sector'];
@@ -164,7 +169,17 @@ if ($result->num_rows > 0) {
             $details = !empty($equipment_details[$i]) ? $equipment_details[$i] : '';
 
             // Determine the size based on equipment type
-            $size =  ($equipment_name == "จานแก้วใส" || $equipment_name == "ถ้วย") ? $equipment_size_1 : ($equipment_name == "ถ้วย" ? $equipment_size_2 : '');
+            switch ($equipment_name) {
+                case "จานแก้วใส":
+                    $size = $equipment_size_1;
+                    break;
+                case "ถ้วย":
+                    $size = $equipment_size_2;
+                    break;
+                default:
+                    $size = '';
+                    break;
+            }
 
             // Default values if not set
             $eq_date = !empty($equipment_dates[$i]) ? $equipment_dates[$i] : $reservation_date;

@@ -23,6 +23,10 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
     CONCAT(meeting_name, ' - ', meeting_room) as title,
     CONCAT(reservation_date, ' ', start_time) as `start`,
     CONCAT(reservation_date_end, ' ', end_time) as `end`,
+    reservation_date,
+    start_time,
+    reservation_date_end,
+    end_time,
     reservation_id,
     CASE
       WHEN meeting_room = 'ห้องประชุมชั้น 4' THEN 'bg-success'

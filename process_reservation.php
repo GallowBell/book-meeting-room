@@ -22,7 +22,7 @@ $reservation_date = $r_date[0];
  * เอาไปใส่ database วันที่สิ้นสุด
  * @var string $reservation_date_end
  */
-$reservation_date_end = $r_date[1];
+$reservation_date_end = isset($r_date[1]) ? $r_date[1] : $reservation_date;
 $start_time = $_POST['start_time'];
 $end_time = $_POST['end_time'];
 $equipment = isset($_POST['equipment']) ? $_POST['equipment'] : [];

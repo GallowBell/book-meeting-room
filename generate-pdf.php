@@ -31,29 +31,7 @@ $imagePath = 'assets/img/report_page_0002.jpg';
 $pageWidth = 210; // Width in mm
 $pageHeight = 297; // Height in mm
 
-/* 
-
-$query = $conn->query("SELECT 
-    CONCAT(meeting_name, ' - ', meeting_room) as title,
-    CONCAT(reservation_date, ' ', start_time) as `start`,
-    CONCAT(reservation_date_end, ' ', end_time) as `end`,
-    reservation_date,
-    start_time,
-    reservation_date_end,
-    end_time,
-    reservation_id,
-    CASE
-      WHEN meeting_room = 'ห้องประชุมชั้น 4' THEN 'bg-success'
-      WHEN meeting_room = 'ห้องประชุมชั้น 5' THEN 'bg-primary'
-          ELSE 'bg-danger'
-    END as color_1
-    FROM `reservations`
-    WHERE is_approve = 1");
-$data = $query -> fetch_all(MYSQLI_ASSOC);
-
-*/
-
-// เอา $data มาวนลูปเพื่อสร้างรายการการจอง ในไฟล์ txt-to-img.php
+// สร้างรายการการจอง ในไฟล์ txt-to-img.php แล้วเรียกใช้ฟังก์ชัน AddText และ AddCheckBox
 require_once __DIR__ . '/txt-to-img.php';
 
 $html = '<img style="width: '.$pageWidth.'mm; height: '.$pageHeight.'mm; margin: 0; padding: 0; border: none;" src="'.$imagePath.'"></img>';

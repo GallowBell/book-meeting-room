@@ -113,6 +113,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
         console.log('data', data);
         const arr = data?.equipment_reservations;
         const meeting_name = data?.meeting_name;
+        const reservation_id = data?.reservation_id;
         body.innerHTML = '';
         title.innerHTML = `จองห้อง: ${meeting_name}`;
         const start_d = (new Date(data?.start_d)).toLocaleString('th-TH', {
@@ -140,6 +141,11 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                   <p class="card-text">จำนวนคน: ${data?.participant_count}</p>
                   <p class="card-text">วันที่: ${start_d} ถึง ${end_d}</p>
                   <p class="card-text">เวลา: ${start_t} ถึง ${end_t}</p>
+                  <p class="card-text">
+                    <a class="btn btn-primary" href="generate-pdf.php?reservation_id=${reservation_id}" target="_blank">
+                      ดาวน์โหลดเอกสาร
+                    </a>
+                  </p>
                 </div>
             </div>
           </div>
@@ -201,7 +207,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
         timePicker24Hour: true
       }).focusin(function(){
       $('.ui-datepicker-calendar').css("display","none");
-    });;
+    });
       var calendar = new FullCalendar.Calendar(calendarEl, {
         locale: 'th',
         headerToolbar: {

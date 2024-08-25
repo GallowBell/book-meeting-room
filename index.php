@@ -115,7 +115,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
         const meeting_name = data?.meeting_name;
         const reservation_id = data?.reservation_id;
         body.innerHTML = '';
-        title.innerHTML = `จองห้อง: ${meeting_name}`;
+        title.innerHTML = `รายละเอียดการจอง: ${data?.meeting_room}`;
         const start_d = (new Date(data?.start_d)).toLocaleString('th-TH', {
           dateStyle: 'full',
         });
@@ -135,8 +135,8 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">ห้องประชุม: ${data?.meeting_room}</h5>
-                  <p class="card-text">หัวข้อ: ${data?.meeting_name}</p>
+                  <h5 class="card-title">หัวข้อ: ${data?.meeting_name}</h5>
+                  <p class="card-text">ห้องประชุม: ${data?.meeting_room}</p>
                   <p class="card-text">ใช้สำหรับ: ${data?.meeting_type}</p>
                   <p class="card-text">จำนวนคน: ${data?.participant_count}</p>
                   <p class="card-text">วันที่: ${start_d} ถึง ${end_d}</p>

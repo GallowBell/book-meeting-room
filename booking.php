@@ -102,17 +102,16 @@ $userlevel = $_SESSION['userlevel'];
 
               <!-- General Form Elements -->
               <form action="process_reservation.php" method="post" class="row g-3 needs-validation" novalidate>
-              <div class="col-md-12">
+              <div class="col-md-6">
                   <label for="government_sector" class="form-label fw-bold fw-bold">ส่วนราชการ</label>
-                  <select class="form-select" id="government_sector" name="government_sector" required>
-                    <option selected disabled hidden value="" >เลือกส่วนราชการ...</option>
-                    <option value="กองสาธารณสุขฯ">กองสาธารณสุขฯ</option>
-                    <option value="กองช่าง">กองช่าง</option>
-                    <option value="กองปลัด">กองปลัด</option>
-                  </select>
+                  <input type="text" id="government_sector" name="government_sector" class="form-control" required>
                   <div class="invalid-feedback">
-                    โปรดเลือกห้อง
+                    โปรดกรอกส่วนราชการ
                   </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="document_number" class="form-label fw-bold fw-bold">เลขที่หนังสือ</label>
+                  <input type="number" id="document_number" name="document_number" class="form-control">
                 </div>
                 <div class="col-md-6">
                   <label for="meeting_room" class="form-label fw-bold">ชื่อห้อง</label>
@@ -166,7 +165,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-6">
                   <label for="contact_number" class="form-label fw-bold">เบอร์ติดต่อ</label>
-                  <input type="number" id="contact_number" name="contact_number" maxlength="10" class="form-control" required>
+                  <input type="text" id="contact_number" name="contact_number" maxlength="10" class="form-control" required>
                   <div class="invalid-feedback">
                     โปรดกรอกเบอร์โทรศัพท์
                   </div>

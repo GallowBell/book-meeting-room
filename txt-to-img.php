@@ -91,26 +91,104 @@ foreach ($data as $key_1 => $value_1) {
     $equipment_reservations = $query->fetch_all(MYSQLI_ASSOC);
 
     // X, Y, Text
+    AddText(325, 255,  $value_1['government_sector']);
+    AddText(120, 340,  $value_1['document_number']);
+    AddText(1100, 340,  $value_1['Timestamps']);
+    AddText(420, 555,  $value_1['government_sector']);
+    AddText(375, 1050,  $value_1['participant_count']);
+    AddText(375, 1050,  $value_1['participant_count']);
     AddText(375, 1050,  $value_1['participant_count']);
     AddText(700, 1050,  $value_1['reservation_date'] . ' ถึง ' . $value_1['reservation_date_end']);
     AddText(1280, 1050,  $value_1['start_time']);
     AddText(1550, 1050,   $value_1['end_time']); 
+
+    // Adjust X and Y based on meeting_room
+    if ($value_1['meeting_room'] == 'ห้องประชุมชั้น 4') {
+        $x = 195;
+        $y = 645;
+    } elseif ($value_1['meeting_room'] == 'ห้องประชุมชั้น 5') {
+        $x = 950;
+        $y = 640;
+    } elseif ($value_1['meeting_room'] == 'ห้องประชุมชั้น 9') {
+        $x = 195;
+        $y = 715;
+    }
+
+    // Add the text with the adjusted X, Y coordinates
+    AddCheckBox($x, $y);
+
 
     // $equipment_reservations = ข้อมูลจากตาราง equipment_reservations
     foreach ($equipment_reservations as $key_2 => $value_2) {
         foreach ($value_2 as $key_3 => $value_3) {
 
             // X, Y ของ CheckBox
+            // x = แนวนอน
+            // y = แนวตั้ง
             if($value_3 == 'ชุดโต๊ะหมู่บูชา'){
                 AddCheckBox(200, 1210);
             }
+            if($value_3 == 'จาน + ช้อนส้อม'){
+                AddCheckBox(200, 1280);
+            }
+            if($value_3 == 'ถาดเสิร์ฟ'){
+                AddCheckBox(1000, 1280);
+            }
             if($value_3 == 'จานแก้วใส'){
+                AddCheckBox(200, 1350);
+            }
+            if($value_3 == 'ช้อนเล็ก'){
                 AddCheckBox(200, 1420);
             }
+            if($value_3 == 'ส้อมเล็ก'){
+                AddCheckBox(1000, 1420);
+            }
+            if($value_3 == 'ชุดกาเเฟ'){
+                AddCheckBox(200, 1490);
+            }
+            if($value_3 == 'ถ้วย'){
+                AddCheckBox(200, 1560);
+            }
+            if($value_3 == 'เเก้วน้ำดื่ม'){
+                AddCheckBox(200, 1630);
+            }
+            if($value_3 == 'เหยือกน้ำ'){
+                AddCheckBox(200, 1700);
+            }
+            if($value_3 == 'คูลเลอร์ใส่น้ำดื่ม'){
+                AddCheckBox(1000, 1700);
+            }
+            if($value_3 == 'คูลเลอร์ใส่น้ำร้อน'){
+                AddCheckBox(200, 1770);
+            }
+            if($value_3 == 'กระติกน้ำเเข็ง'){
+                AddCheckBox(1000, 1770);
+            }
+            if($value_3 == 'ผ้าปูโต๊ะ'){
+                AddCheckBox(200, 1840);
+            }
+            if($value_3 == 'ผ้าคลุมเก้าอี้'){
+                AddCheckBox(1000, 1840);
+            }
+            if($value_3 == 'อื่นๆ'){
+                AddCheckBox(200, 1910);
+            }
+            if($value_3 == 'ที่จอดรถชั้น'){
+                AddCheckBox(200, 1980);
+            }
+            if($value_3 == 'จำนวนคัน'){
+                
+            }
+            if($value_3 == 'เลขทะเบียนรถ'){
+                // AddCheckBox(200, 1350);
+            }
+
+
+
 
             //example
-            AddText(300, 250, ' ชื่อ - นามสกุล 1 ');
-            AddText(100, 325, ' ชื่อ - นามสกุล 2');
+            // AddText(300, 250, ' ชื่อ - นามสกุล 1 ');
+            // AddText(100, 325, ' ชื่อ - นามสกุล 2');
             
         }
     }

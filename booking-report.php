@@ -210,7 +210,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                 <?php 
                                   endif;
                                 ?>
-                                    <button type="button" class="btn btn-primary" <?php echo $is_disabled ? ' disabled ' : ''; ?> data-bs-toggle="modal" data-bs-target="#reportModal"><i class="bi bi-eye"></i></button>
+                                    <button type="button" class="btn btn-primary" <?php echo $is_disabled ? : ''; ?> 
+                                      data-bs-toggle="modal" 
+                                      data-bs-target="#reportModal" 
+                                      data-reservation-id="<?= $row['reservation_id'] ?>">
+                                      <i class="bi bi-eye"></i>
+                                  </button>
+
                               </div>
                           </td>
 
@@ -251,41 +257,51 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="reportModalLabel">แก้ไขข้อมูลการจอง</h5>
+        <h5 class="modal-title" id="reportModalLabel">รายละเอียดการจอง</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="editForm" action="report-update.php" method="post">
+        <form id="viewForm" action="" method="post">
           <input type="hidden" id="reservation_id" name="reservation_id">
           <div class="mb-3">
             <label for="meeting_name" class="form-label">เรื่อง</label>
-            <input type="text" class="form-control" id="meeting_name" name="meeting_name">
+            <input type="text" class="form-control" id="meeting_name" name="meeting_name" disabled>
           </div>
           <div class="mb-3">
             <label for="meeting_room" class="form-label">ห้องที่จอง</label>
-            <input type="text" class="form-control" id="meeting_room" name="meeting_room">
+            <input type="text" class="form-control" id="meeting_room" name="meeting_room" disabled>
           </div>
           <div class="mb-3">
             <label for="organizer_name" class="form-label">ชื่อผู้จอง</label>
-            <input type="text" class="form-control" id="organizer_name" name="organizer_name">
+            <input type="text" class="form-control" id="organizer_name" name="organizer_name" disabled>
           </div>
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="reservation_date" class="form-label">วันที่</label>
-            <input type="date" class="form-control" id="reservation_date" name="reservation_date">
+            <input type="date" class="form-control" id="reservation_date" name="reservation_date" disabled>
+          </div> -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="reservation_date" class="form-label">วันที่เริ่มต้น</label>
+              <input type="date" class="form-control" id="reservation_date" name="reservation_date" disabled>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="reservation_date_end" class="form-label">วันที่สิ้นสุด</label>
+              <input type="date" class="form-control" id="reservation_date_end" name="reservation_date_end" disabled>
+            </div>
           </div>
           <div class="mb-3">
             <label for="start_time" class="form-label">เวลาที่จองเริ่มต้น</label>
-            <input type="time" class="form-control" id="start_time" name="start_time">
+            <input type="time" class="form-control" id="start_time" name="start_time" disabled>
           </div>
           <div class="mb-3">
             <label for="end_time" class="form-label">เวลาที่จองสิ้นสุด</label>
-            <input type="time" class="form-control" id="end_time" name="end_time">
+            <input type="time" class="form-control" id="end_time" name="end_time" disabled>
           </div>
           <div class="mb-3">
             <label for="notes" class="form-label">หมายเหตุ</label>
-            <textarea class="form-control" id="notes" name="notes"></textarea>
+            <textarea class="form-control" id="notes" name="notes" disabled></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">บันทึก</button>
+          <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">ปิด</button>
         </form>
       </div>
     </div>
@@ -296,6 +312,32 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 <?php
   include 'footer.php';
   ?>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var reportModal = document.getElementById('reportModal');
+    reportModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // ปุ่มที่ถูกคลิก
+        var reservationId = button.getAttribute('data-reservation-id'); // ดึง reservation_id จากปุ่ม
+
+        // ค้นหาข้อมูลที่ต้องเติมในฟอร์ม
+        var data = JSON.parse(data_json).find(row => row.reservation_id == reservationId);
+        if (data) {
+            // เติมข้อมูลในฟอร์ม
+            document.getElementById('reservation_id').value = data.reservation_id;
+            document.getElementById('meeting_name').value = data.meeting_name;
+            document.getElementById('meeting_room').value = data.meeting_room;
+            document.getElementById('organizer_name').value = data.organizer_name;
+            document.getElementById('reservation_date').value = data.reservation_date;
+            document.getElementById('reservation_date_end').value = data.reservation_date_end;
+            document.getElementById('start_time').value = data.start_time;
+            document.getElementById('end_time').value = data.end_time;
+            document.getElementById('notes').value = data.notes;
+        }
+    });
+});
+
+  </script>
 
   <script>
     var data_json = `<?php echo json_encode($data, JSON_UNESCAPED_UNICODE); ?>`

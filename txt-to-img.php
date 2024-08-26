@@ -95,7 +95,7 @@ foreach ($data as $key_1 => $value_1) {
     AddText(120, 340,  $value_1['document_number']);
     AddText(1100, 340,  $value_1['Timestamps']);
     AddText(420, 555,  $value_1['government_sector']);
-    AddText(375, 1050,  $value_1['participant_count']);
+    AddText(900, 910,  $value_1['meeting_name']);
     AddText(375, 1050,  $value_1['participant_count']);
     AddText(375, 1050,  $value_1['participant_count']);
     AddText(700, 1050,  $value_1['reservation_date'] . ' ถึง ' . $value_1['reservation_date_end']);
@@ -117,6 +117,20 @@ foreach ($data as $key_1 => $value_1) {
     // Add the text with the adjusted X, Y coordinates
     AddCheckBox($x, $y);
 
+    if ($value_1['meeting_type'] == 'ฝึกอาชีพ') {
+        $x = 195;
+        $y = 855;
+    } elseif ($value_1['meeting_type'] == 'อบรม') {
+        $x = 425;
+        $y = 855;
+    } elseif ($value_1['meeting_type'] == 'ประชุม') {
+        $x = 605;
+        $y = 855;
+    }
+
+    // Add the text with the adjusted X, Y coordinates
+    AddCheckBox($x, $y);
+
 
     // $equipment_reservations = ข้อมูลจากตาราง equipment_reservations
     foreach ($equipment_reservations as $key_2 => $value_2) {
@@ -130,57 +144,73 @@ foreach ($data as $key_1 => $value_1) {
             }
             if($value_3 == 'จาน + ช้อนส้อม'){
                 AddCheckBox(200, 1280);
+                AddText(730, 1330,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ถาดเสิร์ฟ'){
                 AddCheckBox(1000, 1280);
+                AddText(1450, 1330,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'จานแก้วใส'){
                 AddCheckBox(200, 1350);
+                AddText(1060, 1400,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ช้อนเล็ก'){
                 AddCheckBox(200, 1420);
+                AddText(630, 1470,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ส้อมเล็ก'){
                 AddCheckBox(1000, 1420);
+                AddText(1450, 1470,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ชุดกาเเฟ'){
                 AddCheckBox(200, 1490);
+                AddText(1020, 1540,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ถ้วย'){
                 AddCheckBox(200, 1560);
+                AddText(1020, 1610,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'เเก้วน้ำดื่ม'){
                 AddCheckBox(200, 1630);
+                AddText(750, 1680,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'เหยือกน้ำ'){
                 AddCheckBox(200, 1700);
+                AddText(650, 1750,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'คูลเลอร์ใส่น้ำดื่ม'){
                 AddCheckBox(1000, 1700);
+                AddText(1510, 1750,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'คูลเลอร์ใส่น้ำร้อน'){
                 AddCheckBox(200, 1770);
+                AddText(730, 1820,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'กระติกน้ำเเข็ง'){
                 AddCheckBox(1000, 1770);
+                AddText(1490, 1820,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ผ้าปูโต๊ะ'){
                 AddCheckBox(200, 1840);
+                AddText(650, 1890,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ผ้าคลุมเก้าอี้'){
                 AddCheckBox(1000, 1840);
+                AddText(1480, 1890,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'อื่นๆ'){
                 AddCheckBox(200, 1910);
+                AddText(450, 1970,  $value_2['additional_details']);
             }
             if($value_3 == 'ที่จอดรถชั้น'){
                 AddCheckBox(200, 1980);
+                AddText(520, 2040,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'จำนวนคัน'){
-                
+                AddText(850, 2040,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'เลขทะเบียนรถ'){
-                // AddCheckBox(200, 1350);
+                AddText(1280, 2040,  $value_2['equipment_quantity']);
             }
 
 

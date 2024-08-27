@@ -343,12 +343,164 @@ $userlevel = $_SESSION['userlevel'];
                   </div>
                 </div>
                 <!-- End CheckBox1 -->
-                <div class="col-12">
-                          <div class="input-group mt-3 mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default" for="notes">หมายเหตุ</span>
-                            <input type="text" class="form-control" id="notes" name="notes">
-                          </div>
+
+                    <div class="col-12">
+                      <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default" for="notes">หมายเหตุ</span>
+                        <input type="text" class="form-control" id="notes" name="notes">
+                      </div>
+                    </div>
+
+                    <p>
+                      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEquipment" href="#collapseEquipment" aria-expanded="false" aria-controls="collapseEquipment">
+                        ขอใช้ห้องโสตทัศนูปกรณ์
+                      </button>
+                    </p>
+                    <div class="collapse" id="collapseEquipment">
+                      <div class="col-md-12">
+                        <label for="equipment" class="form-label fw-bold mb-3">อุปกรณ์ขอใช้ห้องโสตทัศนูปกรณ์</label>
+                        <div class="border p-3 row">
+                        <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check1">
+                    <label class="form-check-label" for="group1Check1">
+                        ชุดเครื่องเสียงห้องประชุม
+                    </label>
+                </div>
+                <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check2">
+                    <label class="form-check-label" for="group1Check2">
+                    ชุดเครื่องเสียงนอกสถานที่
+                    </label>
+                </div>
+                <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check3">
+                    <label class="form-check-label" for="group1Check3">
+                        เครื่องโปรเจคเตอร์ พร้อมจอภาพ
+                    </label>
+                </div>
+                <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check4">
+                    <label class="form-check-label" for="group1Check4">
+                    เครื่องเสียงลำโพงกระเป๋าหิ้ว
+                    </label>
+                </div>
+                <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check5">
+                    <label class="form-check-label" for="group1Check5">
+                        เจ้าหน้าที่ควบคุม
+                    </label>
+                </div>
+                <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check6">
+                    <label class="form-check-label" for="group1Check6">
+                        เครื่องเสียงพกพาพร้อมไมโครโฟน
+                    </label>
+                </div>
+                <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check7">
+                    <label class="form-check-label" for="group1Check7">
+                      การบันทึกเทปภาพบรรยาย (VDO)
+                    </label>
+                </div>
+                <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check8">
+                    <label class="form-check-label" for="group1Check8">
+                    การบันทึกเทปเสียงบรรยาย (Voice)
+                    </label>
+                </div>
+                <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check9">
+                    <label class="form-check-label" for="group1Check9">
+                        การบันทึกภาพนิ่ง
+                    </label>
+                </div>
+                <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check10">
+                    <label class="form-check-label" for="group1Check10">
+                      การส่งข่าวประชาสัมพันธ์
+                    </label>
+                </div>
+                <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check11">
+                    <label class="form-check-label" for="group1Check11">
+                        แฟ้มเอกสาร จำนวน
+                        <input class="inputint" type="number" value="" id="group1Check11" size="1" height="20"> ฉบับ
+                    </label>
+                </div>
+                <div class="col-md-6 col-xs-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check12">
+                    <label class="form-check-label" for="group1Check12">
+                        เอกสารของที่ระลึก จำนวน
+                        <input class="inputint" type="number" value="" id="group1Check12" size="1" height="20"> ชุด
+                    </label>
+                </div>
+                <div class="col-12 mb-2">
+                  <input class="form-check-input" type="checkbox" value="" id="group1Check13">
+                  <label class="form-check-label" for="group1Check13">
+                      การประชุมออนไลน์ (Video Conference) โปรแกรม
+                      <div style="display: inline-flex; align-items: center;">
+                          <input class="inputtext" type="text" value="" id="group1Check13" size="" height="20" style='width:100%'>
+                          <span> (ระบุ)</span>
+                      </div>
+                  </label>
+                </div>
+                <div class="col-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check14">
+                    <label class="form-check-label" for="group1Check14">
+                        เอกสารแจก 
+                        <div style="display: inline-flex; align-items: center;">
+                            <input class="inputtext" type="text" value="" id="group1Check14" size="" height="20" style='width:100%'>
+                            <span> (ระบุ)</span>
                         </div>
+                        จำนวน 
+                        <input class="inputint" type="number" value="" id="group1Check14" size="1" height="20"> เล่ม
+                    </label>
+                </div>
+
+                <div class="col-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check15">
+                    <label class="form-check-label" for="group1Check15">
+                        พิธีกรดำเนินงาน (วัน/เวลา) ในวันที่
+                    </label>
+                    <input class="inputint" type="date" value="" id="group1Check15" size="1" height="20">
+                    <label class="form-check-label" for="group1Check12">
+                      เวลา <input class="inputint" type="time" value="" id="group1Check15" size="1" height="20"> 
+                    </label>
+                </div>
+                <div class="col-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check16">
+                    <label class="form-check-label" for="group1Check16">
+                        ช่างภาพ (วัน/เวลา) ในวันที่
+                    </label>
+                    <input class="inputint" type="date" value="" id="group1Check16" size="1" height="20">
+                    <label class="form-check-label" for="group1Check16">
+                      เวลา <input class="inputint" type="time" value="" id="group1Check16" size="1" height="20"> 
+                    </label>
+                </div>
+                <div class="col-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check17">
+                    <label class="form-check-label" for="group1Check17">
+                        รถประชาสัมพันธ์เคลื่อนที่
+                        <div style="display: inline-flex; align-items: center;">
+                          <input class="inputtext" type="text" value="" id="group1Check17" size="" height="20" style='width:100%'>
+                        </div>
+                    </label>
+                </div>
+                <div class="col-12 mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="group1Check18">
+                    <label class="form-check-label" for="group1Check18">
+                        อื่นๆ ระบุ
+                        <div style="display: inline-flex; align-items: center;">
+                          <input class="inputtext" type="text" value="" id="group1Check18" size="" height="20" style='width:100%'>
+                        </div>
+                    </label>
+                </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
                 <div class="col-6 mt-3">
                   <a href="index.php" class="btn btn-danger">ย้อนกลับ</a>
                 </div>

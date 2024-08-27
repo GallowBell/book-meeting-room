@@ -42,6 +42,19 @@ $notes = $_POST['notes'];
 $equipment_size_1 = isset($_POST['equipment_size_1']) ? $_POST['equipment_size_1'] : "";
 $equipment_size_2 = isset($_POST['equipment_size_2']) ? $_POST['equipment_size_2'] : "";
 
+
+// booking-sod.php
+$equipment_sod = isset($_POST['equipment']) ? $_POST['equipment'] : [];
+$equipment_sod_qty = isset($_POST['equipment_qty']) ? $_POST['equipment_qty'] : [];
+$equipment_sod_details = isset($_POST['equipment_details']) ? $_POST['equipment_details'] : [];
+$equipment_sod_size = isset($_POST['equipment_size']) ? $_POST['equipment_size'] : [];
+$equipment_sod_dates = isset($_POST['equipment_date']) ? $_POST['equipment_date'] : [];
+$equipment_sod_start_times = isset($_POST['equipment_start_time']) ? $_POST['equipment_start_time'] : [];
+$equipment_sod_end_times = isset($_POST['equipment_end_time']) ? $_POST['equipment_end_time'] : [];
+$notes = $_POST['notes'];
+$equipment_sod_size_1 = isset($_POST['equipment_size_1']) ? $_POST['equipment_size_1'] : "";
+$equipment_sod_size_2 = isset($_POST['equipment_size_2']) ? $_POST['equipment_size_2'] : "";
+
 function InsertCar($equipment_qty = [], $equipment = '')
 {
     global $conn,

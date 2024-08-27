@@ -56,6 +56,12 @@ $result = $conn->query($sql);
 // ดึงข้อมูลทั้งหมดเป็นอาเรย์
 $data = $result->fetch_all(MYSQLI_ASSOC);
 
+foreach ($data as $key => $value) {
+  $sql2 = "SELECT * FROM `equipment_reservations` WHERE reservation_id = ".$value['reservation_id'];
+  $query = $conn->query($sql2);
+  $data[$key]['equipment_reservations'] = $query->fetch_all(MYSQLI_ASSOC);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -257,7 +263,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="reportModalLabel">รายละเอียดการจอง</h5>
+        <h5 class="modal-title" id="myModal2_header">รายละเอียดการจอง</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -325,8 +331,9 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
           <!-- เพิ่มส่วนแสดงผลข้อมูล equipment_reservations -->
             <div class="col-md-12 mb-3">
                 <h5>รายการอุปกรณ์ที่จอง</h5>
-                <div class="equipment-section">
-                  
+                <div class="equipment-section" id="myModal2_body">
+                
+                
                 </div>
             </div>
 
@@ -375,10 +382,90 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             document.getElementById('start_time').value = data.start_time;
             document.getElementById('end_time').value = data.end_time;
             document.getElementById('notes').value = data.notes;
-
+            Render_equipment_reservations(data.equipment_reservations);
         }
+        
     });
 });
+
+function Render_equipment_reservations(data = {}){
+          const body = document.getElementById('myModal2_body');
+          const title = document.getElementById('myModal2_header');
+          console.log('data', data);
+          const arr = data?.equipment_reservations;
+          const meeting_name = data?.meeting_name;
+          const reservation_id = data?.reservation_id;
+          body.innerHTML = '';
+          title.innerHTML = `รายละเอียดการจอง: ${data?.meeting_room}`;
+          const start_d = (new Date(data?.start_d)).toLocaleString('th-TH', {
+            dateStyle: 'full',
+          });
+          const end_d = (new Date(data?.end_d)).toLocaleString('th-TH', {
+            dateStyle: 'full',
+          });
+          const start_t = (new Date(data?.start_d)).toLocaleString('th-TH', {
+            timeStyle: 'short'
+          });
+          const end_t = (new Date(data?.end_d)).toLocaleString('th-TH', {
+            timeStyle: 'short'
+          });
+
+          // set ข้อมูลจาก reservations
+          let html = `
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">หัวข้อ: ${data?.meeting_name}</h5>
+                    <p class="card-text">ห้องประชุม: ${data?.meeting_room}</p>
+                    <p class="card-text">ใช้สำหรับ: ${data?.meeting_type}</p>
+                    <p class="card-text">จำนวนคน: ${data?.participant_count}</p>
+                    <p class="card-text">วันที่: ${start_d} ถึง ${end_d}</p>
+                    <p class="card-text">เวลา: ${start_t} ถึง ${end_t}</p>
+                    <p class="card-text">
+                      <a class="btn btn-primary" href="generate-pdf.php?reservation_id=${reservation_id}" target="_blank">
+                        ดาวน์โหลดเอกสาร
+                      </a>
+                    </p>
+                  </div>
+              </div>
+            </div>
+          </div>`;
+
+        // หัวตาราง
+          html += `
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">ชื่ออุปกรณ์</th>
+                  <th scope="col">จำนวน</th>
+                  <th scope="col">ขนาด</th>
+                  <th scope="col">รายละเอียด</th>
+                </tr>
+              </thead>
+              <tbody>
+          `;
+
+          // ข้อมูลจาก equipment_reservations loop
+          arr?.forEach((item, index) => {
+            html += `
+              <tr>
+                <th scope="row">${index + 1}</th>
+                <td>${item?.equipment_name}</td>
+                <td>${item?.equipment_quantity}</td>
+                <td>${item?.equipment_size}</td>
+                <td>${item?.additional_details}</td>
+              </tr>
+            `;
+          });
+
+          html += `
+              </tbody>
+            </table>
+          `;
+          body.innerHTML = html;
+        }
   </script>
 
   <script>

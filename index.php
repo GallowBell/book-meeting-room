@@ -135,21 +135,22 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">หัวข้อ: ${data?.meeting_name}</h5>
-                  <p class="card-text">ห้องประชุม: ${data?.meeting_room}</p>
-                  <p class="card-text">ใช้สำหรับ: ${data?.meeting_type}</p>
-                  <p class="card-text">จำนวนคน: ${data?.participant_count}</p>
-                  <p class="card-text">วันที่: ${start_d} ถึง ${end_d}</p>
-                  <p class="card-text">เวลา: ${start_t} ถึง ${end_t}</p>
-                  <p class="card-text">
-                    <a class="btn btn-primary" href="generate-pdf.php?reservation_id=${reservation_id}" target="_blank">
-                      ดาวน์โหลดเอกสาร
-                    </a>
-                  </p>
+                  <p class="card-title">หัวข้อ: ${data?.meeting_name}</p>
+                  <p class="card-text"><span class="fw-bold">ห้องประชุม:</span> ${data?.meeting_room}</p>
+                  <p class="card-text"><span class="fw-bold">ใช้สำหรับ:</span> ${data?.meeting_type}</p>
+                  <p class="card-text"><span class="fw-bold">จำนวนคน:</span> ${data?.participant_count}</p>
+                  <p class="card-text"><span class="fw-bold">วันที่:</span> ${start_d} ถึง ${end_d}</p>
+                  <p class="card-text"><span class="fw-bold">เวลา:</span> ${start_t} ถึง ${end_t}</p>
                 </div>
             </div>
           </div>
         </div>`;
+
+        // <p class="card-text">
+        //             <a class="btn btn-primary" href="generate-pdf.php?reservation_id=${reservation_id}" target="_blank">
+        //               ดาวน์โหลดเอกสาร
+        //             </a>
+        //           </p>
 
        // หัวตาราง
        /*  html += `

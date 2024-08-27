@@ -49,13 +49,13 @@ $equipment_size_2 = isset($_POST['equipment_size_2']) ? $_POST['equipment_size_2
 $equipment_sod = isset($_POST['equipment']) ? $_POST['equipment'] : [];
 $equipment_sod_qty = isset($_POST['equipment_qty']) ? $_POST['equipment_qty'] : [];
 $equipment_sod_details = isset($_POST['equipment_details']) ? $_POST['equipment_details'] : [];
-$equipment_sod_size = isset($_POST['equipment_size']) ? $_POST['equipment_size'] : [];
+// $equipment_sod_size = isset($_POST['equipment_size']) ? $_POST['equipment_size'] : [];
 $equipment_sod_dates = isset($_POST['equipment_date']) ? $_POST['equipment_date'] : [];
 $equipment_sod_start_times = isset($_POST['equipment_start_time']) ? $_POST['equipment_start_time'] : [];
 $equipment_sod_end_times = isset($_POST['equipment_end_time']) ? $_POST['equipment_end_time'] : [];
-$notes = $_POST['notes'];
-$equipment_sod_size_1 = isset($_POST['equipment_size_1']) ? $_POST['equipment_size_1'] : "";
-$equipment_sod_size_2 = isset($_POST['equipment_size_2']) ? $_POST['equipment_size_2'] : "";
+// $notes = $_POST['notes'];
+// $equipment_sod_size_1 = isset($_POST['equipment_size_1']) ? $_POST['equipment_size_1'] : "";
+// $equipment_sod_size_2 = isset($_POST['equipment_size_2']) ? $_POST['equipment_size_2'] : "";
 
 function InsertCar($equipment_qty = [], $equipment = '')
 {
@@ -77,6 +77,13 @@ function InsertCar($equipment_qty = [], $equipment = '')
         }
         if ($key == 'car_no') {
             $equipment = 'เลขทะเบียนรถ';
+        }
+        // sod
+        if ($key == 'date') {
+            $equipment = 'ในวันที่';
+        }
+        if ($key == 'time') {
+            $equipment = 'เวลา';
         }
 
         if ($value > 0  /*|| !empty($details) ||  !empty($size)*/) {
@@ -263,11 +270,11 @@ if ($result->num_rows > 0) {
         InsertEquipment('equipment_reservations', $equipment);
 
         ///ส่วนที่ 1 line แจ้งเตือน จัดเรียงข้อความที่จะส่งเข้า line ไว้ในตัวแปร $message
-        $header = 'ส่งข้อความถึงเรา';
+        $header = 'มีผู้ใช้ขอจองห้องประชุม !';
         $message =
             $header .
             "\n" .
-            'ชื่อเต็ม: ' .
+            'ชื่อผู้จอง: ' .
             $organizer_name .
             "\n" .
             'จองห้อง: ' .
@@ -281,7 +288,10 @@ if ($result->num_rows > 0) {
             "\n" .
             'ข้อความ: ' .
             $notes .
-            "\n";
+            "\n" . 
+            'ไปที่เว็บไซต์: ' .
+            'https://7aro.xdark-protocol.com/' ;
+            
 
         ///ส่วนที่ 2 line แจ้งเตือน  ส่วนนี้จะทำการเรียกใช้ function sendlinemesg() เพื่อทำการส่งข้อมูลไปที่ line
         $line_r = sendlinemesg($message);
@@ -289,7 +299,7 @@ if ($result->num_rows > 0) {
         echo "<script>
             window.onload = function() {
                 alert('การจองห้องประชุมสำเร็จ!');
-                //window.location.href = 'index.php';
+                window.location.href = 'index.php';
             };
         </script>";
         

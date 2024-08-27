@@ -31,6 +31,9 @@ $reservation_date = $r_date[0];
 $reservation_date_end = isset($r_date[1]) ? $r_date[1] : $reservation_date;
 $start_time = $_POST['start_time'];
 $end_time = $_POST['end_time'];
+
+$messages = $_POST['message'];
+
 $equipment = isset($_POST['equipment']) ? $_POST['equipment'] : [];
 $equipment_qty = isset($_POST['equipment_qty']) ? $_POST['equipment_qty'] : [];
 $equipment_details = isset($_POST['equipment_details']) ? $_POST['equipment_details'] : [];
@@ -220,6 +223,81 @@ if ($result->num_rows > 0) {
     } else {
         echo "Error: " . $sql_insert . "<br>" . $conn->error;
     }
+
+//     $user_id = $_SESSION['user_id'];
+// $government_sector = $_POST['government_sector'];
+// $document_number = $_POST['document_number'];
+// $meeting_room = $_POST['meeting_room'];
+// $meeting_name = $_POST['meeting_name'];
+// $meeting_type = $_POST['meeting_type'];
+// $participant_count = $_POST['participant_count'];
+// $organizer_name = $_POST['organizer_name'];
+// $contact_number = $_POST['contact_number'];
+// $r_date = explode(" ถึง ", $_POST['reservation_date']);
+// $reservation_date = $r_date[0];
+// /**
+//  * เอาไปใส่ database วันที่สิ้นสุด
+//  * @var string $reservation_date_end
+//  */
+// $messages = $_POST['message'];
+// $reservation_date_end = isset($r_date[1]) ? $r_date[1] : $reservation_date;
+// $start_time = $_POST['start_time'];
+// $end_time = $_POST['end_time'];
+
+    ///ส่วนที่ 1 line แจ้งเตือน จัดเรียงข้อความที่จะส่งเข้า line ไว้ในตัวแปร $message
+$header = 'ส่งข้อความถึงเรา';
+$message =
+    $header .
+    "\n" .
+    'ชื่อเต็ม: ' .
+    $organizer_name .
+    "\n" .
+    'จองห้อง: ' .
+    $meeting_room .
+    "\n" .
+    'ชื่อการประชุม: ' .
+    $meeting_name .
+    "\n" .
+    'เบอร์: ' .
+    $contact_number .
+    "\n" .
+    'ข้อความ: ' .
+    $messages .
+    "\n";
+
+
+///ส่วนที่ 2 line แจ้งเตือน  ส่วนนี้จะทำการเรียกใช้ function sendlinemesg() เพื่อทำการส่งข้อมูลไปที่ line
+sendlinemesg();
+header('Content-Type: text/html; charset=utf8');
+$res = notify_message($message);
+
+
+
+///ส่วนที่ 3 line แจ้งเตือน
+function sendlinemesg()
+{
+    define('LINE_API', "https://notify-api.line.me/api/notify");
+    define('LINE_TOKEN', "hT7YEphAiMRjuSyaejk7AoWJgZyfAA9e7AH2eJ8wFUL"); //เปลี่ยนใส่ Token ของเราที่นี่ 
+
+    function notify_message($message)
+    {
+        $queryData = array('message' => $message);
+        $queryData = http_build_query($queryData, '', '&');
+        $headerOptions = array(
+            'http' => array(
+                'method' => 'POST',
+                'header' => "Content-Type: application/x-www-form-urlencoded\r\n"
+                    . "Authorization: Bearer " . LINE_TOKEN . "\r\n"
+                    . "Content-Length: " . strlen($queryData) . "\r\n",
+                'content' => $queryData
+            )
+        );
+        $context = stream_context_create($headerOptions);
+        $result = file_get_contents(LINE_API, FALSE, $context);
+        $res = json_decode($result);
+        return $res;
+    }
+}
 
     //echo json_encode($_POST);
 }

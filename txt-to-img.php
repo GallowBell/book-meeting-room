@@ -235,6 +235,8 @@ foreach ($data as $key_1 => $value_1) {
             if($value_3 == 'ที่จอดรถชั้น'){
                 AddCheckBox(200, 1980);
                 AddText(520, 2040,  $value_2['equipment_quantity']);
+                AddCheckBox(945, 715);
+                AddText(1400, 765,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'จำนวนคัน'){
                 AddText(850, 2040,  $value_2['equipment_quantity']);

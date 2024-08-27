@@ -54,6 +54,29 @@ function AddText($x, $y, $text){
     imagettftext($img, $FontSize, 0, $x, $y, $black, $font, $text);
 }
 
+// Function to format date to Thai locale with full date style and convert year to BE
+function formatThaiDate($date) {
+    $formatter = new IntlDateFormatter(
+        'th_TH', 
+        IntlDateFormatter::FULL, 
+        IntlDateFormatter::NONE, 
+        'Asia/Bangkok', 
+        IntlDateFormatter::GREGORIAN
+    );
+    
+    // Format the date
+    $formattedDate = $formatter->format(new DateTime($date));
+    
+    // Convert the year to BE
+    $dateTime = new DateTime($date);
+    $yearBE = $dateTime->format('Y') + 543;
+    
+    // Replace the year in the formatted date
+    $formattedDate = str_replace($dateTime->format('Y'), $yearBE, $formattedDate);
+    
+    return $formattedDate;
+}
+
 if(!isset($_GET['reservation_id'])){
     die('Reservation ID is required');
 }
@@ -75,12 +98,16 @@ $query = $conn->query("SELECT
         END as color_1
     FROM `reservations`
   
-    WHERE is_approve = 1 AND reservation_id = $reservation_id");
+    WHERE  reservation_id = $reservation_id");
 
 $data = $query -> fetch_all(MYSQLI_ASSOC);
 
 if(count($data) == 0){
     die('Reservation data not found');
+}
+
+if ($data[0]['is_approve'] == -1 || $data[0]['is_approve'] == 0) {
+    die('Reservation not approve');
 }
 
 // $data = ข้อมูลจากตาราง reservations
@@ -90,14 +117,17 @@ foreach ($data as $key_1 => $value_1) {
     $query = $conn->query($sql2);
     $equipment_reservations = $query->fetch_all(MYSQLI_ASSOC);
 
+    // Convert date to Thai date
+    $thai_date = formatThaiDate($value_1['reservation_date']);
     // X, Y, Text
     AddText(325, 255,  $value_1['government_sector']);
-    AddText(120, 340,  $value_1['document_number']);
+    AddText(120, 340,  $value_1['document_number'].'/'.(date('Y')+543));
     AddText(1100, 340,  $value_1['Timestamps']);
     AddText(420, 555,  $value_1['government_sector']);
     AddText(900, 910,  $value_1['meeting_name']);
     AddText(375, 1050,  $value_1['participant_count']);
     AddText(375, 1050,  $value_1['participant_count']);
+    //AddText(700, 1050, $thai_date . ' ถึง ' . $value_1['reservation_date_end']);
     AddText(700, 1050,  $value_1['reservation_date'] . ' ถึง ' . $value_1['reservation_date_end']);
     AddText(1280, 1050,  $value_1['start_time']);
     AddText(1550, 1050,   $value_1['end_time']); 

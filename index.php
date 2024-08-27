@@ -152,7 +152,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
         </div>`;
 
        // หัวตาราง
-        html += `
+       /*  html += `
           <table class="table">
             <thead>
               <tr>
@@ -182,7 +182,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
         html += `
             </tbody>
           </table>
-        `;
+        `; */
         body.innerHTML = html;
       }
 

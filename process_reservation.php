@@ -32,7 +32,6 @@ $reservation_date_end = isset($r_date[1]) ? $r_date[1] : $reservation_date;
 $start_time = $_POST['start_time'];
 $end_time = $_POST['end_time'];
 
-$messages = $_POST['message'];
 
 $equipment = isset($_POST['equipment']) ? $_POST['equipment'] : [];
 $equipment_qty = isset($_POST['equipment_qty']) ? $_POST['equipment_qty'] : [];
@@ -110,6 +109,95 @@ function InsertCar($equipment_qty = [], $equipment = '')
     //echo json_encode($r);
 }
 
+///ส่วนที่ 3 line แจ้งเตือน
+function sendlinemesg($message=''){
+
+    define('LINE_API', "https://notify-api.line.me/api/notify");
+    define('LINE_TOKEN', "hT7YEphAiMRjuSyaejk7AoWJgZyfAA9e7AH2eJ8wFUL"); //เปลี่ยนใส่ Token ของเราที่นี่ 
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://notify-api.line.me/api/notify',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => array('message' => $message),
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: Bearer '.LINE_TOKEN
+        ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+
+    return $response;
+   
+}
+
+function InsertEquipment($tableName = '', $equipment=[]){
+    global $conn,
+    $equipment_size_1,
+    $equipment_size_2,
+    $reservation_id,
+    $equipment_qty,
+    $equipment_details,
+    $equipment_dates,
+    $reservation_date,
+    $equipment_start_times,
+    $equipment_end_times,
+    $start_time,
+    $end_time,
+    $reservation_date_end;
+
+     // Iterate over the arrays using foreach
+     foreach ($equipment as $i => $equipment_name) {
+        $size = "";
+
+        // Check if the current index is 15
+        if ($i == 15) {
+            // Output equipment quantity as JSON and exit
+            InsertCar($equipment_qty[$i], $equipment[$i]);
+            continue;
+        }
+
+        // Retrieve other details, ensuring they are properly set
+        $qty = !empty($equipment_qty[$i]) ? $equipment_qty[$i] : 0;
+        $details = !empty($equipment_details[$i]) ? $equipment_details[$i] : '';
+
+        // Determine the size based on equipment type
+        switch ($equipment_name) {
+            case "จานแก้วใส":
+                $size = $equipment_size_1;
+                break;
+            case "ถ้วย":
+                $size = $equipment_size_2;
+                break;
+            default:
+                $size = '';
+                break;
+        }
+
+        // Default values if not set
+        $eq_date = !empty($equipment_dates[$i]) ? $equipment_dates[$i] : $reservation_date;
+        $eq_start_time = !empty($equipment_start_times[$i]) ? $equipment_start_times[$i] : $start_time;
+        $eq_end_time = !empty($equipment_end_times[$i]) ? $equipment_end_times[$i] : $end_time;
+
+        // Insert into database if quantity is greater than 0
+        if ($qty > 0 || $i == 16) {
+            $equipment_full_name = $equipment_name;
+            $sql_insert_equipment = "INSERT INTO ".$tableName." (reservation_id, equipment_name, equipment_size, equipment_quantity, additional_details, reservation_date, reservation_date_end, start_time, end_time)
+                                    VALUES ($reservation_id, '$equipment_full_name', '$size', $qty, '$details', '$eq_date', '$reservation_date_end', '$eq_start_time', '$eq_end_time')";
+            $conn->query($sql_insert_equipment);
+        }
+    }
+}
+
 // ตรวจสอบการจองซ้อนทับ
 $sql_check = "SELECT * FROM reservations 
               WHERE meeting_room = '$meeting_room' 
@@ -172,54 +260,39 @@ if ($result->num_rows > 0) {
         // Ensure that all arrays have the same count
         $equipmentCount = count($equipment);
 
-        // Iterate over the arrays using foreach
-        foreach ($equipment as $i => $equipment_name) {
-            $size = "";
+        InsertEquipment('equipment_reservations', $equipment);
 
-            // Check if the current index is 15
-            if ($i == 15) {
-                // Output equipment quantity as JSON and exit
-                InsertCar($equipment_qty[$i], $equipment[$i]);
-                continue;
-            }
+        ///ส่วนที่ 1 line แจ้งเตือน จัดเรียงข้อความที่จะส่งเข้า line ไว้ในตัวแปร $message
+        $header = 'ส่งข้อความถึงเรา';
+        $message =
+            $header .
+            "\n" .
+            'ชื่อเต็ม: ' .
+            $organizer_name .
+            "\n" .
+            'จองห้อง: ' .
+            $meeting_room .
+            "\n" .
+            'ชื่อการประชุม: ' .
+            $meeting_name .
+            "\n" .
+            'เบอร์: ' .
+            $contact_number .
+            "\n" .
+            'ข้อความ: ' .
+            $notes .
+            "\n";
 
-            // Retrieve other details, ensuring they are properly set
-            $qty = !empty($equipment_qty[$i]) ? $equipment_qty[$i] : 0;
-            $details = !empty($equipment_details[$i]) ? $equipment_details[$i] : '';
-
-            // Determine the size based on equipment type
-            switch ($equipment_name) {
-                case "จานแก้วใส":
-                    $size = $equipment_size_1;
-                    break;
-                case "ถ้วย":
-                    $size = $equipment_size_2;
-                    break;
-                default:
-                    $size = '';
-                    break;
-            }
-
-            // Default values if not set
-            $eq_date = !empty($equipment_dates[$i]) ? $equipment_dates[$i] : $reservation_date;
-            $eq_start_time = !empty($equipment_start_times[$i]) ? $equipment_start_times[$i] : $start_time;
-            $eq_end_time = !empty($equipment_end_times[$i]) ? $equipment_end_times[$i] : $end_time;
-
-            // Insert into database if quantity is greater than 0
-            if ($qty > 0 || $i == 16) {
-                $equipment_full_name = $equipment_name;
-                $sql_insert_equipment = "INSERT INTO equipment_reservations (reservation_id, equipment_name, equipment_size, equipment_quantity, additional_details, reservation_date, reservation_date_end, start_time, end_time)
-                                        VALUES ($reservation_id, '$equipment_full_name', '$size', $qty, '$details', '$eq_date', '$reservation_date_end', '$eq_start_time', '$eq_end_time')";
-                $conn->query($sql_insert_equipment);
-            }
-        }
+        ///ส่วนที่ 2 line แจ้งเตือน  ส่วนนี้จะทำการเรียกใช้ function sendlinemesg() เพื่อทำการส่งข้อมูลไปที่ line
+        $line_r = sendlinemesg($message);
 
         echo "<script>
-        window.onload = function() {
-            alert('การจองห้องประชุมสำเร็จ!');
-            window.location.href = 'index.php';
-        };
-      </script>";
+            window.onload = function() {
+                alert('การจองห้องประชุมสำเร็จ!');
+                //window.location.href = 'index.php';
+            };
+        </script>";
+        
     } else {
         echo "Error: " . $sql_insert . "<br>" . $conn->error;
     }
@@ -244,60 +317,32 @@ if ($result->num_rows > 0) {
 // $start_time = $_POST['start_time'];
 // $end_time = $_POST['end_time'];
 
-    ///ส่วนที่ 1 line แจ้งเตือน จัดเรียงข้อความที่จะส่งเข้า line ไว้ในตัวแปร $message
-$header = 'ส่งข้อความถึงเรา';
-$message =
-    $header .
-    "\n" .
-    'ชื่อเต็ม: ' .
-    $organizer_name .
-    "\n" .
-    'จองห้อง: ' .
-    $meeting_room .
-    "\n" .
-    'ชื่อการประชุม: ' .
-    $meeting_name .
-    "\n" .
-    'เบอร์: ' .
-    $contact_number .
-    "\n" .
-    'ข้อความ: ' .
-    $messages .
-    "\n";
-
-
-///ส่วนที่ 2 line แจ้งเตือน  ส่วนนี้จะทำการเรียกใช้ function sendlinemesg() เพื่อทำการส่งข้อมูลไปที่ line
-sendlinemesg();
-header('Content-Type: text/html; charset=utf8');
-$res = notify_message($message);
 
 
 
-///ส่วนที่ 3 line แจ้งเตือน
-function sendlinemesg()
+
+
+
+
+/* function notify_message($message)
 {
-    define('LINE_API', "https://notify-api.line.me/api/notify");
-    define('LINE_TOKEN', "hT7YEphAiMRjuSyaejk7AoWJgZyfAA9e7AH2eJ8wFUL"); //เปลี่ยนใส่ Token ของเราที่นี่ 
-
-    function notify_message($message)
-    {
-        $queryData = array('message' => $message);
-        $queryData = http_build_query($queryData, '', '&');
-        $headerOptions = array(
-            'http' => array(
-                'method' => 'POST',
-                'header' => "Content-Type: application/x-www-form-urlencoded\r\n"
-                    . "Authorization: Bearer " . LINE_TOKEN . "\r\n"
-                    . "Content-Length: " . strlen($queryData) . "\r\n",
-                'content' => $queryData
-            )
-        );
-        $context = stream_context_create($headerOptions);
-        $result = file_get_contents(LINE_API, FALSE, $context);
-        $res = json_decode($result);
-        return $res;
-    }
-}
+    $queryData = array('message' => $message);
+    $queryData = http_build_query($queryData, '', '&');
+    $headerOptions = array(
+        'http' => array(
+            'method' => 'POST',
+            'header' => [
+                "Content-Type: application/x-www-form-urlencoded"
+                "Authorization: Bearer " . LINE_TOKEN,
+            ],
+            'content' => $queryData
+        )
+    );
+    $context = stream_context_create($headerOptions);
+    $result = file_get_contents(LINE_API, FALSE, $context);
+    $res = json_decode($result);
+    return $res;
+} */
 
     //echo json_encode($_POST);
 }

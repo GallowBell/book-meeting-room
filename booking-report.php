@@ -366,6 +366,7 @@ foreach ($data as $key => $value) {
 
         // ค้นหาข้อมูลที่ต้องเติมในฟอร์ม
         var data = JSON.parse(data_json).find(row => row.reservation_id == reservationId);
+        console.log('data a a', data);
         if (data) {
             // เติมข้อมูลในฟอร์ม
             document.getElementById('reservation_id').value = data.reservation_id;
@@ -382,7 +383,7 @@ foreach ($data as $key => $value) {
             document.getElementById('start_time').value = data.start_time;
             document.getElementById('end_time').value = data.end_time;
             document.getElementById('notes').value = data.notes;
-            Render_equipment_reservations(data.equipment_reservations);
+            Render_equipment_reservations(data);
         }
         
     });
@@ -391,7 +392,7 @@ foreach ($data as $key => $value) {
 function Render_equipment_reservations(data = {}){
           const body = document.getElementById('myModal2_body');
           const title = document.getElementById('myModal2_header');
-          console.log('data', data);
+          console.log('data Render_equipment_reservations', data);
           const arr = data?.equipment_reservations;
           const meeting_name = data?.meeting_name;
           const reservation_id = data?.reservation_id;
@@ -415,19 +416,9 @@ function Render_equipment_reservations(data = {}){
           <div class="row">
             <div class="col-12">
               <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">หัวข้อ: ${data?.meeting_name}</h5>
-                    <p class="card-text">ห้องประชุม: ${data?.meeting_room}</p>
-                    <p class="card-text">ใช้สำหรับ: ${data?.meeting_type}</p>
-                    <p class="card-text">จำนวนคน: ${data?.participant_count}</p>
-                    <p class="card-text">วันที่: ${start_d} ถึง ${end_d}</p>
-                    <p class="card-text">เวลา: ${start_t} ถึง ${end_t}</p>
-                    <p class="card-text">
-                      <a class="btn btn-primary" href="generate-pdf.php?reservation_id=${reservation_id}" target="_blank">
-                        ดาวน์โหลดเอกสาร
-                      </a>
-                    </p>
-                  </div>
+                  <a class="btn btn-primary" href="generate-pdf.php?reservation_id=${reservation_id}" target="_blank">
+                    ดาวน์โหลดเอกสาร
+                  </a>
               </div>
             </div>
           </div>`;

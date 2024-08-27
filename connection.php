@@ -9,8 +9,8 @@ $username = "xdarkpro_meeting_reservation";
 $password = "JCW5eXFX78s93RsNaLfH";
 $dbname = "xdarkpro_meeting_reservation";
 
-// $username = "root";
-// $password = "";
+// $username = "xdarkpro_meeting_reservation";
+// $password = "JCW5eXFX78s93RsNaLfH";
 
 // สร้างการเชื่อมต่อ
 $conn = new mysqli($servername, $username, $password, $dbname);

@@ -10,8 +10,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/logopakk.png" rel="icon">
+  <link href="assets/img/logopakk_up.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -74,25 +74,25 @@
                       <label for="username" class="form-label">username</label>
                       <div class="input-group has-validation">
                         <input type="text" name="username" class="form-control" id="username" required>
-                        <div class="invalid-feedback">Please choose a username.</div>
+                        <div class="invalid-feedback">โปรดกรอกชื่อผู้ใช้</div>
                       </div>
                     </div>
 
                     <div class="col-12">
                       <label for="password" class="form-label">Password</label>
                       <input type="password" name="password" class="form-control" id="password" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
+                      <div class="invalid-feedback">โปรดกรอกรหัสผ่าน</div>
                     </div>
                     <div class="col-12">
                       <label for="first_name" class="form-label">ชื่อ</label>
                       <input type="text" name="first_name" class="form-control" id="first_name" required>
-                      <div class="invalid-feedback">Please, enter your name!</div>
+                      <div class="invalid-feedback">โปรดกรอกชื่อ</div>
                     </div>
 
                     <div class="col-12">
                       <label for="last_name" class="form-label">นามสกุล</label>
                       <input type="text" name="last_name" class="form-control" id="last_name" required>
-                      <div class="invalid-feedback">Please, enter your name!</div>
+                      <div class="invalid-feedback">โปรดกรอกนามสกุล</div>
                     </div>
 
                     <!-- <div class="col-12">
@@ -105,8 +105,9 @@
                       <label for="phone_number" class="form-label">เบอร์โทรศัพท์</label>
                       <div class="input-group has-validation">
                         <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
-                        <input type="text" name="phone_number" class="form-control" id="phone_number" required>
-                        <div class="invalid-feedback">Please choose a username.</div>
+                        <input name="phone_number" id="phone_number" class="form-control" value="" aria-required="true" pattern="0[0-9]{9}" type="tel" spellcheck="false" maxlength="10" required>
+                        <!-- <input type="text" name="phone_number" class="form-control" id="phone_number" required> -->
+                        <div class="invalid-feedback">โปรดกรอกเบอร์โทรศัพท์</div>
                       </div>
                     </div>
 

@@ -261,25 +261,46 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="viewForm" action="" method="post">
+      <div class="row">
+      <div class="col-lg-12">
+        <form class="row" id="viewForm" action="" method="post">
           <input type="hidden" id="reservation_id" name="reservation_id">
-          <div class="mb-3">
-            <label for="meeting_name" class="form-label">เรื่อง</label>
-            <input type="text" class="form-control" id="meeting_name" name="meeting_name" disabled>
+          <div class="col-md-6 mb-3">
+            <label for="government_sector" class="form-label fw-bold">ส่วนราชการ</label>
+            <input type="text" class="form-control" id="government_sector" name="government_sector" disabled>
           </div>
-          <div class="mb-3">
+          <div class="col-md-6 mb-3">
+            <label for="document_number" class="form-label">เลขที่หนังสือ</label>
+            <input type="text" class="form-control" id="document_number" name="document_number" disabled>
+          </div>  
+          <div class="col-md-6 mb-3">
             <label for="meeting_room" class="form-label">ห้องที่จอง</label>
             <input type="text" class="form-control" id="meeting_room" name="meeting_room" disabled>
           </div>
-          <div class="mb-3">
+          <div class="col-md-6 mb-3">
+            <label for="meeting_name" class="form-label">เรื่อง</label>
+            <input type="text" class="form-control" id="meeting_name" name="meeting_name" disabled>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="meeting_type" class="form-label">ประเภท</label>
+            <input type="text" class="form-control" id="meeting_type" name="meeting_type" disabled>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="participant_count" class="form-label">จำนวนผู้เข้าร่วม</label>
+            <input type="text" class="form-control" id="participant_count" name="participant_count" disabled>
+          </div>
+          <div class="col-md-6 mb-3">
             <label for="organizer_name" class="form-label">ชื่อผู้จอง</label>
             <input type="text" class="form-control" id="organizer_name" name="organizer_name" disabled>
           </div>
-          <!-- <div class="mb-3">
+          <div class="col-md-6 mb-3">
+            <label for="contact_number" class="form-label">เบอร์ติดต่อ</label>
+            <input type="text" class="form-control" id="contact_number" name="contact_number" disabled>
+          </div>
+          <!-- <div class="col-md-6 mb-3">
             <label for="reservation_date" class="form-label">วันที่</label>
             <input type="date" class="form-control" id="reservation_date" name="reservation_date" disabled>
           </div> -->
-          <div class="row">
             <div class="col-md-6 mb-3">
               <label for="reservation_date" class="form-label">วันที่เริ่มต้น</label>
               <input type="date" class="form-control" id="reservation_date" name="reservation_date" disabled>
@@ -288,22 +309,34 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
               <label for="reservation_date_end" class="form-label">วันที่สิ้นสุด</label>
               <input type="date" class="form-control" id="reservation_date_end" name="reservation_date_end" disabled>
             </div>
-          </div>
-          <div class="mb-3">
+          <div class="col-md-6 mb-3">
             <label for="start_time" class="form-label">เวลาที่จองเริ่มต้น</label>
             <input type="time" class="form-control" id="start_time" name="start_time" disabled>
           </div>
-          <div class="mb-3">
+          <div class="col-md-6 mb-3">
             <label for="end_time" class="form-label">เวลาที่จองสิ้นสุด</label>
             <input type="time" class="form-control" id="end_time" name="end_time" disabled>
           </div>
-          <div class="mb-3">
+          <div class="col-md-12 mb-3">
             <label for="notes" class="form-label">หมายเหตุ</label>
             <textarea class="form-control" id="notes" name="notes" disabled></textarea>
           </div>
+
+          <!-- เพิ่มส่วนแสดงผลข้อมูล equipment_reservations -->
+            <div class="col-md-12 mb-3">
+                <h5>รายการอุปกรณ์ที่จอง</h5>
+                <div class="equipment-section">
+                  
+                </div>
+            </div>
+
+          <div class="modal-footer">
           <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">ปิด</button>
+          </div>
         </form>
       </div>
+      </div>
+    </div>
     </div>
   </div>
 </div>
@@ -320,23 +353,32 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         var button = event.relatedTarget; // ปุ่มที่ถูกคลิก
         var reservationId = button.getAttribute('data-reservation-id'); // ดึง reservation_id จากปุ่ม
 
+        // ส่ง request ไปยัง PHP เพื่อนำข้อมูล reservation มาแสดงใน Modal
+        var formData = new FormData();
+        formData.append('reservation_id', reservationId);
+
         // ค้นหาข้อมูลที่ต้องเติมในฟอร์ม
         var data = JSON.parse(data_json).find(row => row.reservation_id == reservationId);
         if (data) {
             // เติมข้อมูลในฟอร์ม
             document.getElementById('reservation_id').value = data.reservation_id;
-            document.getElementById('meeting_name').value = data.meeting_name;
+            document.getElementById('government_sector').value = data.government_sector;
+            document.getElementById('document_number').value = data.document_number;
             document.getElementById('meeting_room').value = data.meeting_room;
+            document.getElementById('meeting_name').value = data.meeting_name;
+            document.getElementById('meeting_type').value = data.meeting_type;
+            document.getElementById('participant_count').value = data.participant_count;
             document.getElementById('organizer_name').value = data.organizer_name;
+            document.getElementById('contact_number').value = data.contact_number;
             document.getElementById('reservation_date').value = data.reservation_date;
             document.getElementById('reservation_date_end').value = data.reservation_date_end;
             document.getElementById('start_time').value = data.start_time;
             document.getElementById('end_time').value = data.end_time;
             document.getElementById('notes').value = data.notes;
+
         }
     });
 });
-
   </script>
 
   <script>

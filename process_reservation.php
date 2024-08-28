@@ -277,7 +277,7 @@ if ($result->num_rows > 0) {
         // Loop through the parameters
         foreach ($equipment_sod as $index => $equipment_name) {
             // Check if index is 10 or 13
-            if ($index == 10 || $index == 13) {
+            //if ($index == 10 || $index == 13) {
 
                 $quantity = isset($equipment_qty_sod[$index]) ? $equipment_qty_sod[$index] : 0;
                 $details = isset($equipment_sod_details[$index]) ? $equipment_sod_details[$index] : null;
@@ -307,7 +307,7 @@ if ($result->num_rows > 0) {
                     '$operate_time_2'
                 )");
 
-            }
+           // }
         }
 
         // Set parameters and execute

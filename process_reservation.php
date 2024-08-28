@@ -120,8 +120,8 @@ function InsertCar($equipment_qty = [], $equipment = '')
 function sendlinemesg($message=''){
 
     define('LINE_API', "https://notify-api.line.me/api/notify");
-    define('LINE_TOKEN', "hT7YEphAiMRjuSyaejk7AoWJgZyfAA9e7AH2eJ8wFUL"); //เปลี่ยนใส่ Token ของเราที่นี่ 
-
+    define('LINE_TOKEN', "NcwsmJ87U6cXVYs8Lnbz8yGJeGLbRAos5zk1R4FPBwP"); //เปลี่ยนใส่ Token ของเราที่นี่  hT7YEphAiMRjuSyaejk7AoWJgZyfAA9e7AH2eJ8wFUL
+    
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -270,7 +270,7 @@ if ($result->num_rows > 0) {
         InsertEquipment('equipment_reservations', $equipment);
 
         ///ส่วนที่ 1 line แจ้งเตือน จัดเรียงข้อความที่จะส่งเข้า line ไว้ในตัวแปร $message
-        $header = 'มีผู้ใช้ขอจองห้องประชุม !';
+        $header = 'มีผู้ใช้ขอจองห้องประชุม';
         $message =
             $header .
             "\n" .
@@ -283,10 +283,16 @@ if ($result->num_rows > 0) {
             'ชื่อการประชุม: ' .
             $meeting_name .
             "\n" .
+            'วันที่จอง: ' .
+            $reservation_date . 'ถึง' . $reservation_date_end .
+            "\n" .
+            'เวลาที่จอง: ' .
+            $start_time . 'ถึง' . $end_time .
+            "\n" .
             'เบอร์: ' .
             $contact_number .
             "\n" .
-            'ข้อความ: ' .
+            'หมายเหตุ: ' .
             $notes .
             "\n" . 
             'ไปที่เว็บไซต์: ' .

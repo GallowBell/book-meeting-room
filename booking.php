@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$is_required = ' ';
+
 // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
 if (!isset($_SESSION['username'])) {
   // Output SweetAlert2 JavaScript code
@@ -104,7 +106,7 @@ $userlevel = $_SESSION['userlevel'];
               <form action="process_reservation.php" method="post" class="row g-3 needs-validation" novalidate>
               <div class="col-md-6">
                   <label for="government_sector" class="form-label fw-bold fw-bold">ส่วนราชการ</label>
-                  <input type="text" id="government_sector" name="government_sector" class="form-control" required>
+                  <input type="text" id="government_sector" name="government_sector" class="form-control" <?php echo $is_required; ?>>
                   <div class="invalid-feedback">
                     โปรดกรอกส่วนราชการ
                   </div>
@@ -115,7 +117,7 @@ $userlevel = $_SESSION['userlevel'];
                 </div>
                 <div class="col-md-6">
                   <label for="meeting_room" class="form-label fw-bold">ชื่อห้อง</label>
-                  <select class="form-select" id="meeting_room" name="meeting_room" required>
+                  <select class="form-select" id="meeting_room" name="meeting_room" <?php echo $is_required; ?>>
                     <option selected disabled hidden value="" >เลือกห้อง...</option>
                     <option value="ห้องประชุมชั้น 4">ห้องประชุมชั้น 4</option>
                     <option value="ห้องประชุมชั้น 5">ห้องประชุมชั้น 5</option>
@@ -128,7 +130,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-6">
                   <label for="meeting_name" class="form-label fw-bold">หัวข้อ</label>
-                  <input type="text" id="meeting_name" name="meeting_name" class="form-control" required>
+                  <input type="text" id="meeting_name" name="meeting_name" class="form-control" <?php echo $is_required; ?>>
                   <div class="invalid-feedback">
                     โปรดกรอกหัวข้อ
                   </div>
@@ -136,7 +138,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-6">
                   <label for="meeting_type" class="form-label fw-bold">ใช้สำหรับ</label>
-                  <select id="meeting_type" name="meeting_type" class="form-select" required>
+                  <select id="meeting_type" name="meeting_type" class="form-select" <?php echo $is_required; ?>>
                     <option selected disabled hidden value="">ใช้สำหรับการ...</option>
                     <option value="ฝึกอาชีพ">ฝึกอาชีพ</option>
                     <option value="อบรม">อบรม</option>
@@ -149,7 +151,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-6">
                   <label for="participant_count" class="form-label fw-bold">จำนวนผู้เข้าร่วม</label>
-                  <input type="number" id="participant_count" name="participant_count" class="form-control" required>
+                  <input type="number" id="participant_count" name="participant_count" class="form-control" <?php echo $is_required; ?>>
                   <div class="invalid-feedback">
                     โปรดกรอกจำนวนผู้เข้าร่วม
                   </div>
@@ -157,7 +159,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-6">
                   <label for="organizer_name" class="form-label fw-bold">ชื่อผู้จอง</label>
-                  <input type="text" id="organizer_name" name="organizer_name" class="form-control" required>
+                  <input type="text" id="organizer_name" name="organizer_name" class="form-control" <?php echo $is_required; ?>>
                   <div class="invalid-feedback">
                     โปรดกรอกชื่อผู้จอง
                   </div>
@@ -165,7 +167,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-6">
                   <label for="contact_number" class="form-label fw-bold">เบอร์ติดต่อ</label>
-                  <input type="text" id="contact_number" name="contact_number" maxlength="10" class="form-control" required>
+                  <input type="text" id="contact_number" name="contact_number" maxlength="10" class="form-control" <?php echo $is_required; ?>>
                   <div class="invalid-feedback">
                     โปรดกรอกเบอร์โทรศัพท์
                   </div>
@@ -173,7 +175,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-6">
                   <label for="reservation_date" class="form-label fw-bold">วันที่จอง</label>
-                  <input type="text" id="reservation_date" name="reservation_date" class="form-control bg-white" required>
+                  <input type="text" id="reservation_date" name="reservation_date" class="form-control bg-white" <?php echo $is_required; ?>>
                   <div class="invalid-feedback">
                     โปรดกรอกวันที่จอง
                   </div>
@@ -181,7 +183,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-3">
                   <label for="start_time" class="form-label fw-bold">เวลาเริ่มต้น</label>
-                  <input type="time" id="start_time" name="start_time" class="form-control bg-white" required>
+                  <input type="time" id="start_time" name="start_time" class="form-control bg-white" <?php echo $is_required; ?>>
                   <div class="invalid-feedback">
                     โปรดกรอกเวลาจอง
                   </div>
@@ -189,7 +191,7 @@ $userlevel = $_SESSION['userlevel'];
 
                 <div class="col-md-3">
                   <label for="end_time" class="form-label fw-bold">เวลาสิ้นสุด</label>
-                  <input type="time" id="end_time" name="end_time" class="form-control bg-white" required>
+                  <input type="time" id="end_time" name="end_time" class="form-control bg-white" <?php echo $is_required; ?>>
                   <div class="invalid-feedback">
                     โปรดกรอกเวลาจอง
                   </div>
@@ -458,24 +460,29 @@ $userlevel = $_SESSION['userlevel'];
                     </label>
                 </div>
 
-                <div class="col-12 mb-2">
+                <div class="col-5 mb-2">
                     <input class="form-check-input" type="checkbox" id="equipment_sod15" name="equipment_sod[14]">
                     <label class="form-check-label" for="equipment_sod15">
                         พิธีกรดำเนินงาน (วัน/เวลา) ในวันที่
                     </label>
-                    <input class="inputint" type="date" id="equipment_sod15" name="equipment_sod_details[14][date]" size="1" height="20">
-                    <label class="form-check-label" for="equipment_sod15">
-                      เวลา <input class="inputint" type="time" id="equipment_sod15" name="equipment_sod_details[14][time]" size="1" height="20"> 
-                    </label>
+                    <input style="width: 200px;" class="form-control bg-white" type="text" id="sod_date_14" name="equipment_sod_details[14][date]" size="1" height="20">
+                   
                 </div>
-                <div class="col-12 mb-2">
+                <div class="col-5 mb-2">
+                  <label class="form-check-label" for="equipment_sod15">
+                    เวลา <input style="width: 200px;" class="form-control bg-white" type="text" id="sod_time_14" name="equipment_sod_details[14][time]" size="1" height="20"> 
+                  </label>
+                </div>
+                <div class="col-5 mb-2">
                     <input class="form-check-input" type="checkbox" id="equipment_sod16" name="equipment_sod[15]">
                     <label class="form-check-label" for="equipment_sod16">
                         ช่างภาพ (วัน/เวลา) ในวันที่
                     </label>
-                    <input class="inputint" type="date" id="equipment_sod16" name="equipment_sod_details[15][date]" size="1" height="20">
-                    <label class="form-check-label" for="equipment_sod16">
-                      เวลา <input class="inputint" type="time" id="equipment_sod16" name="equipment_sod_details[15][time]" size="1" height="20"> 
+                    <input  style="width: 200px;" class="form-control bg-white" type="text" id="sod_date_15" name="equipment_sod_details[15][date]" size="1" height="20">
+                </div>
+                <div class="col-5 mb-2">
+                  <label class="form-check-label" for="equipment_sod16">
+                      เวลา <input  style="width: 200px;" class="form-control bg-white" type="text" id="sod_time_15" name="equipment_sod_details[15][time]" size="1" height="20"> 
                     </label>
                 </div>
                 <div class="col-12 mb-2">
@@ -604,6 +611,43 @@ $userlevel = $_SESSION['userlevel'];
         time_24hr: true
       });
       flatpickr('#end_time', {
+        enableTime: true,
+        noCalendar: true,
+        altFormat: "H:i",
+        dateFormat: "H:i:ss",
+        time_24hr: true
+      });
+
+      
+      flatpickr('#sod_date_15', {
+        altInput: true,
+        //enableTime: true,
+        altFormat: "j F Y",
+        //mode: "range",
+        dateFormat: "Y-m-d",
+        locale: "th",
+        minDate: "today"
+      });
+      
+      flatpickr('#sod_time_15', {
+        enableTime: true,
+        noCalendar: true,
+        altFormat: "H:i",
+        dateFormat: "H:i:ss",
+        time_24hr: true
+      });
+      
+      flatpickr('#sod_date_14', {
+        altInput: true,
+        //enableTime: true,
+        altFormat: "j F Y",
+        //mode: "range",
+        dateFormat: "Y-m-d",
+        locale: "th",
+        minDate: "today"
+      });
+
+      flatpickr('#sod_time_14', {
         enableTime: true,
         noCalendar: true,
         altFormat: "H:i",

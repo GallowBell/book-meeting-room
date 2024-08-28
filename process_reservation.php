@@ -46,13 +46,13 @@ $equipment_size_2 = isset($_POST['equipment_size_2']) ? $_POST['equipment_size_2
 
 
 // booking-sod.php
-$equipment_sod = isset($_POST['equipment']) ? $_POST['equipment'] : [];
-$equipment_sod_qty = isset($_POST['equipment_qty']) ? $_POST['equipment_qty'] : [];
-$equipment_sod_details = isset($_POST['equipment_details']) ? $_POST['equipment_details'] : [];
-// $equipment_sod_size = isset($_POST['equipment_size']) ? $_POST['equipment_size'] : [];
-$equipment_sod_dates = isset($_POST['equipment_date']) ? $_POST['equipment_date'] : [];
-$equipment_sod_start_times = isset($_POST['equipment_start_time']) ? $_POST['equipment_start_time'] : [];
-$equipment_sod_end_times = isset($_POST['equipment_end_time']) ? $_POST['equipment_end_time'] : [];
+$equipment_sod = isset($_POST['equipment_sod']) ? $_POST['equipment_sod'] : [];
+$equipment_sod_qty = isset($_POST['equipment_sod_qty']) ? $_POST['equipment_sod_qty'] : [];
+$equipment_sod_details = isset($_POST['equipment_sod_details']) ? $_POST['equipment_sod_details'] : [];
+// $equipment_sod_size = isset($_POST['equipment_sod_size']) ? $_POST['equipment_sod_size'] : [];
+$equipment_sod_dates = isset($_POST['equipment_sod_date']) ? $_POST['equipment_sod_date'] : [];
+$equipment_sod_start_times = isset($_POST['equipment_sod_start_time']) ? $_POST['equipment_sod_start_time'] : [];
+$equipment_sod_end_times = isset($_POST['equipment_sod_end_time']) ? $_POST['equipment_sod_end_time'] : [];
 // $notes = $_POST['notes'];
 // $equipment_sod_size_1 = isset($_POST['equipment_size_1']) ? $_POST['equipment_size_1'] : "";
 // $equipment_sod_size_2 = isset($_POST['equipment_size_2']) ? $_POST['equipment_size_2'] : "";
@@ -268,6 +268,50 @@ if ($result->num_rows > 0) {
         $equipmentCount = count($equipment);
 
         InsertEquipment('equipment_reservations', $equipment);
+
+        // Retrieve data from POST request
+        /* $equipment_sod = $_POST['equipment_sod'];
+        $equipment_qty_sod = $_POST['equipment_qty_sod'];
+        $equipment_sod_details = $_POST['equipment_sod_details']; */
+
+        // Loop through the parameters
+        foreach ($equipment_sod as $index => $equipment_name) {
+            // Check if index is 10 or 13
+            if ($index == 10 || $index == 13) {
+
+                $quantity = isset($equipment_qty_sod[$index]) ? $equipment_qty_sod[$index] : 0;
+                $details = isset($equipment_sod_details[$index]) ? $equipment_sod_details[$index] : null;
+
+                $operate_date = isset($_POST['equipment_sod_details'][14]['date']) ? $_POST['equipment_sod_details'][14]['date'] : null;
+                $operate_time = isset($_POST['equipment_sod_details'][15]['time']) ? $_POST['equipment_sod_details'][15]['time'] : null;
+                $operate_date_2 = isset($_POST['equipment_sod_details'][15]['date']) ? $_POST['equipment_sod_details'][15]['date'] : null;
+                $operate_time_2 = isset($_POST['equipment_sod_details'][15]['time']) ? $_POST['equipment_sod_details'][15]['time'] : null;
+
+                $conn->query("INSERT INTO equipment_sod_reservations (
+                    reservation_id,
+                    equipment_sod_name,
+                    equipment_sod_quantity,
+                    additional_sod_details,
+                    operate_date,
+                    operate_time,
+                    operate_date_2,
+                    operate_time_2
+                ) VALUES (
+                    '$reservation_id',
+                    '$equipment_name',
+                    '$quantity',
+                    '$details',
+                    '$operate_date',
+                    '$operate_time',
+                    '$operate_date_2',
+                    '$operate_time_2'
+                )");
+
+            }
+        }
+
+        // Set parameters and execute
+        //$reservation_id = NULL; // Set this to the actual reservation_id if available
 
         ///ส่วนที่ 1 line แจ้งเตือน จัดเรียงข้อความที่จะส่งเข้า line ไว้ในตัวแปร $message
         $header = 'มีผู้ใช้ขอจองห้องประชุม';

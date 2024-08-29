@@ -492,8 +492,6 @@ foreach ($data as $key => $value) {
                   <th scope="col" >ชื่ออุปกรณ์</th>
                   <th scope="col" >จำนวน</th>
                   <th scope="col" >รายละเอียด</th>
-                  <th scope="col" >วันที่</th>
-                  <th scope="col" >เวลา</th>
                 </tr>
               </thead>
               <tbody>
@@ -501,6 +499,23 @@ foreach ($data as $key => $value) {
 
       // ข้อมูลจาก equipment_reservations loop
       equipment_sod_reservations?.forEach((item, index) => {
+
+        let detail = item?.equipment_sod_name;
+        let is_operate_date;
+
+        switch (item?.equipment_sod_name) {
+          case 'ช่างภาพ (วัน/เวลา) ในวันที่':
+            is_operate_date = `${item?.operate_date} ${item?.operate_time}`;
+            break;
+          case 'พิธีกรดำเนินงาน (วัน/เวลา) ในวันที่':
+            is_operate_date = `${item?.operate_date2} ${item?.operate_time2}`;
+            break;
+          default:
+            is_operate_date = detail;
+            break;
+        }
+        
+
         html += `
               <tr>
                 <td scope="row">
@@ -508,9 +523,7 @@ foreach ($data as $key => $value) {
                 </td>
                 <td>${item?.equipment_sod_name}</td>
                 <td>${item?.equipment_sod_quantity}</td>
-                <td>${item?.additional_sod_details}</td>
-                <td>${item?.operate_date}</td>
-                <td>${item?.operate_time}</td>
+                <td>${is_operate_date}</td>
               </tr>
             `;
       });

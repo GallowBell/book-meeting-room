@@ -491,8 +491,9 @@ foreach ($data as $key => $value) {
                   <th scope="col" >#</th>
                   <th scope="col" >ชื่ออุปกรณ์</th>
                   <th scope="col" >จำนวน</th>
-                  <th scope="col" >ขนาด</th>
                   <th scope="col" >รายละเอียด</th>
+                  <th scope="col" >วันที่</th>
+                  <th scope="col" >เวลา</th>
                 </tr>
               </thead>
               <tbody>
@@ -505,10 +506,11 @@ foreach ($data as $key => $value) {
                 <td scope="row">
                   ${index + 1}
                 </td>
-                <td>${item?.equipment_name}</td>
-                <td>${item?.equipment_quantity}</td>
-                <td>${item?.equipment_size}</td>
-                <td>${item?.additional_details}</td>
+                <td>${item?.equipment_sod_name}</td>
+                <td>${item?.equipment_sod_quantity}</td>
+                <td>${item?.additional_sod_details}</td>
+                <td>${item?.operate_date}</td>
+                <td>${item?.operate_time}</td>
               </tr>
             `;
       });

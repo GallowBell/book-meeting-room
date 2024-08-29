@@ -516,7 +516,6 @@ foreach ($data as $key => $value) {
             break;
         }
         
-
         html += `
               <tr>
                 <td scope="row">

@@ -24,8 +24,10 @@ $mpdf->SetTopMargin(5);
 $mpdf->SetRightMargin(0);
 $mpdf->SetDisplayMode('fullwidth');
 $mpdf->SetAutoPageBreak(false, 5);
+
 // Define the path to the image (use forward slashes)
 $imagePath = 'assets/img/report_page_0002.jpg';
+$imagePath2 = 'assets/img/report_page_0004.jpg';
 
 // Get the dimensions of the A4 page
 $pageWidth = 210; // Width in mm
@@ -34,9 +36,15 @@ $pageHeight = 297; // Height in mm
 // สร้างรายการการจอง ในไฟล์ txt-to-img.php แล้วเรียกใช้ฟังก์ชัน AddText และ AddCheckBox
 require_once __DIR__ . '/txt-to-img.php';
 
-$html = '<img style="width: '.$pageWidth.'mm; height: '.$pageHeight.'mm; margin: 0; padding: 0; border: none;" src="'.$imagePath.'"></img>';
+$html_1 = '<img style="width: '.$pageWidth.'mm; height: '.$pageHeight.'mm; margin: 0; padding: 0; border: none;" src="'.$imagePath.'"></img>';
 
-$mpdf->WriteHTML($html);
+$html_2 = '<img style="width: '.$pageWidth.'mm; height: '.$pageHeight.'mm; margin: 0; padding: 0; border: none;" src="'.$imagePath2.'"></img>';
+
+$mpdf->WriteHTML($html_1);
+
+$mpdf->AddPage();
+
+$mpdf->WriteHTML($html_2);
 
 // Output the PDF to the browser
 $mpdf->Output('', 'I');

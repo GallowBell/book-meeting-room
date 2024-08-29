@@ -10,10 +10,15 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 require_once __DIR__ . '/connection.php';
 
+$xAxis = 0;
+$yAxis = 0;
+
 /**
  * @var string $img_path path to the image
  */
 $img_path = __DIR__ . '/assets/img/report_page_0001.jpg';
+
+$img_path3 = __DIR__ . '/assets/img/report_page_0003.jpg';
 
 /**
  * @var string $second_img_path path to the image
@@ -31,8 +36,10 @@ $font = __DIR__. '/font/th_sarabun/THSarabunNew.ttf';
 $FontSize = 40.5;
 
 $img = imagecreatefromjpeg($img_path);
+$img2 = imagecreatefromjpeg($img_path3);
 $second_img = imagecreatefrompng($second_img_path);
 $black = imagecolorallocate($img, 0, 0, 0);
+$black2 = imagecolorallocate($img2, 0, 0, 0);
 
 function AddCheckBox($x, $y){
     global $img, $second_img, $black, $font, $FontSize;
@@ -49,16 +56,58 @@ function AddCheckBox($x, $y){
 }
 
 function AddText($x, $y, $text){
-    global $img, $black, $font, $FontSize;
+    global $img, $black2, $font, $FontSize;
     // Add text to the image
-    imagettftext($img, $FontSize, 0, $x, $y, $black, $font, $text);
+    imagettftext($img, $FontSize, 0, $x, $y, $black2, $font, $text);
+}
+
+function AddCheckBox2($x, $y){
+    global $img2, $second_img, $black2, $font, $FontSize;
+    // Define the position where the second image will be drawn
+    $second_img_x = $x; // X position for the second image
+    $second_img_y = $y; // Y position for the second image
+
+    // Get the width and height of the second image
+    $second_img_width = imagesx($second_img);
+    $second_img_height = imagesy($second_img);
+
+    // Draw the second image onto the first image
+    imagecopy($img2, $second_img, $second_img_x, $second_img_y, 0, 0, $second_img_width, $second_img_height);
+}
+
+function AddText2($x, $y, $text){
+    global $img2, $black2, $font, $FontSize;
+    // Add text to the image
+    imagettftext($img2, $FontSize, 0, $x, $y, $black2, $font, $text);
 }
 
 // Function to format date to Thai locale with full date style and convert year to BE
 function formatThaiDate($date) {
     $formatter = new IntlDateFormatter(
         'th_TH', 
-        IntlDateFormatter::FULL, 
+        IntlDateFormatter::LONG, 
+        IntlDateFormatter::NONE, 
+        'Asia/Bangkok', 
+        IntlDateFormatter::GREGORIAN
+    );
+    
+    // Format the date
+    $formattedDate = $formatter->format(new DateTime($date));
+    
+    // Convert the year to BE
+    $dateTime = new DateTime($date);
+    $yearBE = $dateTime->format('Y') + 543;
+    
+    // Replace the year in the formatted date
+    $formattedDate = str_replace($dateTime->format('Y'), $yearBE, $formattedDate);
+    
+    return $formattedDate;
+}
+
+function formatThaiDate2($date) {
+    $formatter = new IntlDateFormatter(
+        'th_TH', 
+        IntlDateFormatter::MEDIUM, 
         IntlDateFormatter::NONE, 
         'Asia/Bangkok', 
         IntlDateFormatter::GREGORIAN
@@ -97,7 +146,7 @@ $query = $conn->query("SELECT
             ELSE 'bg-danger'
         END as color_1
     FROM `reservations`
-  
+
     WHERE  reservation_id = $reservation_id");
 
 $data = $query -> fetch_all(MYSQLI_ASSOC);
@@ -117,18 +166,21 @@ foreach ($data as $key_1 => $value_1) {
     $query = $conn->query($sql2);
     $equipment_reservations = $query->fetch_all(MYSQLI_ASSOC);
 
-    // Convert date to Thai date
-    $thai_date = formatThaiDate($value_1['reservation_date']);
+    
+    $query = $conn->query("SELECT * FROM `equipment_sod_reservations` WHERE reservation_id = ".$value_1['reservation_id']);
+    $equipment_sod_reservations = $query->fetch_all(MYSQLI_ASSOC);
+
+
     // X, Y, Text
     AddText(325, 255,  $value_1['government_sector']);
     AddText(120, 340,  $value_1['document_number'].'/'.(date('Y')+543));
-    AddText(1100, 340,  $value_1['Timestamps']);
+    AddText(1100, 340,  formatThaiDate($value_1['Timestamps']));
     AddText(420, 555,  $value_1['government_sector']);
     AddText(900, 910,  $value_1['meeting_name']);
     AddText(375, 1050,  $value_1['participant_count']);
     AddText(375, 1050,  $value_1['participant_count']);
     //AddText(700, 1050, $thai_date . ' ถึง ' . $value_1['reservation_date_end']);
-    AddText(700, 1050,  $value_1['reservation_date'] . ' ถึง ' . $value_1['reservation_date_end']);
+    AddText(700, 1050,  formatThaiDate2($value_1['reservation_date']) . ' ถึง ' . formatThaiDate2($value_1['reservation_date_end']));
     AddText(1280, 1050,  $value_1['start_time']);
     AddText(1550, 1050,   $value_1['end_time']); 
 
@@ -182,6 +234,15 @@ foreach ($data as $key_1 => $value_1) {
             }
             if($value_3 == 'จานแก้วใส'){
                 AddCheckBox(200, 1350);
+                if ($value_2['equipment_size'] == 'ใหญ่') {
+                    AddCheckBox(200, 1350);
+                }
+                if ($value_2['equipment_size'] == 'กลาง') {
+                    AddCheckBox(200, 1350);
+                }
+                if ($value_2['equipment_size'] == 'เล็ก') {
+                    AddCheckBox(200, 1350);
+                }
                 AddText(1060, 1400,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ช้อนเล็ก'){
@@ -245,13 +306,28 @@ foreach ($data as $key_1 => $value_1) {
                 AddText(1280, 2040,  $value_2['equipment_quantity']);
             }
 
-
-
-
             //example
             // AddText(300, 250, ' ชื่อ - นามสกุล 1 ');
             // AddText(100, 325, ' ชื่อ - นามสกุล 2');
             
+        }
+    }
+
+
+    // $equipment_sod_reservations = ข้อมูลจากตาราง equipment_sod_reservations
+    foreach ($equipment_sod_reservations as $key_2 => $value_2) {
+        foreach ($value_2 as $key_3 => $value_3) {
+
+            if($value_3 == 'เอกสารแจก'){
+                AddCheckBox2(200, 1210);
+                AddText2(300, 1250,  $value_2['equipment_sod_name']);
+            }
+             
+            if($value_3 == 'รถประชาสัมพันธ์เคลื่อนที่'){
+                AddCheckBox2(500, 1210);
+                AddText2(400, 1250,  $value_2['equipment_sod_name']);
+                AddText2(400, 200,  $value_2['additional_sod_details']);
+            }
         }
     }
 
@@ -262,6 +338,7 @@ foreach ($data as $key_1 => $value_1) {
 
 
 $result = imagejpeg($img, __DIR__ . '/assets/img/report_page_0002.jpg', 100);
+$result2 = imagejpeg($img2, __DIR__ . '/assets/img/report_page_0004.jpg', 100);
 
 // Free up memory
 imagedestroy($img);

@@ -1,7 +1,7 @@
 <?php
 session_start();
 //asd
-$is_required = ' ';
+$is_required = ' required ';
 
 // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
 if (!isset($_SESSION['username'])) {
@@ -427,14 +427,14 @@ $userlevel = $_SESSION['userlevel'];
                     <input class="form-check-input" type="checkbox" id="equipment_sod11" name="equipment_sod[10]" value="แฟ้มเอกสาร">
                     <label class="form-check-label" for="equipment_sod11">
                         แฟ้มเอกสาร จำนวน
-                        <input class="inputint" type="number" name="equipment_qty_sod[10]" size="1" height="20"> ฉบับ
+                        <input class="inputint" type="number" name="equipment_sod_qty[10]" size="1" height="20"> ฉบับ
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
                     <input class="form-check-input" type="checkbox" id="equipment_sod12" name="equipment_sod[11]" value="เอกสารของที่ระลึก">
                     <label class="form-check-label" for="equipment_sod12">
                         เอกสารของที่ระลึก จำนวน
-                        <input class="inputint" type="number" id="equipment_sod12" name="equipment_qty_sod[11]" size="1" height="20"> ชุด
+                        <input class="inputint" type="number" id="equipment_sod12" name="equipment_sod_qty[11]" size="1" height="20"> ชุด
                     </label>
                 </div>
                 <div class="col-12 mb-2">
@@ -442,7 +442,7 @@ $userlevel = $_SESSION['userlevel'];
                   <label class="form-check-label" for="equipment_sod13">
                       การประชุมออนไลน์ (Video Conference) โปรแกรม
                       <div style="display: inline-flex; align-items: center;">
-                          <input class="inputtext" type="text" id="equipment_sod13" id="equipment_sod_details[12]" size="" height="20" style='width:100%'>
+                          <input class="inputtext" type="text" id="equipment_sod_details[12]" name="equipment_sod_details[12]"  size="" height="20" style='width:100%'>
                           <span> (ระบุ)</span>
                       </div>
                   </label>
@@ -452,7 +452,7 @@ $userlevel = $_SESSION['userlevel'];
                     <label class="form-check-label" for="equipment_sod14">
                         เอกสารแจก 
                         <div style="display: inline-flex; align-items: center;">
-                            <input class="inputtext" type="text" id="equipment_sod14" name="equipment_sod_details[13]" size="" height="20" style='width:100%'>
+                            <input class="inputtext" type="text" id="equipment_sod14" name="equipment_sod_details[13]"  size="" height="20" style='width:100%'>
                             <span> (ระบุ)</span>
                         </div>
                         จำนวน 
@@ -461,12 +461,11 @@ $userlevel = $_SESSION['userlevel'];
                 </div>
 
                 <div class="col-5 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod15" name="equipment_sod[14]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod15" name="equipment_sod[14]" value="พิธีกรดำเนินงาน (วัน/เวลา) ในวันที่">
                     <label class="form-check-label" for="equipment_sod15">
                         พิธีกรดำเนินงาน (วัน/เวลา) ในวันที่
                     </label>
                     <input style="width: 200px;" class="form-control bg-white" type="text" id="sod_date_14" name="equipment_sod_details[14][date]" size="1" height="20">
-                   
                 </div>
                 <div class="col-5 mb-2">
                   <label class="form-check-label" for="equipment_sod15">
@@ -474,7 +473,7 @@ $userlevel = $_SESSION['userlevel'];
                   </label>
                 </div>
                 <div class="col-5 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod16" name="equipment_sod[15]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod16" name="equipment_sod[15]" value="ช่างภาพ (วัน/เวลา) ในวันที่">
                     <label class="form-check-label" for="equipment_sod16">
                         ช่างภาพ (วัน/เวลา) ในวันที่
                     </label>

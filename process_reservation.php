@@ -270,24 +270,24 @@ if ($result->num_rows > 0) {
         InsertEquipment('equipment_reservations', $equipment);
 
         // Retrieve data from POST request
-        /* $equipment_sod = $_POST['equipment_sod'];
-        $equipment_qty_sod = $_POST['equipment_qty_sod'];
-        $equipment_sod_details = $_POST['equipment_sod_details']; */
-
+        $result = [];
         // Loop through the parameters
         foreach ($equipment_sod as $index => $equipment_name) {
             // Check if index is 10 or 13
             //if ($index == 10 || $index == 13) {
+                if($equipment_name == 'on'){
+                    continue;
+                }
 
-                $quantity = isset($equipment_qty_sod[$index]) ? $equipment_qty_sod[$index] : 0;
-                $details = isset($equipment_sod_details[$index]) ? $equipment_sod_details[$index] : null;
+                $quantity = isset($equipment_sod_qty[$index]) ? $equipment_sod_qty[$index] : 0;
+                $details = isset($equipment_sod_details[$index]) && !is_array($equipment_sod_details[$index]) ? $equipment_sod_details[$index] : null;
 
-                $operate_date = isset($_POST['equipment_sod_details'][14]['date']) ? $_POST['equipment_sod_details'][14]['date'] : null;
-                $operate_time = isset($_POST['equipment_sod_details'][15]['time']) ? $_POST['equipment_sod_details'][15]['time'] : null;
-                $operate_date_2 = isset($_POST['equipment_sod_details'][15]['date']) ? $_POST['equipment_sod_details'][15]['date'] : null;
-                $operate_time_2 = isset($_POST['equipment_sod_details'][15]['time']) ? $_POST['equipment_sod_details'][15]['time'] : null;
+                $operate_date = isset($equipment_sod_details[14]['date']) ? $equipment_sod_details[14]['date'] : null;
+                $operate_time = isset($equipment_sod_details[14]['time']) ? $equipment_sod_details[14]['time'] : null;
+                $operate_date_2 = isset($equipment_sod_details[15]['date']) ? $equipment_sod_details[15]['date'] : null;
+                $operate_time_2 = isset($equipment_sod_details[15]['time']) ? $equipment_sod_details[15]['time'] : null;
 
-                $conn->query("INSERT INTO equipment_sod_reservations (
+                $result[] = $conn->query("INSERT INTO equipment_sod_reservations (
                     reservation_id,
                     equipment_sod_name,
                     equipment_sod_quantity,
@@ -345,11 +345,15 @@ if ($result->num_rows > 0) {
 
         ///ส่วนที่ 2 line แจ้งเตือน  ส่วนนี้จะทำการเรียกใช้ function sendlinemesg() เพื่อทำการส่งข้อมูลไปที่ line
         $line_r = sendlinemesg($message);
-
+        $js = "var data = " . json_encode([
+            'result' => $result,
+            'post' => $_POST,
+        ]) . "; console.log(data);";
         echo "<script>
+            $js
             window.onload = function() {
                 alert('การจองห้องประชุมสำเร็จ!');
-                window.location.href = 'index.php';
+                //window.location.href = 'index.php';
             };
         </script>";
         

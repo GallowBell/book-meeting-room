@@ -60,6 +60,9 @@ foreach ($data as $key => $value) {
   $sql2 = "SELECT * FROM `equipment_reservations` WHERE reservation_id = " . $value['reservation_id'];
   $query = $conn->query($sql2);
   $data[$key]['equipment_reservations'] = $query->fetch_all(MYSQLI_ASSOC);
+
+  $query = $conn->query("SELECT * FROM `equipment_sod_reservations` WHERE reservation_id = " . $value['reservation_id']);
+  $data[$key]['equipment_sod_reservations'] = $query->fetch_all(MYSQLI_ASSOC);
 }
 
 ?>
@@ -415,6 +418,7 @@ foreach ($data as $key => $value) {
       const title = document.getElementById('myModal2_header');
       console.log('data Render_equipment_reservations', data);
       const arr = data?.equipment_reservations;
+      const equipment_sod_reservations = data?.equipment_sod_reservations;
       const meeting_name = data?.meeting_name;
       const reservation_id = data?.reservation_id;
       body.innerHTML = '';
@@ -478,6 +482,45 @@ foreach ($data as $key => $value) {
               </tbody>
             </table>
           `;
+
+          // หัวตาราง
+      html += `
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" >#</th>
+                  <th scope="col" >ชื่ออุปกรณ์</th>
+                  <th scope="col" >จำนวน</th>
+                  <th scope="col" >ขนาด</th>
+                  <th scope="col" >รายละเอียด</th>
+                </tr>
+              </thead>
+              <tbody>
+          `;
+
+      // ข้อมูลจาก equipment_reservations loop
+      equipment_sod_reservations?.forEach((item, index) => {
+        html += `
+              <tr>
+                <td scope="row">
+                  ${index + 1}
+                </td>
+                <td>${item?.equipment_name}</td>
+                <td>${item?.equipment_quantity}</td>
+                <td>${item?.equipment_size}</td>
+                <td>${item?.additional_details}</td>
+              </tr>
+            `;
+      });
+
+      html += `
+              </tbody>
+            </table>
+          `;
+
+
+
+
       body.innerHTML = html;
     }
   </script>

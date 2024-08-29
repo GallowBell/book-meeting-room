@@ -352,6 +352,12 @@ foreach ($data as $key => $value) {
                   </div>
                 </div>
 
+                <div class="col-md-12 mb-3">
+                  <h5>รายการอุปกรณ์ที่ขอใช้โสตทัศนูปกรณ์</h5>
+                  <div class="equipment-sod-section" id="myModal2_body">
+                  </div>
+                </div>
+
                 <div class="modal-footer">
                   <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">ปิด</button>
                 </div>

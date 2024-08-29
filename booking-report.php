@@ -500,7 +500,7 @@ foreach ($data as $key => $value) {
       // ข้อมูลจาก equipment_reservations loop
       equipment_sod_reservations?.forEach((item, index) => {
 
-        let detail = item?.equipment_sod_name;
+        let detail = item?.additional_sod_details;
         let is_operate_date;
 
         switch (item?.equipment_sod_name) {

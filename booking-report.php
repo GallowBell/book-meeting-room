@@ -348,16 +348,10 @@ foreach ($data as $key => $value) {
 
                 <!-- เพิ่มส่วนแสดงผลข้อมูล equipment_reservations -->
                 <div class="col-md-12 mb-3">
-                  <h5>รายการอุปกรณ์ที่จอง</h5>
+                  
                   <div class="equipment-section" id="myModal2_body">
 
 
-                  </div>
-                </div>
-
-                <div class="col-md-12 mb-3">
-                  <h5>รายการอุปกรณ์ที่ขอใช้โสตทัศนูปกรณ์</h5>
-                  <div class="equipment-sod-section" id="myModal2_body">
                   </div>
                 </div>
 
@@ -438,7 +432,7 @@ foreach ($data as $key => $value) {
 
       // set ข้อมูลจาก reservations
       let html = `
-          <div class="row">
+      <div class="row">
             <div class="col-12">
               <div class="card">
                   <a class="btn btn-primary" href="generate-pdf.php?reservation_id=${reservation_id}" target="_blank">
@@ -446,7 +440,9 @@ foreach ($data as $key => $value) {
                   </a>
               </div>
             </div>
-          </div>`;
+          </div>
+          <h5>รายการอุปกรณ์ที่จอง</h5>
+          `;
 
       // หัวตาราง
       html += `
@@ -481,6 +477,9 @@ foreach ($data as $key => $value) {
       html += `
               </tbody>
             </table>
+                <div class="col-md-12 mt-5 mb-3">
+                  <h5>รายการอุปกรณ์ที่ขอใช้โสตทัศนูปกรณ์</h5>
+                </div>
           `;
 
           // หัวตาราง
@@ -503,12 +502,14 @@ foreach ($data as $key => $value) {
         let detail = item?.additional_sod_details;
         let is_operate_date;
 
+        console.log('item sod', item);
+
         switch (item?.equipment_sod_name) {
           case 'ช่างภาพ (วัน/เวลา) ในวันที่':
             is_operate_date = `${item?.operate_date} ${item?.operate_time}`;
             break;
           case 'พิธีกรดำเนินงาน (วัน/เวลา) ในวันที่':
-            is_operate_date = `${item?.operate_date2} ${item?.operate_time2}`;
+            is_operate_date = `${item?.operate_date_2} ${item?.operate_time_2}`;
             break;
           default:
             is_operate_date = detail;
@@ -522,7 +523,7 @@ foreach ($data as $key => $value) {
                   ${index + 1}
                 </td>
                 <td>${item?.equipment_sod_name}</td>
-                <td>${item?.equipment_sod_quantity}</td>
+                <td>${item?.equipment_sod_quantity == 0 ? '' : item?.equipment_sod_quantity}</td>
                 <td>${is_operate_date}</td>
               </tr>
             `;

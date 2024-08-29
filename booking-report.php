@@ -506,10 +506,10 @@ foreach ($data as $key => $value) {
 
         switch (item?.equipment_sod_name) {
           case 'ช่างภาพ (วัน/เวลา) ในวันที่':
-            is_operate_date = `${item?.operate_date} ${item?.operate_time}`;
+            is_operate_date = formatThaiDateTime(`${item?.operate_date} ${item?.operate_time}`);
             break;
           case 'พิธีกรดำเนินงาน (วัน/เวลา) ในวันที่':
-            is_operate_date = `${item?.operate_date_2} ${item?.operate_time_2}`;
+            is_operate_date = formatThaiDateTime(`${item?.operate_date_2} ${item?.operate_time_2}`);
             break;
           default:
             is_operate_date = detail;
@@ -650,6 +650,17 @@ foreach ($data as $key => $value) {
         })
       }
     }
+
+// Function to format date and time to Thai locale with full date and time styles
+function formatThaiDateTime(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString('th-TH', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+        timeZone: 'Asia/Bangkok'
+    });
+}
+
   </script>
 
 </body>

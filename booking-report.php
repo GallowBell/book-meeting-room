@@ -503,6 +503,8 @@ foreach ($data as $key => $value) {
         let detail = item?.additional_sod_details;
         let is_operate_date;
 
+        console.log('item sod', item);
+
         switch (item?.equipment_sod_name) {
           case 'ช่างภาพ (วัน/เวลา) ในวันที่':
             is_operate_date = `${item?.operate_date} ${item?.operate_time}`;
@@ -515,14 +517,13 @@ foreach ($data as $key => $value) {
             break;
         }
         
-
         html += `
               <tr>
                 <td scope="row">
                   ${index + 1}
                 </td>
                 <td>${item?.equipment_sod_name}</td>
-                <td>${item?.equipment_sod_quantity}</td>
+                <td>${item?.equipment_sod_quantity == 0 ? '' : item?.equipment_sod_quantity}</td>
                 <td>${is_operate_date}</td>
               </tr>
             `;

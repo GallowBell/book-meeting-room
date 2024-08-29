@@ -279,7 +279,7 @@ if ($result->num_rows > 0) {
                     continue;
                 }
 
-                $quantity = isset($equipment_sod_qty[$index]) ? $equipment_sod_qty[$index] : 0;
+                $quantity = isset($equipment_sod_qty[$index]) ? $equipment_sod_qty[$index] : 1;
                 $details = isset($equipment_sod_details[$index]) && !is_array($equipment_sod_details[$index]) ? $equipment_sod_details[$index] : null;
 
                 $operate_date = isset($equipment_sod_details[14]['date']) ? $equipment_sod_details[14]['date'] : null;

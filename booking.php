@@ -364,81 +364,81 @@ $userlevel = $_SESSION['userlevel'];
                         <label for="equipment" class="form-label fw-bold mb-3">อุปกรณ์ขอใช้ห้องโสตทัศนูปกรณ์</label>
                         <div class="border p-3 row">
                         <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod1" name="equipment_sod[0]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod1" name="equipment_sod[0]" value="ชุดเครื่องเสียงห้องประชุม">
                     <label class="form-check-label" for="equipment_sod1">
                         ชุดเครื่องเสียงห้องประชุม
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod2" name="equipment_sod[1]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod2" name="equipment_sod[1]" value="ชุดเครื่องเสียงนอกสถานที่">
                     <label class="form-check-label" for="equipment_sod2">
                     ชุดเครื่องเสียงนอกสถานที่
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod3" name="equipment_sod[2]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod3" name="equipment_sod[2]" value="เครื่องโปรเจคเตอร์">
                     <label class="form-check-label" for="equipment_sod3">
                         เครื่องโปรเจคเตอร์ พร้อมจอภาพ
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod4" name="equipment_sod[3]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod4" name="equipment_sod[3]" value="เครื่องเสียงลำโพงกระเป๋าหิ้ว">
                     <label class="form-check-label" for="equipment_sod4">
                     เครื่องเสียงลำโพงกระเป๋าหิ้ว
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod5" name="equipment_sod[4]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod5" name="equipment_sod[4]" value="เจ้าหน้าที่ควบคุม">
                     <label class="form-check-label" for="equipment_sod5">
                         เจ้าหน้าที่ควบคุม
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod6" name="equipment_sod[5]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod6" name="equipment_sod[5]" value="เครื่องเสียงพกพาพร้อมไมโครโฟน">
                     <label class="form-check-label" for="equipment_sod6">
                         เครื่องเสียงพกพาพร้อมไมโครโฟน
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod7" name="equipment_sod[6]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod7" name="equipment_sod[6]" value="การบันทึกเทปภาพบรรยาย">
                     <label class="form-check-label" for="equipment_sod7">
                       การบันทึกเทปภาพบรรยาย (VDO)
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod8" name="equipment_sod[7]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod8" name="equipment_sod[7]" value="การบันทึกเทปเสียงบรรยาย">
                     <label class="form-check-label" for="equipment_sod8">
                     การบันทึกเทปเสียงบรรยาย (Voice)
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod9" name="equipment_sod[8]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod9" name="equipment_sod[8]" value="การบันทึกภาพนิ่ง">
                     <label class="form-check-label" for="equipment_sod9">
                         การบันทึกภาพนิ่ง
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod10" name="equipment_sod[9]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod10" name="equipment_sod[9]" value="การส่งข่าวประชาสัมพันธ์">
                     <label class="form-check-label" for="equipment_sod10">
                       การส่งข่าวประชาสัมพันธ์
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod11" name="equipment_sod[10]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod11" name="equipment_sod[10]" value="แฟ้มเอกสาร">
                     <label class="form-check-label" for="equipment_sod11">
                         แฟ้มเอกสาร จำนวน
                         <input class="inputint" type="number" name="equipment_qty_sod[10]" size="1" height="20"> ฉบับ
                     </label>
                 </div>
                 <div class="col-md-6 col-xs-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod12" name="equipment_sod[11]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod12" name="equipment_sod[11]" value="เอกสารของที่ระลึก">
                     <label class="form-check-label" for="equipment_sod12">
                         เอกสารของที่ระลึก จำนวน
                         <input class="inputint" type="number" id="equipment_sod12" name="equipment_qty_sod[11]" size="1" height="20"> ชุด
                     </label>
                 </div>
                 <div class="col-12 mb-2">
-                  <input class="form-check-input" type="checkbox" id="equipment_sod13" name="equipment_sod[12]">
+                  <input class="form-check-input" type="checkbox" id="equipment_sod13" name="equipment_sod[12]" value="การประชุมออนไลน์">
                   <label class="form-check-label" for="equipment_sod13">
                       การประชุมออนไลน์ (Video Conference) โปรแกรม
                       <div style="display: inline-flex; align-items: center;">
@@ -448,7 +448,7 @@ $userlevel = $_SESSION['userlevel'];
                   </label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod14" name="equipment_sod[13]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod14" name="equipment_sod[13]" value="เอกสารแจก">
                     <label class="form-check-label" for="equipment_sod14">
                         เอกสารแจก 
                         <div style="display: inline-flex; align-items: center;">
@@ -486,7 +486,7 @@ $userlevel = $_SESSION['userlevel'];
                     </label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod17" name="equipment_sod[16]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod17" name="equipment_sod[16]" value="รถประชาสัมพันธ์เคลื่อนที่">
                     <label class="form-check-label" for="equipment_sod17">
                         รถประชาสัมพันธ์เคลื่อนที่
                         <div style="display: inline-flex; align-items: center;">
@@ -495,7 +495,7 @@ $userlevel = $_SESSION['userlevel'];
                     </label>
                 </div>
                 <div class="col-12 mb-2">
-                    <input class="form-check-input" type="checkbox" id="equipment_sod18" name="equipment_sod[17]">
+                    <input class="form-check-input" type="checkbox" id="equipment_sod18" name="equipment_sod[17]" value="อื่นๆ">
                     <label class="form-check-label" for="equipment_sod18">
                         อื่นๆ ระบุ
                         <div style="display: inline-flex; align-items: center;">

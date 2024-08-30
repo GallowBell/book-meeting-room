@@ -24,6 +24,7 @@ $img_path3 = __DIR__ . '/assets/img/report_page_0003.jpg';
  * @var string $second_img_path path to the image
  */
 $second_img_path = __DIR__ . '/assets/img/checkmark.png'; // Path to the second image
+$third_img_path = __DIR__ . '/assets/img/circlemark.png'; // Path to the second image
 
 /**
  * @var string $font path to the font
@@ -38,6 +39,7 @@ $FontSize = 40.5;
 $img = imagecreatefromjpeg($img_path);
 $img2 = imagecreatefromjpeg($img_path3);
 $second_img = imagecreatefrompng($second_img_path);
+$third_img = imagecreatefrompng($third_img_path);
 $black = imagecolorallocate($img, 0, 0, 0);
 $black2 = imagecolorallocate($img2, 0, 0, 0);
 
@@ -54,6 +56,47 @@ function AddCheckBox($x, $y){
     // Draw the second image onto the first image
     imagecopy($img, $second_img, $second_img_x, $second_img_y, 0, 0, $second_img_width, $second_img_height);
 }
+
+function AddCheckCircle($x, $y, $new_width, $new_height) {
+    global $img, $third_img, $black, $font, $FontSize;
+
+    // Define the position where the resized third image will be drawn
+    $third_img_x = $x; // X position for the third image
+    $third_img_y = $y; // Y position for the third image
+
+    // Get the original width and height of the third image
+    $third_img_width = imagesx($third_img);
+    $third_img_height = imagesy($third_img);
+
+    // Create a new true color image with the new dimensions
+    $resized_img = imagecreatetruecolor($new_width, $new_height);
+
+    // Preserve transparency for PNG images
+    imagealphablending($resized_img, false);
+    imagesavealpha($resized_img, true);
+
+    // Fill the resized image with a transparent color
+    $transparent = imagecolorallocatealpha($resized_img, 0, 0, 0, 127);
+    imagefill($resized_img, 0, 0, $transparent);
+
+    // Resize the third image
+    imagecopyresampled(
+        $resized_img,  // Destination image resource
+        $third_img,    // Source image resource
+        0, 0,          // Destination X, Y (top-left corner)
+        0, 0,          // Source X, Y (top-left corner)
+        $new_width, $new_height,  // Destination width, height
+        $third_img_width, $third_img_height // Source width, height
+    );
+
+    // Draw the resized third image onto the main image
+    imagecopy($img, $resized_img, $third_img_x, $third_img_y, 0, 0, $new_width, $new_height);
+
+    // Free up memory by destroying the resized image resource
+    imagedestroy($resized_img);
+}
+
+
 
 function AddText($x, $y, $text){
     global $img, $black2, $font, $FontSize;
@@ -172,42 +215,45 @@ foreach ($data as $key_1 => $value_1) {
 
 
     // X, Y, Text
-    AddText(325, 255,  $value_1['government_sector']);
-    AddText(120, 340,  $value_1['document_number'].'/'.(date('Y')+543));
-    AddText(1100, 340,  formatThaiDate($value_1['Timestamps']));
-    AddText(420, 555,  $value_1['government_sector']);
-    AddText(900, 910,  $value_1['meeting_name']);
-    AddText(375, 1050,  $value_1['participant_count']);
-    AddText(375, 1050,  $value_1['participant_count']);
+    AddText(590, 370,  $value_1['government_sector']);
+    AddText(390, 455,  $value_1['document_number'].'/'.(date('Y')+543));
+    AddText(1400, 455,  formatThaiDate($value_1['Timestamps']));
+    AddText(650, 740,  $value_1['government_sector']);
+    AddText(1360, 1145,  $value_1['meeting_name']);
+    AddText(630, 1285,  $value_1['participant_count']);
     //AddText(700, 1050, $thai_date . ' ถึง ' . $value_1['reservation_date_end']);
-    AddText(700, 1050,  formatThaiDate2($value_1['reservation_date']) . ' ถึง ' . formatThaiDate2($value_1['reservation_date_end']));
-    AddText(1280, 1050,  $value_1['start_time']);
-    AddText(1550, 1050,   $value_1['end_time']); 
+    AddText(980, 1285,  formatThaiDate2($value_1['reservation_date']) . ' ถึง ' . formatThaiDate2($value_1['reservation_date_end']));
+    AddText(1600, 1285,  $value_1['start_time']);
+    AddText(1890, 1285,   $value_1['end_time']); 
+    AddText(500, 1360,   $value_1['notes']); 
 
     // Adjust X and Y based on meeting_room
     if ($value_1['meeting_room'] == 'ห้องประชุมชั้น 4') {
-        $x = 195;
-        $y = 645;
+        $x = 420;
+        $y = 860;
     } elseif ($value_1['meeting_room'] == 'ห้องประชุมชั้น 5') {
-        $x = 950;
-        $y = 640;
+        $x = 1135;
+        $y = 860;
     } elseif ($value_1['meeting_room'] == 'ห้องประชุมชั้น 9') {
-        $x = 195;
-        $y = 715;
+        $x = 420;
+        $y = 940;
     }
 
     // Add the text with the adjusted X, Y coordinates
     AddCheckBox($x, $y);
 
     if ($value_1['meeting_type'] == 'ฝึกอาชีพ') {
-        $x = 195;
-        $y = 855;
+        $x = 450;
+        $y = 1100;
     } elseif ($value_1['meeting_type'] == 'อบรม') {
-        $x = 425;
-        $y = 855;
+        $x = 690;
+        $y = 1100;
     } elseif ($value_1['meeting_type'] == 'ประชุม') {
-        $x = 605;
-        $y = 855;
+        $x = 865;
+        $y = 1100;
+    } elseif ($value_1['meeting_type'] == 'รับคณะ') {
+        $x = 1055;
+        $y = 1100;
     }
 
     // Add the text with the adjusted X, Y coordinates
@@ -222,88 +268,95 @@ foreach ($data as $key_1 => $value_1) {
             // x = แนวนอน
             // y = แนวตั้ง
             if($value_3 == 'ชุดโต๊ะหมู่บูชา'){
-                AddCheckBox(200, 1210);
+                AddCheckBox(415, 1470);
             }
             if($value_3 == 'จาน + ช้อนส้อม'){
-                AddCheckBox(200, 1280);
-                AddText(730, 1330,  $value_2['equipment_quantity']);
+                AddCheckBox(415, 1550); //+80
+                AddText(950, 1590,  $value_2['equipment_quantity']); //+80
             }
             if($value_3 == 'ถาดเสิร์ฟ'){
-                AddCheckBox(1000, 1280);
-                AddText(1450, 1330,  $value_2['equipment_quantity']);
+                AddCheckBox(1285, 1550);
+                AddText(1700, 1590,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'จานแก้วใส'){
-                AddCheckBox(200, 1350);
+                AddCheckBox(415, 1630);
                 if ($value_2['equipment_size'] == 'ใหญ่') {
-                    AddCheckBox(200, 1350);
+                    AddCheckCircle(770, 1620, 90, 90);
                 }
                 if ($value_2['equipment_size'] == 'กลาง') {
-                    AddCheckBox(200, 1350);
+                    AddCheckCircle(888, 1614, 100, 100);
                 }
                 if ($value_2['equipment_size'] == 'เล็ก') {
-                    AddCheckBox(200, 1350);
+                    AddCheckCircle(1010, 1615, 90, 90);
                 }
-                AddText(1060, 1400,  $value_2['equipment_quantity']);
+                AddText(1270, 1670,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ช้อนเล็ก'){
-                AddCheckBox(200, 1420);
-                AddText(630, 1470,  $value_2['equipment_quantity']);
+                AddCheckBox(415, 1710);
+                AddText(800, 1750,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ส้อมเล็ก'){
-                AddCheckBox(1000, 1420);
-                AddText(1450, 1470,  $value_2['equipment_quantity']);
+                AddCheckBox(1285, 1710);
+                AddText(1670, 1750,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ชุดกาเเฟ'){
-                AddCheckBox(200, 1490);
-                AddText(1020, 1540,  $value_2['equipment_quantity']);
+                AddCheckBox(415, 1785);
+                AddText(1220, 1830,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ถ้วย'){
-                AddCheckBox(200, 1560);
-                AddText(1020, 1610,  $value_2['equipment_quantity']);
+                AddCheckBox(415, 1865);
+                if ($value_2['equipment_size'] == 'ใหญ่') {
+                    AddCheckCircle(640, 1850, 100, 100);
+                }
+                if ($value_2['equipment_size'] == 'กลาง') {
+                    AddCheckCircle(760, 1850, 110, 110);
+                }
+                if ($value_2['equipment_size'] == 'เล็ก') {
+                    AddCheckCircle(885, 1860, 90, 90);
+                }
+                AddText(1130, 1915,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'เเก้วน้ำดื่ม'){
-                AddCheckBox(200, 1630);
-                AddText(750, 1680,  $value_2['equipment_quantity']);
+                AddCheckBox(415, 1955);
+                AddText(930, 1995,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'เหยือกน้ำ'){
-                AddCheckBox(200, 1700);
-                AddText(650, 1750,  $value_2['equipment_quantity']);
+                AddCheckBox(415, 2045);
+                AddText(880, 2080,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'คูลเลอร์ใส่น้ำดื่ม'){
-                AddCheckBox(1000, 1700);
-                AddText(1510, 1750,  $value_2['equipment_quantity']);
+                AddCheckBox(1285, 2045);
+                AddText(1830, 2080,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'คูลเลอร์ใส่น้ำร้อน'){
-                AddCheckBox(200, 1770);
-                AddText(730, 1820,  $value_2['equipment_quantity']);
+                AddCheckBox(415, 2125);
+                AddText(940, 2160,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'กระติกน้ำเเข็ง'){
-                AddCheckBox(1000, 1770);
-                AddText(1490, 1820,  $value_2['equipment_quantity']);
+                AddCheckBox(1285, 2125);
+                AddText(1810, 2160,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ผ้าปูโต๊ะ'){
-                AddCheckBox(200, 1840);
-                AddText(650, 1890,  $value_2['equipment_quantity']);
+                AddCheckBox(415, 2210);
+                AddText(840, 2240,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'ผ้าคลุมเก้าอี้'){
-                AddCheckBox(1000, 1840);
-                AddText(1480, 1890,  $value_2['equipment_quantity']);
+                AddCheckBox(1285, 2200);
+                AddText(1800, 2240,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'อื่นๆ'){
-                AddCheckBox(200, 1910);
-                AddText(450, 1970,  $value_2['additional_details']);
+                AddCheckBox(415, 2280);
+                AddText(700, 2320,  $value_2['additional_details']);
             }
             if($value_3 == 'ที่จอดรถชั้น'){
-                AddCheckBox(200, 1980);
-                AddText(520, 2040,  $value_2['equipment_quantity']);
-                AddCheckBox(945, 715);
-                AddText(1400, 765,  $value_2['equipment_quantity']);
+                AddCheckBox(415, 2355);
+                AddText(760, 2400,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'จำนวนคัน'){
-                AddText(850, 2040,  $value_2['equipment_quantity']);
+                AddText(1100, 2400,  $value_2['equipment_quantity']);
             }
             if($value_3 == 'เลขทะเบียนรถ'){
-                AddText(1280, 2040,  $value_2['equipment_quantity']);
+                AddText(1490, 2400,  $value_2['equipment_quantity']);
             }
 
             //example

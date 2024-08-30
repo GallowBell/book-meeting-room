@@ -353,7 +353,7 @@ if ($result->num_rows > 0) {
             $js
             window.onload = function() {
                 alert('การจองห้องประชุมสำเร็จ!');
-                //window.location.href = 'index.php';
+                window.location.href = 'index.php';
             };
         </script>";
         

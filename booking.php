@@ -143,6 +143,7 @@ $userlevel = $_SESSION['userlevel'];
                     <option value="ฝึกอาชีพ">ฝึกอาชีพ</option>
                     <option value="อบรม">อบรม</option>
                     <option value="ประชุม">ประชุม</option>
+                    <option value="รับคณะ">รับคณะ</option>
                   </select>
                   <div class="invalid-feedback">
                     โปรดเลือกห้อง

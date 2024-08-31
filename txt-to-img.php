@@ -371,15 +371,82 @@ foreach ($data as $key_1 => $value_1) {
     foreach ($equipment_sod_reservations as $key_2 => $value_2) {
         foreach ($value_2 as $key_3 => $value_3) {
 
+            if($value_3 == 'ชุดเครื่องเสียงห้องประชุม'){
+                AddCheckBox2(515, 1485);
+            }
+            if($value_3 == 'ชุดเครื่องเสียงนอกสถานที่'){
+                AddCheckBox2(1415, 1485);
+            }
+
+            if($value_3 == 'เครื่องโปรเจคเตอร์'){
+                AddCheckBox2(515, 1575);
+            }
+            if($value_3 == 'เครื่องเสียงลำโพงกระเป๋าหิ้ว'){
+                AddCheckBox2(1416, 1575);
+            }
+
+            if($value_3 == 'เจ้าหน้าที่ควบคุม'){
+                AddCheckBox2(515, 1665);
+            }
+            if($value_3 == 'เครื่องเสียงพกพาพร้อมไมโครโฟน'){
+                AddCheckBox2(1416, 1665);
+            }
+
+            if($value_3 == 'การบันทึกเทปภาพบรรยาย'){
+                AddCheckBox2(515, 1755);
+            }
+            if($value_3 == 'การบันทึกเทปเสียงบรรยาย'){
+                AddCheckBox2(1416, 1755);
+            }
+            
+            if($value_3 == 'การบันทึกภาพนิ่ง'){
+                AddCheckBox2(515, 1845);
+            }
+            if($value_3 == 'การส่งข่าวประชาสัมพันธ์'){
+                AddCheckBox2(1416, 1845);
+            }
+
+            if($value_3 == 'การประชุมออนไลน์'){
+                AddCheckBox2(515, 1935);
+                AddText2(1550, 1980,  $value_2['additional_sod_details']);
+            }
+
+            if($value_3 == 'พิธีกรดำเนินงาน (วัน/เวลา) ในวันที่'){
+                AddCheckBox2(515, 2025);
+                AddText2(1350, 2070,  formatThaiDate($value_2['operate_date']));
+                AddText2(1950, 2070,  $value_2['operate_time']);
+            }
+
+            if($value_3 == 'ช่างภาพ (วัน/เวลา) ในวันที่'){
+                AddCheckBox2(515, 2115);
+                AddText2(1350, 2160,  formatThaiDate($value_2['operate_date_2']));
+                AddText2(1950, 2160,  $value_2['operate_time_2']);
+            }
+
             if($value_3 == 'เอกสารแจก'){
-                AddCheckBox2(200, 1210);
-                AddText2(300, 1250,  $value_2['equipment_sod_name']);
+                AddCheckBox2(515, 2205);
+                AddText2(965, 2245,  $value_2['additional_sod_details']);
+                AddText2(2040, 2245,  $value_2['equipment_sod_quantity']);
+            }
+
+            if($value_3 == 'แฟ้มเอกสาร'){
+                AddCheckBox2(515, 2295);
+                AddText2(1050, 2335,  $value_2['equipment_sod_quantity']);
+            }
+
+            if($value_3 == 'เอกสารของที่ระลึก'){
+                AddCheckBox2(1416, 2295);
+                AddText2(2070, 2335,  $value_2['equipment_sod_quantity']);
             }
              
             if($value_3 == 'รถประชาสัมพันธ์เคลื่อนที่'){
-                AddCheckBox2(500, 1210);
-                AddText2(400, 1250,  $value_2['equipment_sod_name']);
-                AddText2(400, 200,  $value_2['additional_sod_details']);
+                AddCheckBox2(515, 2385);
+                AddText2(1070, 2425,  $value_2['additional_sod_details']);
+            }
+
+            if($value_3 == 'อื่นๆ'){
+                AddCheckBox2(515, 2475);
+                AddText2(800, 2515,  $value_2['additional_sod_details']);
             }
         }
     }

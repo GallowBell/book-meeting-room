@@ -5,8 +5,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);   
 
 $servername = "localhost";
-$username = "xdarkpro_meeting_reservation";
-$password = "JCW5eXFX78s93RsNaLfH";
+$username = "root";
+$password = "";
 $dbname = "xdarkpro_meeting_reservation";
 
 // $username = "xdarkpro_meeting_reservation";

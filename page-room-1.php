@@ -69,13 +69,19 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                 </div>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="assets/img/news-1.jpg" class="d-block w-100" alt="...">
+                    <a href="assets/img/room-1.jpg">
+                      <img src="assets/img/room-1.jpg" class="d-block w-100" alt="...">
+                    </a>
                   </div>
                   <div class="carousel-item">
-                    <img src="assets/img/news-2.jpg" class="d-block w-100" alt="...">
+                    <a href="assets/img/room-1.jpg">
+                      <img src="assets/img/room-2.jpg" class="d-block w-100" alt="...">
+                    </a>
                   </div>
                   <div class="carousel-item">
-                    <img src="assets/img/news-3.jpg" class="d-block w-100" alt="...">
+                    <a href="assets/img/room-1.jpg">
+                      <img src="assets/img/room-3.jpg" class="d-block w-100" alt="...">
+                    </a>
                   </div>
                 </div>
 

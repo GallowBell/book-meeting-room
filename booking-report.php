@@ -135,7 +135,7 @@ foreach ($data as $key => $value) {
                   <table class="table table-striped datatable">
                     <thead>
                       <tr>
-                        <th scope="col" class="text-truncate">#</th>
+                        <th scope="col" class="text-truncate">ID</th>
                         <th scope="col" class="text-truncate">ส่วนราชการ</th>
                         <th scope="col" class="text-truncate">เรื่อง</th>
                         <th scope="col" class="text-truncate">ห้องที่จอง</th>
@@ -143,7 +143,7 @@ foreach ($data as $key => $value) {
                         <th scope="col" class="text-truncate">วันที่</th>
                         <th scope="col" class="text-truncate">เวลาที่จอง</th>
                         <th scope="col" class="text-truncate">สถานะ</th>
-                        <th scope="col" class="text-truncate">หมายเหตุ</th>
+                        <!-- <th scope="col" class="text-truncate">หมายเหตุ</th> -->
                         <th scope="col" class="text-truncate">Actions</th>
                       </tr>
                     </thead>
@@ -152,14 +152,14 @@ foreach ($data as $key => $value) {
                         $date = new DateTime($row["reservation_date"]);
 
                         // แปลงวันที่ให้เป็นรูปแบบ dd:mm:yyyy
-                        $formatted_date = $date->format('d-m-');
+                        $formatted_date = $date->format('d/m/');
 
                         // แปลงปีเป็น พ.ศ.
                         $thai_year = $date->format('Y') + 543;
 
                         // แปลงวันที่ reservation_date_end
                         $end_date = new DateTime($row["reservation_date_end"]);
-                        $formatted_end_date = $end_date->format('d-m-');
+                        $formatted_end_date = $end_date->format('d/m/');
                         $thai_year_end = $end_date->format('Y') + 543;
 
                         // ตรวจสอบว่าเวลาเป็น 00:00:00 หรือไม่
@@ -180,9 +180,15 @@ foreach ($data as $key => $value) {
                             <?= htmlspecialchars($row["meeting_name"]) ?>
                           </td>
                           <td class="text-truncate">
-                            <a href="#" class="text-primary">
-                              <?= htmlspecialchars($row["meeting_room"]) ?>
-                            </a>
+                              <span class="<?php 
+                              if ($row["meeting_room"] == "ห้องประชุมชั้น 4") {
+                                  echo 'badge rounded-pill bg-success fs-6 text-white';  // สีเขียว
+                              } elseif ($row["meeting_room"] == "ห้องประชุมชั้น 5") {
+                                  echo 'badge rounded-pill bg-primary fs-6 text-white';  // สีฟ้า
+                              } elseif ($row["meeting_room"] == "ห้องประชุมชั้น 9") {
+                                  echo 'badge rounded-pill bg-danger fs-6 text-white';  // สีแดง
+                              }
+                          ?>"><?= htmlspecialchars($row["meeting_room"]) ?></span>
                           </td>
                           <td class="text-truncate">
                             <?= htmlspecialchars($row["organizer_name"]) ?>
@@ -219,7 +225,7 @@ foreach ($data as $key => $value) {
                             endif;
                             ?>
                           </td>
-                          <td class="text-truncate"><?= htmlspecialchars($row["notes"]) ?></td>
+                          <!-- <td class="text-truncate"><?= htmlspecialchars($row["notes"]) ?></td> -->
                           <td class="text-truncate">
                             <div class="btn-group-sm" role="group">
                               <?php
@@ -231,6 +237,9 @@ foreach ($data as $key => $value) {
                                 <button type="button" class="btn btn-danger" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerReject(`<?= $row['reservation_id'] ?>`)">
                                   ✖
                                 </button>
+                                <button type="button" class="btn btn-warning" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerDelete(`<?= $row['reservation_id'] ?>`)">
+                                  <i class="bi bi-trash"></i>
+            </button>
                               <?php
                               endif;
                               ?>
@@ -624,6 +633,44 @@ foreach ($data as $key => $value) {
           });
       });
     }
+
+function handlerDelete(reservationId) {
+    Swal.fire({
+        title: 'แน่ใจหรือไม่ ?',
+        text: "การกระทำนี้จะลบข้อมูลนี้อย่างถาวร!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ใช่, ลบมัน!',
+        cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // สร้างคำขอลบด้วย AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "delete_reservation.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    Swal.fire(
+                        'ลบเรียบร้อย!',
+                        'ข้อมูลของคุณถูกลบแล้ว.',
+                        'success'
+                    ).then(() => {
+                        location.reload();  // โหลดหน้าเว็บใหม่เพื่ออัปเดตข้อมูล
+                    });
+                } else if (xhr.readyState === 4) {
+                    Swal.fire(
+                        'เกิดข้อผิดพลาด!',
+                        'ไม่สามารถลบข้อมูลได้.',
+                        'error'
+                    );
+                }
+            };
+            xhr.send("reservation_id=" + reservationId);
+        }
+    });
+}
 
     async function SendApprove(reservation_id, status) {
       try {

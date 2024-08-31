@@ -228,17 +228,22 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
         navLinks: true, // can click day/week names to navigate views
         selectable: true,
         selectMirror: true,
-        select: function(arg) {
-          console.log(123)
-          console.log('arg', arg)
-          //var title = prompt('Event Title:');
 
-         let date = arg.startStr
-         document.getElementById('date_select').value = date;
+        // Start Modal show when click
+
+        // select: function(arg) {
+        //   console.log(123)
+        //   console.log('arg', arg)
+        //   //var title = prompt('Event Title:');
+
+        //  let date = arg.startStr
+        //  document.getElementById('date_select').value = date;
           
-          myModal.show()
-          //calendar.unselect()
-        },
+        //   myModal.show()
+        //   //calendar.unselect()
+        // },
+
+        // End Moal show when click
         eventClick: function(arg) {
           /* if (confirm('ต้องการจะจบกิจกรรม ?')) {
             arg.event.remove()
@@ -307,7 +312,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           <div class="row">
 
             <!-- Sales Card -->
-            <div class="col-12">
+            <div class="col-6">
               <div class="card-link mb-4 rounded-3 bg-dark">
 
                 <div class="card-body p-0">
@@ -332,6 +337,30 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
               </div>
             </div>
             <!-- End Sales Card -->
+            <div class="col-6">
+              <div class="card-link mb-4 rounded-3 bg-dark">
+
+                <div class="card-body p-0">
+                  <a href="booking-report.php">
+                  <h5 class="card-title"></h5>
+
+                  <div class="d-flex align-items-center justify-content-center">
+                    <!-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-feather"></i>
+                    </div> -->
+                    <div class="p-3">
+                      <h1 class="text-white">ดูรายการจอง</h1>
+                    </div>
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-file-earmark-bar-graph-fill text-white"></i>
+                    </div>
+                  </div>
+                  <h5 class="card-title"></h5>
+                </div>
+                </a>
+
+              </div>
+            </div>
 
             <!-- Revenue Card -->
             <!-- <div class="col-xxl-4 col-md-6">
@@ -380,7 +409,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                <div class="row">
+                <div class="row justify-content-md-center">
                   <div class="col-12 mt-1 d-flex justify-content-center">
                   <h2 class="mt-3 fw-bold">ปฏิทินการจองห้องประชุม</h2>
                 </div>
@@ -390,31 +419,29 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
                 <div class="row m-4">
                 <div class="col-xxl-4 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
-                <i class="fs-5 bi bi-square-fill text-success"></i>
-                <span class="fs-5 ms-2">ห้องประชุมชั้น 4</span>
+                <!-- <i class="fs-5 bi bi-square-fill text-success"></i> -->
+                <span class="badge bg-success text-wrap fs-5 ms-2 py-3">ห้องประชุมชั้น 4</span>
                   </div>
                 <div class="col-xxl-4 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
-                  <i class="fs-5 bi bi-square-fill text-primary"></i>
-                  <span class="fs-5 ms-2">ห้องประชุมชั้น 5</span>
+                  <!-- <i class="fs-5 bi bi-square-fill text-primary"></i> -->
+                  <span class="badge bg-primary text-wrap fs-5 ms-2 py-3">ห้องประชุมชั้น 5</span>
                 </div>
                 <div class="col-xxl-4 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
-                  <i class="fs-5 bi bi-square-fill text-danger"></i>
-                  <span class="fs-5 ms-2">ห้องประชุมชั้น 9</span>
+                  <!-- <i class="fs-5 bi bi-square-fill text-danger"></i> -->
+                  <span class="badge bg-danger text-wrap fs-5 ms-2 py-3">ห้องประชุมชั้น 9</span>
                 </div>
                 </div>
                 </div>
-
-
-                <div id='calendar'></div>
-
-
+                <div class="container">
+                <div class="" id='calendar'></div>
+                </div>
                 </div>
                 </div>
               </div>
-            </div><!-- End Reports -->
+            </div>
           </div>
-        </div><!-- End Left side columns -->
-        </div><!-- End Right side columns -->
+        </div>
+
 
     </section>
 
@@ -785,10 +812,3 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
 
 </html>
-<div class="col-md-6">
-                  <label for="book_date" class="form-label">วันที่จอง</label>
-                  <input type="date" class="form-control" name="date" id="date_select" maxlength="10" required disabled>
-                  <div class="invalid-feedback">
-                    โปรดกรอกวันที่จอง
-                  </div>
-                </div>

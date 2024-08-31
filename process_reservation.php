@@ -150,7 +150,7 @@ function sendlinemesg($message=''){
 function formatThaiDate($date) {
     $formatter = new IntlDateFormatter(
         'th_TH', 
-        IntlDateFormatter::LONG, 
+        IntlDateFormatter::MEDIUM, 
         IntlDateFormatter::NONE, 
         'Asia/Bangkok', 
         IntlDateFormatter::GREGORIAN
@@ -336,7 +336,7 @@ if ($result->num_rows > 0) {
         //$reservation_id = NULL; // Set this to the actual reservation_id if available
 
         ///ส่วนที่ 1 line แจ้งเตือน จัดเรียงข้อความที่จะส่งเข้า line ไว้ในตัวแปร $message
-        $header = 'มีผู้ใช้ขอจองห้องประชุม';
+        $header = "เลขที่การจอง " . $reservation_id;
         $message =
             $header .
             "\n" .
@@ -350,20 +350,20 @@ if ($result->num_rows > 0) {
             $meeting_name .
             "\n" .
             'วันที่จอง: ' .
-            $reservation_date . 'ถึง' . $reservation_date_end .
+            formatThaiDate($reservation_date) . ' ถึง ' . formatThaiDate($reservation_date_end) .
             "\n" .
             'เวลาที่จอง: ' .
-            formatThaiDate($start_time) . 'ถึง' . formatThaiDate($end_time) .
+            $start_time . ' ถึง ' . $end_time .
             "\n" .
             'เบอร์: ' .
             $contact_number .
             "\n" .
             'หมายเหตุ: ' .
             $notes .
-            "\n" . 
+            "\n";
             // 'ไปที่เว็บไซต์: ' .
             // 'https://7aro.xdark-protocol.com/' 
-            ;
+
             
 
         ///ส่วนที่ 2 line แจ้งเตือน  ส่วนนี้จะทำการเรียกใช้ function sendlinemesg() เพื่อทำการส่งข้อมูลไปที่ line

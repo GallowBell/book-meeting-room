@@ -51,12 +51,12 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           </a>
         </li>End Search Icon -->
 
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell text-light"></i>
             <span class="badge bg-danger badge-number">4</span>
-          </a><!-- End Notification Icon -->
+          </a>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
@@ -122,9 +122,10 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
               <a href="#">Show all notifications</a>
             </li>
 
-          </ul><!-- End Notification Dropdown Items -->
+          </ul>
 
-        </li><!-- End Notification Nav -->
+        </li> -->
+        <!-- End Notification Nav -->
 
         <!-- <li class="nav-item dropdown">
 
@@ -197,10 +198,10 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/userdf.png" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2 text-light"><?php echo $username; ?></span>
+            <span class="ps-2 text-light"><?php echo $username; ?></span>
           </a><!-- End Profile Iamge Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <!-- <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6><?php echo $username; ?></h6>
               <span><?php echo $userlevel; ?></span>
@@ -238,23 +239,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
             <li>
               <hr class="dropdown-divider">
             </li>
-
-            <!-- <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-logout.php">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li> -->
-
-          </ul><!-- End Profile Dropdown Items -->
+          </ul> -->
         </li>
         
         
-        <li class="nav-item dropdown pe-3">
+        <li class="nav-item dropdown pe-3 me-2">
         <a href="pages-logout.php" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
         </li><!-- End Profile Nav -->
         <?php else: ?>
-          <li class="nav-item dropdown pe-3">
+          <li class="nav-item dropdown pe-3 me-2">
         <a href="pages-login.html" class="btn btn-primary text-white "><i class="bi bi-box-arrow-right"></i> Login</a>
         </li>
         <?php endif; ?>

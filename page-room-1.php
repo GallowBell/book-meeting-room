@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
+$is_logged_in = isset($_SESSION['username']);
+$username = $is_logged_in ? $_SESSION['username'] : 'Guest';
+$userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -477,7 +477,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
  <!-- Modal -->
  <div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="myModal2_header">จองห้อง</h1>
@@ -557,13 +557,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                     โปรดกรอกเบอร์โทรศัพท์
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <label for="book_date" class="form-label">วันที่จอง</label>
-                  <input type="date" class="form-control" name="date" id="date_select" maxlength="10" required disabled>
-                  <div class="invalid-feedback">
-                    โปรดกรอกวันที่จอง
-                  </div>
-                </div>
+
                 <div class="col-md-3">
                   <label for="startDate" class="form-label">เวลาเริ่มต้น</label>
                   <input type="time" class="form-control" id="" name="time">
@@ -755,6 +749,8 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   </div>
 </div>
 
+      </main>
+
 
   <!-- ======= Footer ======= -->
   <footer>
@@ -789,3 +785,10 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
 
 </html>
+<div class="col-md-6">
+                  <label for="book_date" class="form-label">วันที่จอง</label>
+                  <input type="date" class="form-control" name="date" id="date_select" maxlength="10" required disabled>
+                  <div class="invalid-feedback">
+                    โปรดกรอกวันที่จอง
+                  </div>
+                </div>

@@ -51,28 +51,28 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
               <div class="info-box card">
                 <i class="bi bi-geo-alt"></i>
                 <h3>ที่อยู่</h3>
-                <p>A108 Adam Street,<br>New York, NY 535022</p>
+                <p>เลขที่ 1 ถนนแจ้งวัฒนะ ตำบลปากเกร็ด <br>อำเภอปากเกร็ด จังหวัดนนทบุรี 11120</p>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="info-box card">
                 <i class="bi bi-telephone"></i>
                 <h3>เบอร์ติดต่อ</h3>
-                <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                <p>โทร. 0 2960 9704 - 14 <br>สำนักปลัดเทศบาล ต่อ  413</p>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="info-box card">
                 <i class="bi bi-envelope"></i>
                 <h3>อีเมล</h3>
-                <p>info@example.com<br>contact@example.com</p>
+                <p>saraban@pakkretcity.go.th<br>-</p>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="info-box card">
                 <i class="bi bi-clock"></i>
-                <h3>Open Hours</h3>
-                <p>Monday - Friday<br>9:00AM - 05:00PM</p>
+                <h3>ระยะเวลาให้บริการ</h3>
+                <p>วันจันทร์ - วันศุกร์<br>8:30 น. - 16:30 น. (มีพักเที่ยง)</p>
               </div>
             </div>
           </div>

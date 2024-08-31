@@ -371,6 +371,49 @@ foreach ($data as $key_1 => $value_1) {
     foreach ($equipment_sod_reservations as $key_2 => $value_2) {
         foreach ($value_2 as $key_3 => $value_3) {
 
+            AddText2(670, 470,  $value_1['government_sector']);
+            AddText2(590, 585,  $value_1['document_number'].'/'.(date('Y')+543));
+            AddText2(1500, 585,  formatThaiDate($value_1['Timestamps']));
+            AddText2(1000, 880,  $value_1['government_sector']);
+
+            AddText2(1500, 1235,  $value_1['meeting_name']);
+            AddText2(730, 1335,  $value_1['participant_count']);
+            //AddText(700, 1050, $thai_date . ' ถึง ' . $value_1['reservation_date_end']);
+            AddText2(1100, 1335,  formatThaiDate2($value_1['reservation_date']) . ' ถึง ' . formatThaiDate2($value_1['reservation_date_end']));
+            AddText2(1760, 1335,  $value_1['start_time']);
+            AddText2(2080, 1335,   $value_1['end_time']); 
+
+            if ($value_1['meeting_room'] == 'ห้องประชุมชั้น 4') {
+                $x = 518;
+                $y = 1010;
+            } elseif ($value_1['meeting_room'] == 'ห้องประชุมชั้น 5') {
+                $x = 1116;
+                $y = 1010;
+            } elseif ($value_1['meeting_room'] == 'ห้องประชุมชั้น 9') {
+                $x = 518;
+                $y = 1100;
+            }
+        
+            // Add the text with the adjusted X, Y coordinates
+            AddCheckBox2($x, $y);
+        
+            if ($value_1['meeting_type'] == 'ฝึกอาชีพ') {
+                $x = 515;
+                $y = 1195;
+            } elseif ($value_1['meeting_type'] == 'อบรม') {
+                $x = 757;
+                $y = 1195;
+            } elseif ($value_1['meeting_type'] == 'ประชุม') {
+                $x = 946;
+                $y = 1195;
+            } elseif ($value_1['meeting_type'] == 'รับคณะ') {
+                $x = 1163;
+                $y = 1195;
+            }
+        
+            // Add the text with the adjusted X, Y coordinates
+            AddCheckBox2($x, $y);
+
             if($value_3 == 'ชุดเครื่องเสียงห้องประชุม'){
                 AddCheckBox2(515, 1485);
             }

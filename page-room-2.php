@@ -60,7 +60,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           <div class="card mb-3">
             <div class="row g-0">
               <div class="col-md-6 p-3">
-              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+              <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -68,15 +68,19 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                 </div>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <a href="assets/img/slides-1.jpg">
-                    <img src="assets/img/slides-1.jpg" class="d-block w-100" alt="...">
+                    <a href="assets/img/room-1.jpg">
+                    <img src="assets/img/room-1.jpg" class="d-block w-100" alt="...">
                     </a>
                   </div>
                   <div class="carousel-item">
-                    <img src="assets/img/slides-2.jpg" class="d-block w-100" alt="...">
+                    <a href="assets/img/room-1.jpg">
+                    <img src="assets/img/room-2.jpg" class="d-block w-100" alt="...">
+                    </a>
                   </div>
                   <div class="carousel-item">
-                    <img src="assets/img/slides-3.jpg" class="d-block w-100" alt="...">
+                    <a href="assets/img/room-1.jpg">
+                    <img src="assets/img/room-3.jpg" class="d-block w-100" alt="...">
+                    </a>
                   </div>
                 </div>
 

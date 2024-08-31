@@ -147,6 +147,28 @@ function sendlinemesg($message=''){
    
 }
 
+function formatThaiDate($date) {
+    $formatter = new IntlDateFormatter(
+        'th_TH', 
+        IntlDateFormatter::LONG, 
+        IntlDateFormatter::NONE, 
+        'Asia/Bangkok', 
+        IntlDateFormatter::GREGORIAN
+    );
+    
+    // Format the date
+    $formattedDate = $formatter->format(new DateTime($date));
+    
+    // Convert the year to BE
+    $dateTime = new DateTime($date);
+    $yearBE = $dateTime->format('Y') + 543;
+    
+    // Replace the year in the formatted date
+    $formattedDate = str_replace($dateTime->format('Y'), $yearBE, $formattedDate);
+    
+    return $formattedDate;
+}
+
 function InsertEquipment($tableName = '', $equipment=[]){
     global $conn,
     $equipment_size_1,
@@ -331,7 +353,7 @@ if ($result->num_rows > 0) {
             $reservation_date . 'ถึง' . $reservation_date_end .
             "\n" .
             'เวลาที่จอง: ' .
-            $start_time . 'ถึง' . $end_time .
+            formatThaiDate($start_time) . 'ถึง' . formatThaiDate($end_time) .
             "\n" .
             'เบอร์: ' .
             $contact_number .
@@ -339,8 +361,9 @@ if ($result->num_rows > 0) {
             'หมายเหตุ: ' .
             $notes .
             "\n" . 
-            'ไปที่เว็บไซต์: ' .
-            'https://7aro.xdark-protocol.com/' ;
+            // 'ไปที่เว็บไซต์: ' .
+            // 'https://7aro.xdark-protocol.com/' 
+            ;
             
 
         ///ส่วนที่ 2 line แจ้งเตือน  ส่วนนี้จะทำการเรียกใช้ function sendlinemesg() เพื่อทำการส่งข้อมูลไปที่ line

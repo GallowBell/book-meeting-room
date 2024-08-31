@@ -19,7 +19,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
 
-<body>
+<body>  
 
   <?php
     include 'header.php';
@@ -39,6 +39,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
     font-size: 18px;
     font-weight: bold;
   }
+  
 </style>
 
 <main id="main" class="main">
@@ -60,31 +61,29 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           <div class="card mb-3">
             <div class="row g-0">
               <div class="col-md-6 p-3">
-              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+              <div id="carouselRoom1" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  <button type="button" data-bs-target="#carouselRoom1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselRoom1" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselRoom1" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <a href="assets/img/slides-1.jpg">
-                    <img src="assets/img/slides-1.jpg" class="d-block w-100" alt="...">
-                    </a>
+                    <img src="assets/img/news-1.jpg" class="d-block w-100" alt="...">
                   </div>
                   <div class="carousel-item">
-                    <img src="assets/img/slides-2.jpg" class="d-block w-100" alt="...">
+                    <img src="assets/img/news-2.jpg" class="d-block w-100" alt="...">
                   </div>
                   <div class="carousel-item">
-                    <img src="assets/img/slides-3.jpg" class="d-block w-100" alt="...">
+                    <img src="assets/img/news-3.jpg" class="d-block w-100" alt="...">
                   </div>
                 </div>
 
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselRoom1" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselRoom1" data-bs-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
                 </button>

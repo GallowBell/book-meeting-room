@@ -404,7 +404,7 @@ foreach ($data as $key => $value) {
         console.log('data a a', data);
         if (data) {
           let is_admin = <?php echo $_SESSION['userlevel'] == 'admin' ? 'true' : '' ?>;
-          if (data.is_approve == '1' || !is_admin) {
+          if (data.is_approve == '1' && !is_admin) {
             document.querySelectorAll('#viewForm')[0].querySelectorAll('input, select, textarea').forEach(e => {
               console.log(e)
               e.setAttribute('disabled', true)

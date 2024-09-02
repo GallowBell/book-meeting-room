@@ -387,7 +387,7 @@ foreach ($data as $key => $value) {
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       console.log('asdasdasds');
-      
+
       var reportModal = document.getElementById('reportModal');
 
       // แสดง Modal เมื่อคลิกที่ปุ่ม
@@ -403,6 +403,19 @@ foreach ($data as $key => $value) {
         var data = JSON.parse(data_json).find(row => row.reservation_id == reservationId);
         console.log('data a a', data);
         if (data) {
+          let is_admin = <?php echo $_SESSION['userlevel'] == 'admin' ? 'true' : '' ?>;
+          if (data.is_approve == '1' || !is_admin) {
+            document.querySelectorAll('#viewForm')[0].querySelectorAll('input, select, textarea').forEach(e => {
+              console.log(e)
+              e.setAttribute('disabled', true)
+            })
+          }else{
+            document.querySelectorAll('#viewForm')[0].querySelectorAll('input, select, textarea').forEach(e => {
+              console.log(e)
+              e.removeAttribute('disabled')
+            })
+          }
+
           // เติมข้อมูลในฟอร์ม
           document.getElementById('reservation_id').value = data.reservation_id;
           document.getElementById('government_sector').value = data.government_sector;

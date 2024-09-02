@@ -15,7 +15,7 @@ return; */
 session_start();
 $user_id = $_SESSION['user_id'];
 $government_sector = $_POST['government_sector'];
-$document_number = $_POST['document_number'];
+$document_number = !empty($_POST['document_number']) ? $_POST['document_number'] : null;
 $meeting_room = $_POST['meeting_room'];
 $meeting_name = $_POST['meeting_name'];
 $meeting_type = $_POST['meeting_type'];

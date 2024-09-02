@@ -112,6 +112,13 @@ $userlevel = $_SESSION['userlevel'];
                   </div>
                 </div>
                 <div class="col-md-6">
+                  <label for="contact_number" class="form-label fw-bold">โทร.</label>
+                  <input type="text" id="contact_number" name="contact_number" maxlength="10" class="form-control" <?php echo $is_required; ?>>
+                  <div class="invalid-feedback">
+                    โปรดกรอกเบอร์โทรศัพท์
+                  </div>
+                </div>
+                <div class="col-md-6">
                   <label for="document_number" class="form-label fw-bold fw-bold">เลขที่หนังสือ</label>
                   <input type="number" id="document_number" name="document_number" class="form-control">
                 </div>
@@ -166,13 +173,7 @@ $userlevel = $_SESSION['userlevel'];
                   </div>
                 </div>
 
-                <div class="col-md-6">
-                  <label for="contact_number" class="form-label fw-bold">เบอร์ติดต่อ</label>
-                  <input type="text" id="contact_number" name="contact_number" maxlength="10" class="form-control" <?php echo $is_required; ?>>
-                  <div class="invalid-feedback">
-                    โปรดกรอกเบอร์โทรศัพท์
-                  </div>
-                </div>
+                
 
                 <div class="col-md-6">
                   <label for="reservation_date" class="form-label fw-bold">วันที่จอง</label>

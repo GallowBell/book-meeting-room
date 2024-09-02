@@ -216,7 +216,9 @@ foreach ($data as $key_1 => $value_1) {
 
     // X, Y, Text
     AddText(590, 370,  $value_1['government_sector']);
-    AddText(390, 455,  $value_1['document_number'].'/'.(date('Y')+543));
+    AddText(1800, 370,  $value_1['contact_number']);
+    AddText(505, 455,  $value_1['document_number']);
+    AddText(590, 455,  '/'.(date('Y')+543));
     AddText(1400, 455,  formatThaiDate($value_1['Timestamps']));
     AddText(650, 740,  $value_1['government_sector']);
     AddText(1360, 1145,  $value_1['meeting_name']);
@@ -379,7 +381,9 @@ foreach ($data as $key_1 => $value_1) {
         foreach ($value_2 as $key_3 => $value_3) {
 
             AddText2(670, 470,  $value_1['government_sector']);
-            AddText2(590, 585,  $value_1['document_number'].'/'.(date('Y')+543));
+            AddText2(1800, 470,  $value_1['contact_number']);
+            AddText2(620, 585,  $value_1['document_number']);
+            AddText2(710, 585,  '/'.(date('Y')+543));
             AddText2(1500, 585,  formatThaiDate($value_1['Timestamps']));
             AddText2(1000, 880,  $value_1['government_sector']);
 

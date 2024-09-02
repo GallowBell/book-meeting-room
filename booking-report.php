@@ -301,19 +301,21 @@ foreach ($data as $key => $value) {
                 <input type="hidden" id="reservation_id" name="reservation_id">
                 <div class="col-md-6 mb-3">
                   <label for="government_sector" class="form-label">ส่วนราชการ</label>
-                  <input type="text" class="form-control" id="government_sector" name="government_sector" disabled>
+                  <textarea class="form-control" name="government_sector" id="government_sector" disabled></textarea>
+                  <!-- <input type="text" class="form-control" id="government_sector" name="government_sector" disabled> -->
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="document_number" class="form-label">เลขที่หนังสือ</label>
                   <input type="text" class="form-control" id="document_number" name="document_number" disabled>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="meeting_room" class="form-label">ห้องที่จอง</label>
-                  <input type="text" class="form-control" id="meeting_room" name="meeting_room" disabled>
+                  <label for="meeting_name" class="form-label">เรื่อง</label>
+                  <textarea class="form-control" name="meeting_name" id="meeting_name" disabled></textarea>
+                  <!-- <input type="text" class="form-control" id="meeting_name" name="meeting_name" disabled> -->
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="meeting_name" class="form-label">เรื่อง</label>
-                  <input type="text" class="form-control" id="meeting_name" name="meeting_name" disabled>
+                  <label for="meeting_room" class="form-label">ห้องที่จอง</label>
+                  <input type="text" class="form-control" id="meeting_room" name="meeting_room" disabled>
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="meeting_type" class="form-label">ประเภท</label>

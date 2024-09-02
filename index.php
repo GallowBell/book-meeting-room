@@ -115,7 +115,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
         const meeting_name = data?.meeting_name;
         const reservation_id = data?.reservation_id;
         body.innerHTML = '';
-        title.innerHTML = `รายละเอียดการจอง: ${data?.meeting_room}`;
+        title.innerHTML = `รายละเอียดการจอง : ${data?.meeting_room}`;
         const start_d = (new Date(data?.start_d)).toLocaleString('th-TH', {
           dateStyle: 'full',
         });
@@ -135,11 +135,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                  <p class="card-title">หัวข้อ: ${data?.meeting_name}</p>
-                  <p class="card-text"><span class="fw-bold">ห้องประชุม:</span> ${data?.meeting_room}</p>
+                  <p class="card-title">เรื่อง: ${data?.meeting_name}</p>
+                  <p class="card-text"><span class="fw-bold">เลขที่การจอง:</span> ${data?.reservation_id}</p>
+                  <p class="card-text"><span class="fw-bold">ห้อง:</span> ${data?.meeting_room}</p>
                   <p class="card-text"><span class="fw-bold">ใช้สำหรับ:</span> ${data?.meeting_type}</p>
                   <p class="card-text"><span class="fw-bold">จำนวนคน:</span> ${data?.participant_count}</p>
-                  <p class="card-text"><span class="fw-bold">วันที่:</span> ${start_d} ถึง ${end_d}</p>
+                  <p class="card-text">
+                    <span class="fw-bold">วันที่:</span>
+                    ${start_d}${start_d !== end_d ? ' ถึง ' + end_d : ''}
+                  </p>
                   <p class="card-text"><span class="fw-bold">เวลา:</span> ${start_t} ถึง ${end_t}</p>
                 </div>
             </div>
@@ -504,7 +508,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
  <!-- Modal -->
  <div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-xl">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="myModal2_header">จองห้อง</h1>

@@ -136,11 +136,11 @@ foreach ($data as $key => $value) {
                     <thead>
                       <tr>
                         <th scope="col" class="text-truncate">ID</th>
-                        <th scope="col" class="text-truncate">ส่วนราชการ</th>
+                        <!-- <th scope="col" class="text-truncate">ส่วนราชการ</th> -->
                         <th scope="col" class="text-truncate">เรื่อง</th>
                         <th scope="col" class="text-truncate">ห้องที่จอง</th>
                         <th scope="col" class="text-truncate">ชื่อผู้จอง</th>
-                        <th scope="col" class="text-truncate">วันที่</th>
+                        <th scope="col" class="text-truncate">วันที่ (ว/ด/ป)</th>
                         <th scope="col" class="text-truncate">เวลาที่จอง</th>
                         <th scope="col" class="text-truncate">สถานะ</th>
                         <!-- <th scope="col" class="text-truncate">หมายเหตุ</th> -->
@@ -173,9 +173,9 @@ foreach ($data as $key => $value) {
                               <?= htmlspecialchars($row["reservation_id"]) ?>
                             </a>
                           </td>
-                          <td class="text-truncate">
+                          <!-- <td class="text-truncate">
                             <?= htmlspecialchars($row["government_sector"]) ?>
-                          </td>
+                          </td> -->
                           <td class="text-truncate">
                             <?= htmlspecialchars($row["meeting_name"]) ?>
                           </td>
@@ -195,9 +195,10 @@ foreach ($data as $key => $value) {
                           </td>
 
                           <td class="text-truncate">
-                            <?= htmlspecialchars($formatted_date . $thai_year) ?>
-                            ถึง 
-                            <?= htmlspecialchars($formatted_end_date . $thai_year_end) ?>
+                              <?= htmlspecialchars($formatted_date . $thai_year) ?>
+                              <?php if ($formatted_end_date !== $formatted_date): ?>
+                                  ถึง <?= htmlspecialchars($formatted_end_date . $thai_year_end) ?>
+                              <?php endif; ?>
                           </td>
                           <td class="text-truncate">
                             <?php
@@ -286,7 +287,7 @@ foreach ($data as $key => $value) {
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Modal HTML -->
-  <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+  <div class="modal" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
@@ -299,7 +300,7 @@ foreach ($data as $key => $value) {
               <form class="row" id="viewForm" action="" method="post">
                 <input type="hidden" id="reservation_id" name="reservation_id">
                 <div class="col-md-6 mb-3">
-                  <label for="government_sector" class="form-label fw-bold">ส่วนราชการ</label>
+                  <label for="government_sector" class="form-label">ส่วนราชการ</label>
                   <input type="text" class="form-control" id="government_sector" name="government_sector" disabled>
                 </div>
                 <div class="col-md-6 mb-3">
@@ -514,10 +515,10 @@ foreach ($data as $key => $value) {
         console.log('item sod', item);
 
         switch (item?.equipment_sod_name) {
-          case 'ช่างภาพ (วัน/เวลา) ในวันที่':
+          case 'พิธีกรดำเนินงาน (วัน/เวลา) ในวันที่':
             is_operate_date = formatThaiDateTime(`${item?.operate_date} ${item?.operate_time}`);
             break;
-          case 'พิธีกรดำเนินงาน (วัน/เวลา) ในวันที่':
+          case 'ช่างภาพ (วัน/เวลา) ในวันที่':
             is_operate_date = formatThaiDateTime(`${item?.operate_date_2} ${item?.operate_time_2}`);
             break;
           default:

@@ -222,7 +222,14 @@ foreach ($data as $key_1 => $value_1) {
     AddText(1360, 1145,  $value_1['meeting_name']);
     AddText(630, 1285,  $value_1['participant_count']);
     //AddText(700, 1050, $thai_date . ' ถึง ' . $value_1['reservation_date_end']);
-    AddText(980, 1285,  formatThaiDate2($value_1['reservation_date']) . ' ถึง ' . formatThaiDate2($value_1['reservation_date_end']));
+    // AddText(980, 1285,  formatThaiDate2($value_1['reservation_date']) . ' ถึง ' . formatThaiDate2($value_1['reservation_date_end']));
+    AddText(
+        980,
+        1285,
+        formatThaiDate2($value_1['reservation_date']) .
+        ($value_1['reservation_date_end'] !== $value_1['reservation_date'] ? ' ถึง ' . formatThaiDate2($value_1['reservation_date_end']) : '')
+    );
+    
     AddText(1600, 1285,  $value_1['start_time']);
     AddText(1890, 1285,   $value_1['end_time']); 
     AddText(500, 1360,   $value_1['notes']); 

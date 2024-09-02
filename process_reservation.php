@@ -336,7 +336,7 @@ if ($result->num_rows > 0) {
         //$reservation_id = NULL; // Set this to the actual reservation_id if available
 
         ///ส่วนที่ 1 line แจ้งเตือน จัดเรียงข้อความที่จะส่งเข้า line ไว้ในตัวแปร $message
-        $header = "เลขที่การจอง " . $reservation_id;
+        $header = "\n"."เลขที่การจอง: " . $reservation_id;
         $message =
             $header .
             "\n" .
@@ -350,7 +350,8 @@ if ($result->num_rows > 0) {
             $meeting_name .
             "\n" .
             'วันที่จอง: ' .
-            formatThaiDate($reservation_date) . ' ถึง ' . formatThaiDate($reservation_date_end) .
+            formatThaiDate($reservation_date) .
+    ($reservation_date_end != $reservation_date ? ' ถึง ' . formatThaiDate($reservation_date_end) : '') .
             "\n" .
             'เวลาที่จอง: ' .
             $start_time . ' ถึง ' . $end_time .
@@ -359,8 +360,8 @@ if ($result->num_rows > 0) {
             $contact_number .
             "\n" .
             'หมายเหตุ: ' .
-            $notes .
-            "\n";
+            $notes;
+            // ."\n" .
             // 'ไปที่เว็บไซต์: ' .
             // 'https://7aro.xdark-protocol.com/' 
 

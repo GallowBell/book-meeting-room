@@ -297,41 +297,41 @@ foreach ($data as $key => $value) {
         <div class="modal-body">
           <div class="row">
             <div class="col-lg-12">
-              <form class="row" id="viewForm" action="" method="post">
+              <form class="row" id="viewForm" action="report-update.php" method="post">
                 <input type="hidden" id="reservation_id" name="reservation_id">
                 <div class="col-md-6 mb-3">
                   <label for="government_sector" class="form-label">ส่วนราชการ</label>
-                  <textarea class="form-control" name="government_sector" id="government_sector" disabled></textarea>
+                  <textarea class="form-control" name="government_sector" id="government_sector"></textarea>
                   <!-- <input type="text" class="form-control" id="government_sector" name="government_sector" disabled> -->
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="document_number" class="form-label">เลขที่หนังสือ</label>
-                  <input type="text" class="form-control" id="document_number" name="document_number" disabled>
+                  <input type="text" class="form-control" id="document_number" name="document_number">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="meeting_name" class="form-label">เรื่อง</label>
-                  <textarea class="form-control" name="meeting_name" id="meeting_name" disabled></textarea>
+                  <textarea class="form-control" name="meeting_name" id="meeting_name"></textarea>
                   <!-- <input type="text" class="form-control" id="meeting_name" name="meeting_name" disabled> -->
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="meeting_room" class="form-label">ห้องที่จอง</label>
-                  <input type="text" class="form-control" id="meeting_room" name="meeting_room" disabled>
+                  <input type="text" class="form-control" id="meeting_room" name="meeting_room">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="meeting_type" class="form-label">ประเภท</label>
-                  <input type="text" class="form-control" id="meeting_type" name="meeting_type" disabled>
+                  <input type="text" class="form-control" id="meeting_type" name="meeting_type">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="participant_count" class="form-label">จำนวนผู้เข้าร่วม</label>
-                  <input type="text" class="form-control" id="participant_count" name="participant_count" disabled>
+                  <input type="text" class="form-control" id="participant_count" name="participant_count">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="organizer_name" class="form-label">ชื่อผู้จอง</label>
-                  <input type="text" class="form-control" id="organizer_name" name="organizer_name" disabled>
+                  <input type="text" class="form-control" id="organizer_name" name="organizer_name">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="contact_number" class="form-label">เบอร์ติดต่อ</label>
-                  <input type="text" class="form-control" id="contact_number" name="contact_number" disabled>
+                  <input type="text" class="form-control" id="contact_number" name="contact_number">
                 </div>
                 <!-- <div class="col-md-6 mb-3">
             <label for="reservation_date" class="form-label">วันที่</label>
@@ -339,23 +339,23 @@ foreach ($data as $key => $value) {
           </div> -->
                 <div class="col-md-6 mb-3">
                   <label for="reservation_date" class="form-label">วันที่เริ่มต้น</label>
-                  <input type="date" class="form-control" id="reservation_date" name="reservation_date" disabled>
+                  <input type="date" class="form-control" id="reservation_date" name="reservation_date">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="reservation_date_end" class="form-label">วันที่สิ้นสุด</label>
-                  <input type="date" class="form-control" id="reservation_date_end" name="reservation_date_end" disabled>
+                  <input type="date" class="form-control" id="reservation_date_end" name="reservation_date_end">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="start_time" class="form-label">เวลาที่จองเริ่มต้น</label>
-                  <input type="time" class="form-control" id="start_time" name="start_time" disabled>
+                  <input type="time" class="form-control" id="start_time" name="start_time">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="end_time" class="form-label">เวลาที่จองสิ้นสุด</label>
-                  <input type="time" class="form-control" id="end_time" name="end_time" disabled>
+                  <input type="time" class="form-control" id="end_time" name="end_time">
                 </div>
                 <div class="col-md-12 mb-3">
                   <label for="notes" class="form-label">หมายเหตุ</label>
-                  <textarea class="form-control" id="notes" name="notes" disabled></textarea>
+                  <textarea class="form-control" id="notes" name="notes"></textarea>
                 </div>
 
                 <!-- เพิ่มส่วนแสดงผลข้อมูล equipment_reservations -->

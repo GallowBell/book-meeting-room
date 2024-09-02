@@ -1,18 +1,30 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "meeting_reservation";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $reservation_id = $_POST['reservation_id'];
+
+    /* $reservation_id = $_POST['reservation_id'];
     $meeting_name = $_POST['meeting_name'];
     $meeting_room = $_POST['meeting_room'];
     $organizer_name = $_POST['organizer_name'];
     $reservation_date = $_POST['reservation_date'];
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
-    $notes = $_POST['notes'];
+    $notes = $_POST['notes']; */
+
+    $reservation_id = $_POST['reservation_id']; 
+    $government_sector = $_POST['government_sector']; 
+    $contact_number = $_POST['contact_number']; 
+    $meeting_name = $_POST['meeting_name']; 
+    $document_number = $_POST['document_number']; 
+    $meeting_room = $_POST['meeting_room'];  
+    $meeting_type = $_POST['meeting_type']; 
+    $participant_count = $_POST['participant_count']; 
+    $organizer_name = $_POST['organizer_name'];  
+    $reservation_date = $_POST['reservation_date']; 
+    $reservation_date_end = $_POST['reservation_date_end']; 
+    $start_time = $_POST['start_time']; 
+    $end_time = $_POST['end_time']; 
+    $notes = $_POST['notes']; 
 
     // เชื่อมต่อกับฐานข้อมูล
     include 'connection.php';

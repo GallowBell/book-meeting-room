@@ -233,7 +233,7 @@ $sql_check = "SELECT * FROM reservations
               AND (
                   (reservation_date <= '$reservation_date_end' AND reservation_date_end >= '$reservation_date') 
                   AND ((start_time <= '$end_time' AND end_time >= '$start_time'))
-              )";
+              ) AND is_approve = 1";
 
 $result = $conn->query($sql_check);
 //echo "row".$result->num_rows;

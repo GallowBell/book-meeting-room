@@ -240,7 +240,7 @@ foreach ($data as $key => $value) {
                                 </button>
                                 <button type="button" class="btn btn-warning" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerDelete(`<?= $row['reservation_id'] ?>`)">
                                   <i class="bi bi-trash"></i>
-            </button>
+                                </button>
                               <?php
                               endif;
                               ?>

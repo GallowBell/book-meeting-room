@@ -445,7 +445,7 @@ foreach ($data as $key => $value) {
       <div class="row">
             <div class="col-12">
               <div class="card">
-                  <a class="btn btn-primary" href="generate-pdf.php?reservation_id=${reservation_id}" target="_blank">
+                  <a class="btn btn-primary fs-5" href="generate-pdf.php?reservation_id=${reservation_id}" target="_blank">
                     ดาวน์โหลดเอกสาร
                   </a>
               </div>
@@ -462,7 +462,7 @@ foreach ($data as $key => $value) {
                   <th scope="col" >#</th>
                   <th scope="col" >ชื่ออุปกรณ์</th>
                   <th scope="col" >จำนวน</th>
-                  <th scope="col" >ขนาด</th>
+
                   <th scope="col" >รายละเอียด</th>
                 </tr>
               </thead>
@@ -478,8 +478,8 @@ foreach ($data as $key => $value) {
                 </td>
                 <td>${item?.equipment_name}</td>
                 <td>${item?.equipment_quantity}</td>
-                <td>${item?.equipment_size}</td>
-                <td>${item?.additional_details}</td>
+
+                <td>${item?.equipment_size}${item?.additional_details}</td>
               </tr>
             `;
       });

@@ -386,7 +386,13 @@ foreach ($data as $key_1 => $value_1) {
             AddText2(1500, 1235,  $value_1['meeting_name']);
             AddText2(730, 1335,  $value_1['participant_count']);
             //AddText(700, 1050, $thai_date . ' ถึง ' . $value_1['reservation_date_end']);
-            AddText2(1100, 1335,  formatThaiDate2($value_1['reservation_date']) . ' ถึง ' . formatThaiDate2($value_1['reservation_date_end']));
+    
+            AddText2(
+                1100,
+                1335,  
+                formatThaiDate2($value_1['reservation_date']) .
+                ($value_1['reservation_date_end'] !== $value_1['reservation_date'] ? ' ถึง ' . formatThaiDate2($value_1['reservation_date_end']) : '')
+            );
             AddText2(1760, 1335,  $value_1['start_time']);
             AddText2(2080, 1335,   $value_1['end_time']); 
 

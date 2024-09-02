@@ -367,8 +367,9 @@ foreach ($data as $key => $value) {
                   </div>
                 </div>
 
-                <div class="modal-footer">
-                  <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">ปิด</button>
+                <div class="col-12 mt-3 d-flex justify-content-end">
+                <a class="btn btn-danger me-3" data-bs-dismiss="modal" aria-label="Close">ปิด</a>
+                  <button type="submit" class="btn btn-success">บันทึก</button>
                 </div>
               </form>
             </div>

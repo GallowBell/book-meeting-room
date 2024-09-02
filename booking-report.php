@@ -386,7 +386,11 @@ foreach ($data as $key => $value) {
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      console.log('asdasdasds');
+      
       var reportModal = document.getElementById('reportModal');
+
+      // แสดง Modal เมื่อคลิกที่ปุ่ม
       reportModal.addEventListener('show.bs.modal', function(event) {
         var button = event.relatedTarget; // ปุ่มที่ถูกคลิก
         var reservationId = button.getAttribute('data-reservation-id'); // ดึง reservation_id จากปุ่ม

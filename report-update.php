@@ -33,10 +33,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // เตรียมและรันคำสั่ง SQL
-    $stmt = $conn->prepare("UPDATE reservations SET meeting_name=?, meeting_room=?, organizer_name=?, reservation_date=?, start_time=?, end_time=?, notes=? WHERE reservation_id=?");
-    $stmt->bind_param('ssssssss', $meeting_name, $meeting_room, $organizer_name, $reservation_date, $start_time, $end_time, $notes, $reservation_id);
+    // ตรวจสอบการจองซ้อนทับ
+    $sql_check = "SELECT * FROM reservations 
+    WHERE meeting_room = '$meeting_room' 
+    AND (
+        (reservation_date <= '$reservation_date_end' AND reservation_date_end >= '$reservation_date') 
+        AND ((start_time <= '$end_time' AND end_time >= '$start_time'))
+    ) AND is_approve = 1";
 
+    $result = $conn->query($sql_check);
+    //echo "row".$result->num_rows;
+    if ($result->num_rows > 0) {
+        echo "
+        <script>
+            window.onload = function() {
+                alert('ไม่สามารถจองได้เนื่องจากเวลาที่คุณเลือกทับซ้อนกับการจองอื่นแล้ว.');
+                window.location.href = 'booking-report.php';
+            };
+        </script>";
+        return;
+    }
+
+    
+
+    // เตรียมและรันคำสั่ง SQL
+    $stmt = $conn->prepare("UPDATE reservations SET 
+        government_sector = ?,
+        contact_number = ?,
+        meeting_name = ?,
+        document_number = ?,
+        meeting_room = ?,
+        meeting_type = ?,
+        participant_count = ?,
+        organizer_name = ?,
+        reservation_date = ?,
+        reservation_date_end = ?,
+        start_time = ?,
+        end_time = ?,
+        notes = ?
+    WHERE reservation_id=?");
+   
+    $stmt->bind_param('ssssssssssssss', 
+        $government_sector,
+        $contact_number,
+        $meeting_name,
+        $document_number,
+        $meeting_room,
+        $meeting_type,
+        $participant_count,
+        $organizer_name,
+        $reservation_date,
+        $reservation_date_end,
+        $start_time,
+        $end_time,
+        $notes,
+        $reservation_id
+    );
+    $result = $stmt->execute();
     if ($stmt->execute()) {
         echo "Record updated successfully";
     } else {

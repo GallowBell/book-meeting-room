@@ -305,13 +305,17 @@ foreach ($data as $key => $value) {
                   <!-- <input type="text" class="form-control" id="government_sector" name="government_sector" disabled> -->
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="document_number" class="form-label">เลขที่หนังสือ</label>
-                  <input type="text" class="form-control" id="document_number" name="document_number">
+                  <label for="contact_number" class="form-label">โทร.</label>
+                  <input type="text" class="form-control" id="contact_number" name="contact_number">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="meeting_name" class="form-label">เรื่อง</label>
                   <textarea class="form-control" name="meeting_name" id="meeting_name"></textarea>
                   <!-- <input type="text" class="form-control" id="meeting_name" name="meeting_name" disabled> -->
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="document_number" class="form-label">เลขที่หนังสือ</label>
+                  <input type="text" class="form-control" id="document_number" name="document_number">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="meeting_room" class="form-label">ห้องที่จอง</label>
@@ -328,10 +332,6 @@ foreach ($data as $key => $value) {
                 <div class="col-md-6 mb-3">
                   <label for="organizer_name" class="form-label">ชื่อผู้จอง</label>
                   <input type="text" class="form-control" id="organizer_name" name="organizer_name">
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="contact_number" class="form-label">เบอร์ติดต่อ</label>
-                  <input type="text" class="form-control" id="contact_number" name="contact_number">
                 </div>
                 <!-- <div class="col-md-6 mb-3">
             <label for="reservation_date" class="form-label">วันที่</label>

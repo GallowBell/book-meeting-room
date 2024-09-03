@@ -135,7 +135,7 @@ foreach ($data as $key => $value) {
                   <table class="table table-striped datatable">
                     <thead>
                       <tr>
-                        <th scope="col" class="text-truncate">ID</th>
+                        <th scope="col" class="text-truncate">เลขที่การจอง</th>
                         <!-- <th scope="col" class="text-truncate">ส่วนราชการ</th> -->
                         <th scope="col" class="text-truncate">เรื่อง</th>
                         <th scope="col" class="text-truncate">ห้องที่จอง</th>
@@ -386,7 +386,7 @@ foreach ($data as $key => $value) {
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('asdasdasds');
+      // console.log('asdasdasds');
 
       var reportModal = document.getElementById('reportModal');
 
@@ -403,18 +403,19 @@ foreach ($data as $key => $value) {
         var data = JSON.parse(data_json).find(row => row.reservation_id == reservationId);
         console.log('data a a', data);
         if (data) {
-          let is_admin = <?php echo $_SESSION['userlevel'] == 'admin' ? 'true' : '' ?>;
-          if (data.is_approve == '1' && !is_admin) {
-            document.querySelectorAll('#viewForm')[0].querySelectorAll('input, select, textarea').forEach(e => {
-              console.log(e)
-              e.setAttribute('disabled', true)
-            })
-          }else{
-            document.querySelectorAll('#viewForm')[0].querySelectorAll('input, select, textarea').forEach(e => {
-              console.log(e)
-              e.removeAttribute('disabled')
-            })
-          }
+          // Correctly setting is_admin as a Boolean
+      let is_admin = <?php echo $_SESSION['userlevel'] == 'admin' ? 'true' : 'false'; ?>;
+
+      // Conditionally disable or enable form fields
+      if (data.is_approve == '1' && !is_admin) {
+        document.querySelectorAll('#viewForm')[0].querySelectorAll('input, select, textarea').forEach(e => {
+          e.setAttribute('disabled', true);
+        });
+      } else {
+        document.querySelectorAll('#viewForm')[0].querySelectorAll('input, select, textarea').forEach(e => {
+          e.removeAttribute('disabled');
+        });
+      }
 
           // เติมข้อมูลในฟอร์ม
           document.getElementById('reservation_id').value = data.reservation_id;
@@ -585,10 +586,12 @@ foreach ($data as $key => $value) {
       console.log('handlerApprove id', reservation_id)
       Swal.fire({
         icon: 'question',
-        title: 'ยืนยันการการจอง',
+        title: 'ยืนยันการอนุมัติ',
         showCancelButton: true,
         confirmButtonText: 'ยืนยัน',
         cancelButtonText: 'ย้อนกลับ',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
       }).then((result) => {
         if (!result.isConfirmed) {
           return;
@@ -599,7 +602,10 @@ foreach ($data as $key => $value) {
             if (result.status == 200) {
               Swal.fire({
                 icon: 'success',
-                title: 'อนุมัติการจองเรียบร้อยแล้ว'
+                title: 'อนุมัติการจองเรียบร้อยแล้ว',
+                confirmButtonText: 'ยืนยัน',
+                confirmButtonColor: '#3085d6'
+                
               }).then(() => {
                 location.reload();
               });
@@ -626,6 +632,8 @@ foreach ($data as $key => $value) {
         showCancelButton: true,
         confirmButtonText: 'ยืนยัน',
         cancelButtonText: 'ย้อนกลับ',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33'
       }).then((result) => {
         if (!result.isConfirmed) {
           return;
@@ -636,7 +644,9 @@ foreach ($data as $key => $value) {
             if (result.status == 200) {
               Swal.fire({
                 icon: 'success',
-                title: 'ไม่อนุมัติการจองเรียบร้อยแล้ว'
+                title: 'ไม่อนุมัติการจองเรียบร้อยแล้ว',
+                confirmButtonText: 'ยืนยัน',
+                confirmButtonColor: '#3085d6'
               }).then(() => {
                 location.reload();
               });
@@ -649,7 +659,8 @@ foreach ($data as $key => $value) {
               title: 'เกิดข้อผิดพลาด',
               text: 'โปรดลองใหม่อีกครั้ง ' + error,
               icon: 'error',
-              confirmButtonText: 'ตกลง'
+              confirmButtonText: 'ตกลง',
+              confirmButtonColor: '#3085d6'
             })
           });
       });

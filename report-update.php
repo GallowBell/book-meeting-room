@@ -44,13 +44,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $conn->query($sql_check);
     //echo "row".$result->num_rows;
     if ($result->num_rows > 0) {
-        echo "
-        <script>
-            window.onload = function() {
-                alert('ไม่สามารถจองได้เนื่องจากเวลาที่คุณเลือกทับซ้อนกับการจองอื่นแล้ว.');
-                window.location.href = 'booking-report.php';
-            };
-        </script>";
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script>
+        window.onload = function() {
+            Swal.fire({
+                title: 'มีบางอย่างผิดพลาด',
+                text: 'ไม่สามารถจองวัน/เวลา ทับซ้อนได้ หรือสถานะเป็นอนุมัติอยู่',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#3085d6'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'booking-report.php';
+                }
+            });
+        };
+    </script>";
         return;
     }
 
@@ -91,9 +100,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
     $result = $stmt->execute();
     if ($stmt->execute()) {
-        echo "Record updated successfully";
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script>
+            window.onload = function() {
+                Swal.fire({
+                    title: 'แก้ไขสำเร็จ !',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#3085d6'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'booking-report.php';
+                    }
+                });
+            };
+        </script>";
+
+
     } else {
-        echo "Error updating record: " . $stmt->error;
+        echo "<script>
+            window.onload = function() {
+                Swal.fire({
+                    title: 'มีบางอย่างผิดพลาด',
+                    text: 'ไม่สามารถแก้ไขได้ !',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#3085d6'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'booking-report.php';
+                    }
+                });
+            };
+        </script>" . $stmt->error;
     }
 
     $stmt->close();

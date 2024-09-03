@@ -373,11 +373,19 @@ if ($result->num_rows > 0) {
             'result' => $result,
             'post' => $_POST,
         ]) . "; console.log(data);";
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
         echo "<script>
-            $js
             window.onload = function() {
-                alert('การจองห้องประชุมสำเร็จ!');
-                window.location.href = 'index.php';
+                Swal.fire({
+                    title: 'การจองห้องสำเร็จ !',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#3085d6'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'booking-report.php';
+                    }
+                });
             };
         </script>";
         

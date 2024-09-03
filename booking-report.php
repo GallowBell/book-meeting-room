@@ -319,11 +319,28 @@ foreach ($data as $key => $value) {
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="meeting_room" class="form-label">ห้องที่จอง</label>
-                  <input type="text" class="form-control" id="meeting_room" name="meeting_room">
+                  <select class="form-select" id="meeting_room" name="meeting_room">
+                    <option selected disabled hidden value="" >เลือกห้อง...</option>
+                    <option value="ห้องประชุมชั้น 4">ห้องประชุมชั้น 4</option>
+                    <option value="ห้องประชุมชั้น 5">ห้องประชุมชั้น 5</option>
+                    <option value="ห้องประชุมชั้น 9">ห้องประชุมชั้น 9</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    โปรดเลือกห้อง
+                  </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="meeting_type" class="form-label">ประเภท</label>
-                  <input type="text" class="form-control" id="meeting_type" name="meeting_type">
+                  <label for="meeting_type" class="form-label">ใช้สำหรับ</label>
+                  <select id="meeting_type" name="meeting_type" class="form-select">
+                    <option selected disabled hidden value="">ใช้สำหรับการ...</option>
+                    <option value="ฝึกอาชีพ">ฝึกอาชีพ</option>
+                    <option value="อบรม">อบรม</option>
+                    <option value="ประชุม">ประชุม</option>
+                    <option value="รับคณะ">รับคณะ</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    โปรดเลือกห้อง
+                  </div>
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="participant_count" class="form-label">จำนวนผู้เข้าร่วม</label>

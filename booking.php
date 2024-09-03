@@ -590,6 +590,8 @@ $userlevel = $_SESSION['userlevel'];
         } */
   </style>
 
+  <!-- Start datepicker -->
+
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://npmcdn.com/flatpickr@4.6.13/dist/l10n/th.js"></script>
 
@@ -657,6 +659,9 @@ $userlevel = $_SESSION['userlevel'];
       });
     });
   </script>
+
+    <!-- End datepicker -->
+
 </body>
 
 

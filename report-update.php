@@ -104,7 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script>
             window.onload = function() {
                 Swal.fire({
-                    title: 'แก้ไขสำเร็จ !',
+                    title: 'แก้ไขสำเร็จ',
+                    text: 'กรุณา อนุมัติ อีกครั้งด้วย !',
                     icon: 'success',
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#3085d6'

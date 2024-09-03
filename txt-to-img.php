@@ -199,8 +199,28 @@ if(count($data) == 0){
 }
 
 if ($data[0]['is_approve'] == -1 || $data[0]['is_approve'] == 0) {
-    die('Reservation not approve');
+    // Output the SweetAlert2 scripts
+    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+    echo "<script>
+    window.onload = function() {
+        Swal.fire({
+            title: 'ไม่สามารถโหลดเอกสารได้',
+            text: 'เนื่องจากสถานะยังไม่อนุมัติ',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#3085d6'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'booking-report.php';
+            }
+        });
+    };
+    </script>";
+
+    // Terminate the script after outputting the message
+    exit;
 }
+
 
 // $data = ข้อมูลจากตาราง reservations
 foreach ($data as $key_1 => $value_1) {

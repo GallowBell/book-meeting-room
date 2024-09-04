@@ -1,41 +1,42 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
+    include '../connection.php';
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+        $comment_name = $_POST['comment_name'];
+        $comment_text = $_POST['comment_text'];
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+        $sql = "INSERT INTO comment (comment_name, comment_text)
+                VALUES ('$comment_name', '$comment_text')";
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
+        if ($conn->query($sql) === TRUE) {
+            echo '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Redirecting</title>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    Swal.fire({
+                        title: "เราได้รับคำแนะนำของคุณแล้ว",
+                        icon: "success",
+                        confirmButtonText: "ตกลง"
+                    }).then(function() {
+                        window.location.href = "../pages-contact.php";
+                    });
+                });
+            </script>
+        </head>
+        <body>
+        </body>
+        </html>';
+        } else {
+            echo "<script>
+                    alert('เกิดข้อผิดพลาด: " . $conn->error . "');
+                  </script>";
+        }
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
-
-  echo $contact->send();
+    // ปิดการเชื่อมต่อกับฐานข้อมูล
+    $conn->close();
 ?>

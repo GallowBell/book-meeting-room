@@ -401,12 +401,11 @@ foreach ($data as $key_1 => $value_1) {
         foreach ($value_2 as $key_3 => $value_3) {
 
             AddText2(670, 470,  $value_1['government_sector']);
-            AddText2(1800, 470,  $value_1['contact_number']);
-            AddText2(620, 585,  $value_1['document_number']);
-            AddText2(710, 585,  '/'.(date('Y')+543));
-            AddText2(1500, 585,  formatThaiDate($value_1['Timestamps']));
-            AddText2(1000, 880,  $value_1['government_sector']);
-
+            AddText2(2000, 470,  $value_1['contact_number']);
+            AddText2(620, 580,  $value_1['document_number']);
+            AddText2(710, 580,  '/'.(date('Y')+543));
+            AddText2(1500, 580,  formatThaiDate($value_1['Timestamps']));
+            AddText2(1000, 875,  $value_1['government_sector']);
             AddText2(1500, 1235,  $value_1['meeting_name']);
             AddText2(730, 1335,  $value_1['participant_count']);
             //AddText(700, 1050, $thai_date . ' ถึง ' . $value_1['reservation_date_end']);
@@ -436,16 +435,16 @@ foreach ($data as $key_1 => $value_1) {
         
             if ($value_1['meeting_type'] == 'ฝึกอาชีพ') {
                 $x = 515;
-                $y = 1195;
+                $y = 1190;
             } elseif ($value_1['meeting_type'] == 'อบรม') {
                 $x = 757;
-                $y = 1195;
+                $y = 1190;
             } elseif ($value_1['meeting_type'] == 'ประชุม') {
                 $x = 946;
-                $y = 1195;
+                $y = 1190;
             } elseif ($value_1['meeting_type'] == 'รับคณะ') {
                 $x = 1163;
-                $y = 1195;
+                $y = 1190;
             }
         
             // Add the text with the adjusted X, Y coordinates

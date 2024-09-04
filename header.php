@@ -198,10 +198,10 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/userdf.png" alt="Profile" class="rounded-circle">
-            <span class="ps-2 text-light"><?php echo $username; ?></span>
+            <span class="ps-2 text-light"><?php echo $username; ?> | <?php echo $userlevel; ?></span>
           </a><!-- End Profile Iamge Icon -->
 
-          <!-- <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+         <!-- <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6><?php echo $username; ?></h6>
               <span><?php echo $userlevel; ?></span>
@@ -240,22 +240,23 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
               <hr class="dropdown-divider">
             </li>
           </ul> -->
-        </li>
-        
+        </li> 
         
         <li class="nav-item dropdown pe-3 me-2">
-        <a href="pages-logout.php" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        <a href="pages-logout.php" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i> ออกจากระบบ</a>
         </li><!-- End Profile Nav -->
         <?php else: ?>
           <li class="nav-item dropdown pe-3 me-2">
-        <a href="pages-login.html" class="btn btn-primary text-white "><i class="bi bi-box-arrow-right"></i> Login</a>
+        <a href="pages-login.html" class="btn btn-primary text-white "><i class="bi bi-box-arrow-right"></i> เข้าสู่ระบบ</a>
         </li>
         <?php endif; ?>
 
       </ul>
-    </nav><!-- End Icons Navigation -->
+    </nav>
+    <!-- End Icons Navigation -->
 
-  </header><!-- End Header -->
+  </header>
+  <!-- End Header -->
   
  <!-- Vendor JS Files -->
  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

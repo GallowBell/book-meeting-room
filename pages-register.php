@@ -26,14 +26,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES ('$username', '$password', '$first_name', '$last_name', '$phone_number', '$userlevel')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "<script>
-                    alert('ลงทะเบียนสำเร็จ!');
-                    window.location.href = 'pages-login.html';
-                  </script>";
+            echo '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Redirecting</title>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    Swal.fire({
+                        title: "ลงทะเบียนสำเร็จ",
+                        text: "กรุณาเข้าสู่ระบบ",
+                        icon: "success",
+                        confirmButtonText: "ตกลง"
+                    }).then(function() {
+                        window.location.href = "pages-login.html";
+                    });
+                });
+            </script>
+        </head>
+        <body>
+        </body>
+        </html>';
         } else {
-            echo "<script>
-                    alert('เกิดข้อผิดพลาด: " . $conn->error . "');
-                  </script>";
+            echo '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Redirecting</title>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    Swal.fire({
+                        title: "มีบางอย่างผิดพลาด",
+                        icon: "success",
+                        confirmButtonText: "ตกลง"
+                    }).then(function() {
+                        window.location.href = "pages-register.html";
+                    });
+                });
+            </script>
+        </head>
+        <body>
+        </body>
+        </html>';
         }
     }
 

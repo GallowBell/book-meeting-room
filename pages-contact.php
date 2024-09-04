@@ -81,31 +81,25 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
         <div class="col-xl-6">
           <div class="card p-4">
-            <form action="forms/contact.php" method="post" class="php-email-form">
+            <form action="forms/contact.php" method="post" class="form-group">
+              <div class="card-body">
+                <h4 class="d-flex justify-content-center m-4">เสนอคำแนะนำให้ระบบ</h4>
               <div class="row gy-4">
 
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                <div class="col-md-12">
+                  <input type="text" name="comment_name" class="form-control" placeholder="Your Name" required>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
-                </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                  <textarea class="form-control" name="comment_text" rows="6" placeholder="Message" required></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
+                  <!-- <div class="loading">Loading</div>
                   <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div> -->
 
-                  <button type="submit">Send Message</button>
+                  <button class="btn btn-primary" type="submit">Send Message</button>
                 </div>
 
               </div>

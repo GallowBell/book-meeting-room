@@ -27,17 +27,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } else {
             // รหัสผ่านไม่ถูกต้อง
-            echo "<script>
-                    alert('รหัสผ่านไม่ถูกต้อง');
-                    window.location.href = 'pages-login.html';
-                  </script>";
+            echo '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Redirecting</title>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    Swal.fire({
+                        title: "รหัสผ่านไม่ถูกต้อง",
+                        icon: "error",
+                        confirmButtonText: "ตกลง"
+                    }).then(function() {
+                        window.location.href = "pages-login.html";
+                    });
+                });
+            </script>
+        </head>
+        <body>
+        </body>
+        </html>';
         }
     } else {
         // ไม่พบ username
-        echo "<script>
-                alert('ไม่พบ Username นี้');
-                window.location.href = 'pages-login.html';
-              </script>";
+        echo '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Redirecting</title>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    Swal.fire({
+                        title: "ไม่พบ Username นี้",
+                        icon: "error",
+                        confirmButtonText: "ตกลง"
+                    }).then(function() {
+                        window.location.href = "pages-login.html";
+                    });
+                });
+            </script>
+        </head>
+        <body>
+        </body>
+        </html>';
     }
 }
 

@@ -100,6 +100,16 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
     background-size: 100% 100%;
     }
 
+  /* .bg-success-room{
+    background-color: #2bdf22;
+  }
+  .bg-primary-room{
+    background-color: #fd7e14;
+  }
+  .bg-danger-room{
+    background-color: #fd7e14;
+  } */
+
   
   </style>
 

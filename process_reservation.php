@@ -392,9 +392,7 @@ if ($result->num_rows > 0) {
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#3085d6'
                 }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = 'booking-report.php';
-                    }
+                    window.location.href = 'booking-report.php';
                 });
             };
         </script>";

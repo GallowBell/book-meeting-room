@@ -238,12 +238,22 @@ $sql_check = "SELECT * FROM reservations
 $result = $conn->query($sql_check);
 //echo "row".$result->num_rows;
 if ($result->num_rows > 0) {
-    echo "<script>
+    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script>
             window.onload = function() {
-                alert('ไม่สามารถจองได้เนื่องจากเวลาที่คุณเลือกทับซ้อนกับการจองอื่นแล้ว.');
-                window.location.href = 'booking.php';
+                Swal.fire({
+                    title: 'ไม่สามารถจองได้',
+                    text: 'เนื่องจาก วันที่/เวลา ที่คุณเลือกทับซ้อนกับการจองอื่นแล้ว',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#3085d6'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'booking.php';
+                    }
+                });
             };
-          </script>";
+        </script>";
 } else {
     // ถ้าไม่มีการจองซ้อนทับ ให้บันทึกการจองใหม่ในตาราง reservations
     $sql_insert = "INSERT INTO reservations (

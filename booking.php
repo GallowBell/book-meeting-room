@@ -123,7 +123,7 @@ $userlevel = $_SESSION['userlevel'];
                   <input type="number" id="document_number" name="document_number" class="form-control">
                 </div>
                 <div class="col-md-6">
-                  <label for="meeting_room" class="form-label fw-bold">ชื่อห้อง</label>
+                  <label for="meeting_room" class="form-label fw-bold">ห้อง</label>
                   <select class="form-select" id="meeting_room" name="meeting_room" <?php echo $is_required; ?>>
                     <option selected disabled hidden value="" >เลือกห้อง...</option>
                     <option value="ห้องประชุมชั้น 4">ห้องประชุมชั้น 4</option>

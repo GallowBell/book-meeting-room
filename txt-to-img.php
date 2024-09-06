@@ -169,6 +169,25 @@ function formatThaiDate2($date) {
     return $formattedDate;
 }
 
+/**
+ * Remove seconds from a time string.
+ *
+ * @param string $time The time string in the format "HH:MM:SS".
+ * @return string The time string without seconds in the format "HH:MM".
+ */
+function removeSeconds($time) {
+    // Split the time string by the colon (":")
+    $timeParts = explode(':', $time);
+    
+    // Return the first two parts (HH:MM)
+    return $timeParts[0] . ':' . $timeParts[1];
+}
+
+// Example usage
+$time = '08:00:00';
+$timeWithoutSeconds = removeSeconds($time);
+echo $timeWithoutSeconds; // Output: "08:00"
+
 if(!isset($_GET['reservation_id'])){
     die('Reservation ID is required');
 }
@@ -252,8 +271,8 @@ foreach ($data as $key_1 => $value_1) {
         ($value_1['reservation_date_end'] !== $value_1['reservation_date'] ? ' ถึง ' . formatThaiDate2($value_1['reservation_date_end']) : '')
     );
     
-    AddText(1600, 1285,  $value_1['start_time']);
-    AddText(1890, 1285,   $value_1['end_time']); 
+    AddText(1600, 1285, removeSeconds($value_1['start_time']));
+    AddText(1890, 1285, removeSeconds($value_1['end_time'])); 
     AddText(500, 1360,   $value_1['notes']); 
 
     // Adjust X and Y based on meeting_room

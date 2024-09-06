@@ -380,19 +380,19 @@ foreach ($data as $key => $value) {
           </div> -->
                 <div class="col-md-6 mb-3">
                   <label for="reservation_date" class="form-label">วันที่เริ่มต้น (เดือน/วัน/ปี)</label>
-                  <input type="date" class="form-control" id="reservation_date" name="reservation_date">
+                  <input type="text" class="form-control" id="reservation_date" name="reservation_date">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="reservation_date_end" class="form-label">วันที่สิ้นสุด (เดือน/วัน/ปี)</label>
-                  <input type="date" class="form-control" id="reservation_date_end" name="reservation_date_end">
+                  <input type="text" class="form-control" id="reservation_date_end" name="reservation_date_end">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="start_time" class="form-label">เวลาที่จองเริ่มต้น</label>
-                  <input type="time" class="form-control" id="start_time" name="start_time">
+                  <input type="text" class="form-control" id="start_time" name="start_time">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="end_time" class="form-label">เวลาที่จองสิ้นสุด</label>
-                  <input type="time" class="form-control" id="end_time" name="end_time">
+                  <input type="text" class="form-control" id="end_time" name="end_time">
                 </div>
                 <div class="col-md-12 mb-3">
                   <label for="notes" class="form-label">หมายเหตุ</label>
@@ -421,6 +421,9 @@ foreach ($data as $key => $value) {
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://npmcdn.com/flatpickr@4.6.13/dist/l10n/th.js"></script>
+
   <?php
   include 'footer.php';
   ?>
@@ -609,6 +612,38 @@ foreach ($data as $key => $value) {
 
 
       body.innerHTML = html;
+      flatpickr('#reservation_date', {
+        altInput: true,
+        //enableTime: true,
+        altFormat: "j F Y",
+        //mode: "range",
+        dateFormat: "Y-m-d",
+        locale: "th",
+        minDate: "today"
+      });
+      flatpickr('#reservation_date_end', {
+        altInput: true,
+        //enableTime: true,
+        altFormat: "j F Y",
+        //mode: "range",
+        dateFormat: "Y-m-d",
+        locale: "th",
+        minDate: "today"
+      });
+      flatpickr('#start_time', {
+        enableTime: true,
+        noCalendar: true,
+        altFormat: "H:i",
+        dateFormat: "H:i:ss",
+        time_24hr: true
+      });
+      flatpickr('#end_time', {
+        enableTime: true,
+        noCalendar: true,
+        altFormat: "H:i",
+        dateFormat: "H:i:ss",
+        time_24hr: true
+      });
     }
   </script>
 
@@ -749,51 +784,51 @@ foreach ($data as $key => $value) {
       });
     }
 
-function handlerDelete(reservationId) {
-    Swal.fire({
-        title: 'แน่ใจหรือไม่ ?',
-        text: "การกระทำนี้จะลบข้อมูลนี้อย่างถาวร!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'ใช่, ลบมัน!',
-        cancelButtonText: 'ยกเลิก'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // สร้างคำขอลบด้วย AJAX
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "delete_reservation.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState === 4 && xhr.status === 200) {
-                  if (xhr.responseText.trim() === "success") {
-                      Swal.fire(
-                          'ลบเรียบร้อย!',
-                          'ข้อมูลของคุณถูกลบแล้ว.',
-                          'success'
-                      ).then(() => {
-                          location.reload();  // โหลดหน้าเว็บใหม่เพื่ออัปเดตข้อมูล
-                      });
-                  } else {
-                      Swal.fire(
-                          'เกิดข้อผิดพลาด!',
-                          'ไม่สามารถลบข้อมูลได้: ' + xhr.responseText, // Display detailed error
-                          'error'
-                      );
-                  }
-              } else if (xhr.readyState === 4) {
-                  Swal.fire(
-                      'เกิดข้อผิดพลาด!',
-                      'ไม่สามารถลบข้อมูลได้.',
-                      'error'
-                  );
-              }
-          };
-            xhr.send("reservation_id=" + reservationId);
-        }
-    });
-}
+    function handlerDelete(reservationId) {
+      Swal.fire({
+          title: 'แน่ใจหรือไม่ ?',
+          text: "การกระทำนี้จะลบข้อมูลนี้อย่างถาวร!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'ใช่, ลบมัน!',
+          cancelButtonText: 'ยกเลิก'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              // สร้างคำขอลบด้วย AJAX
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", "delete_reservation.php", true);
+              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+              xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    if (xhr.responseText.trim() === "success") {
+                        Swal.fire(
+                            'ลบเรียบร้อย!',
+                            'ข้อมูลของคุณถูกลบแล้ว.',
+                            'success'
+                        ).then(() => {
+                            location.reload();  // โหลดหน้าเว็บใหม่เพื่ออัปเดตข้อมูล
+                        });
+                    } else {
+                        Swal.fire(
+                            'เกิดข้อผิดพลาด!',
+                            'ไม่สามารถลบข้อมูลได้: ' + xhr.responseText, // Display detailed error
+                            'error'
+                        );
+                    }
+                } else if (xhr.readyState === 4) {
+                    Swal.fire(
+                        'เกิดข้อผิดพลาด!',
+                        'ไม่สามารถลบข้อมูลได้.',
+                        'error'
+                    );
+                }
+            };
+              xhr.send("reservation_id=" + reservationId);
+          }
+      });
+    }
 
     async function SendApprove(reservation_id, status) {
       try {

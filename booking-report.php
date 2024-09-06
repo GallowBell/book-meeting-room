@@ -86,6 +86,7 @@ foreach ($data as $key => $value) {
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 <body>
 
@@ -608,10 +609,8 @@ foreach ($data as $key => $value) {
             </table>
           `;
 
-
-
-
       body.innerHTML = html;
+      
       flatpickr('#reservation_date', {
         altInput: true,
         //enableTime: true,

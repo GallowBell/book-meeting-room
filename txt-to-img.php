@@ -184,9 +184,9 @@ function removeSeconds($time) {
 }
 
 // Example usage
-$time = '08:00:00';
-$timeWithoutSeconds = removeSeconds($time);
-echo $timeWithoutSeconds; // Output: "08:00"
+//$time = '08:00:00';
+//$timeWithoutSeconds = removeSeconds($time);
+//echo $timeWithoutSeconds; // Output: "08:00"
 
 if(!isset($_GET['reservation_id'])){
     die('Reservation ID is required');

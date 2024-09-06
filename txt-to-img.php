@@ -104,6 +104,42 @@ function AddText($x, $y, $text){
     imagettftext($img, $FontSize, 0, $x, $y, $black2, $font, $text);
 }
 
+/**
+ * Draw text with word wrapping.
+ *
+ * @param resource $img The image resource.
+ * @param int $FontSize The font size.
+ * @param int $x The x-coordinate.
+ * @param int $y The y-coordinate.
+ * @param int $color The color of the text.
+ * @param string $font The path to the font file.
+ * @param string $text The text to draw.
+ * @param int $maxWidth The maximum width of the text.
+ */
+function imagettftextWrapped($x, $y, $text, $maxWidth) {
+    global $img, $black2, $font, $FontSize;
+    $words = explode(' ', $text);
+    $line = '';
+    $lineHeight = $FontSize + 5; // Adjust line height as needed
+
+    foreach ($words as $word) {
+        $testLine = $line . $word . ' ';
+        $testBox = imagettfbbox($FontSize, 0, $font, $testLine);
+        $testWidth = $testBox[2] - $testBox[0];
+
+        if ($testWidth > $maxWidth && !empty($line)) {
+            imagettftext($img, $FontSize, 0, $x, $y, $black2, $font, $line);
+            $line = $word . ' ';
+            $y += $lineHeight;
+        } else {
+            $line = $testLine;
+        }
+    }
+
+    // Draw the last line
+    imagettftext($img, $FontSize, 0, $x, $y, $black2, $font, $line);
+}
+
 function AddCheckBox2($x, $y){
     global $img2, $second_img, $black2, $font, $FontSize;
     // Define the position where the second image will be drawn

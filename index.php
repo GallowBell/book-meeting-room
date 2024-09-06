@@ -451,8 +451,10 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                 </div>
                 </div>
                 </div>
+                <div class="row justify-content-md-center">
                 <div class="container">
-                <div class="" id='calendar'></div>
+                <div id='calendar' style="width: auto;"></div>
+                </div>
                 </div>
                 </div>
                 </div>

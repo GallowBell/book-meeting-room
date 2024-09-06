@@ -40,11 +40,11 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   </a>
 
   <!-- Toggle Sidebar Button for Mobile -->
-  <button class="navbar-toggler d-lg-none">
+  <button class="navbar-toggler d-xxl-none">
     <i class="bi bi-list toggle-sidebar-btn text-white"></i>
   </button>
 
-  <div class="vr d-none d-lg-block m-2" style="border: 2px solid #ffffff ;"></div>
+  <div class="vr d-none d-xxl-block m-2" style="border: 2px solid #ffffff ;"></div>
 
   <!-- New Button Next to Logo -->
 
@@ -55,33 +55,33 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
   </style> -->
 
-  <a href="index.php" class="menu d-none d-lg-block <?php echo ($current_page == 'index.php') ? 'btn btn-light' : 'light'; ?> mx-3 fs-5">
-    <span class="d-none d-lg-block text-<?php echo ($current_page == 'index.php') ? 'dark' : 'light'; ?>">หน้าแรก</span>
+  <a href="index.php" class="menu d-none d-xxl-block <?php echo ($current_page == 'index.php') ? 'btn btn-light' : 'light'; ?> mx-3 fs-5">
+    <span class="d-none d-xxl-block text-<?php echo ($current_page == 'index.php') ? 'dark' : 'light'; ?>">หน้าแรก</span>
   </a>
   
-  <div class="dropdown d-none d-lg-block">
-      <a class="dropdown-toggle <?php echo $is_active; ?> d-none d-lg-block me-3 fs-5" 
+  <div class="dropdown d-none d-xxl-block">
+      <a class="dropdown-toggle <?php echo $is_active; ?> d-none d-xxl-block me-3 fs-5" 
           role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
         ห้องประชุม
       </a>
       
       <!-- Dropdown Menu -->
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li><a class="dropdown-item <?php echo ($current_page == 'page-room-1.php') ? 'active' : ''; ?>" href="page-room-1.php">ห้องประชุมชั้น 4</a></li>
-        <li><a class="dropdown-item <?php echo ($current_page == 'page-room-2.php') ? 'active' : ''; ?>" href="page-room-2.php">ห้องประชุมชั้น 5</a></li>
-        <li><a class="dropdown-item <?php echo ($current_page == 'page-room-3.php') ? 'active' : ''; ?>" href="page-room-3.php">ห้องประชุมชั้น 9</a></li>
+        <li><a class="dropdown-item <?php echo ($current_page == 'page-room-1.php') ? 'active' : ''; ?> fs-6" href="page-room-1.php">ห้องประชุมชั้น 4</a></li>
+        <li><a class="dropdown-item <?php echo ($current_page == 'page-room-2.php') ? 'active' : ''; ?> fs-6" href="page-room-2.php">ห้องประชุมชั้น 5</a></li>
+        <li><a class="dropdown-item <?php echo ($current_page == 'page-room-3.php') ? 'active' : ''; ?> fs-6" href="page-room-3.php">ห้องประชุมชั้น 9</a></li>
       </ul>
     </div>
   </a>
 
-  <a href="booking.php" class="menu <?php echo ($current_page == 'booking.php') ? 'btn btn-light' : 'light'; ?> me-3 fs-5">
-    <span class="d-none d-lg-block text-<?php echo ($current_page == 'booking.php') ? 'dark' : 'light'; ?>">จองห้อง</span>
+  <a href="booking.php" class="menu <?php echo ($current_page == 'booking.php') ? 'btn btn-light' : 'light'; ?> d-none d-xxl-block me-3 fs-5">
+    <span class="d-none d-xxl-block text-<?php echo ($current_page == 'booking.php') ? 'dark' : 'light'; ?>">จองห้อง</span>
   </a>
-  <a href="booking-report.php" class="menu <?php echo ($current_page == 'booking-report.php') ? 'btn btn-light' : 'light'; ?> me-3 fs-5">
-    <span class="d-none d-lg-block text-<?php echo ($current_page == 'booking-report.php') ? 'dark' : 'light'; ?>">รายงาน</span>
+  <a href="booking-report.php" class="menu <?php echo ($current_page == 'booking-report.php') ? 'btn btn-light' : 'light'; ?> d-none d-xxl-block me-3 fs-5">
+    <span class="d-none d-xxl-block text-<?php echo ($current_page == 'booking-report.php') ? 'dark' : 'light'; ?>">รายงาน</span>
   </a>
-  <a href="pages-contact.php" class="menu <?php echo ($current_page == 'pages-contact.php') ? 'btn btn-light' : 'light'; ?> me-3 fs-5">
-    <span class="d-none d-lg-block text-<?php echo ($current_page == 'pages-contact.php') ? 'dark' : 'light'; ?>">ติดต่อ</span>
+  <a href="pages-contact.php" class="menu <?php echo ($current_page == 'pages-contact.php') ? 'btn btn-light' : 'light'; ?> d-none d-xxl-block me-3 fs-5">
+    <span class="d-none d-xxl-block text-<?php echo ($current_page == 'pages-contact.php') ? 'dark' : 'light'; ?>">ติดต่อ</span>
   </a>
 
 <!--  

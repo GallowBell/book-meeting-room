@@ -380,20 +380,20 @@ foreach ($data as $key => $value) {
             <input type="date" class="form-control" id="reservation_date" name="reservation_date" disabled>
           </div> -->
                 <div class="col-md-6 mb-3">
-                  <label for="reservation_date" class="form-label">วันที่เริ่มต้น (เดือน/วัน/ปี)</label>
-                  <input type="text" class="form-control" id="reservation_date" name="reservation_date">
+                  <label for="reservation_date" class="form-label">วันที่เริ่มต้น</label>
+                  <input type="text" class="form-control bg-white" id="reservation_date" name="reservation_date">
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="reservation_date_end" class="form-label">วันที่สิ้นสุด (เดือน/วัน/ปี)</label>
-                  <input type="text" class="form-control" id="reservation_date_end" name="reservation_date_end">
+                  <label for="reservation_date_end" class="form-label">วันที่สิ้นสุด</label>
+                  <input type="text" class="form-control bg-white" id="reservation_date_end" name="reservation_date_end">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="start_time" class="form-label">เวลาที่จองเริ่มต้น</label>
-                  <input type="text" class="form-control" id="start_time" name="start_time">
+                  <input type="text" class="form-control bg-white" id="start_time" name="start_time">
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="end_time" class="form-label">เวลาที่จองสิ้นสุด</label>
-                  <input type="text" class="form-control" id="end_time" name="end_time">
+                  <input type="text" class="form-control bg-white" id="end_time" name="end_time">
                 </div>
                 <div class="col-md-12 mb-3">
                   <label for="notes" class="form-label">หมายเหตุ</label>

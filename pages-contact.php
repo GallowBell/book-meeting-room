@@ -24,11 +24,19 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 <body>
 
  <?php
-  include 'header.php';
+  include 'headertop.php';
   include 'sidebar.php';
  ?>
 
-  <main id="main" class="main">
+     <!-- For Full page -->
+<style>   
+#main-full{
+  margin: 80px 25px 10px 25px ;
+}
+
+</style>
+
+  <main id="main-full" class="main">
 
     <div class="pagetitle">
       <h1>ติดต่อเรา</h1>

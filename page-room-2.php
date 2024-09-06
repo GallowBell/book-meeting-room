@@ -22,7 +22,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 <body>
 
   <?php
-    include 'header.php';
+    include 'headertop.php';
     include 'sidebar.php';
   ?>
 
@@ -41,7 +41,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   }
 </style>
 
-<main id="main" class="main">
+    <!-- For Full page -->
+    <style>   
+#main-full{
+  margin: 80px 25px 10px 25px ;
+}
+
+</style>
+
+<main id="main-full" class="main">
 
   <div class="pagetitle">
     <h1>ห้องประชุมชั้น 5</h1>
@@ -53,6 +61,17 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
       </ol>
     </nav>
   </div><!-- End Page Title -->
+
+  <!-- <style>
+  .carousel {
+   width:auto;
+   height:460px;
+ }
+ .carousel-inner > .item > img {
+   width:640px;
+   height:460px;
+ }
+  </style> -->
 
   <section class="section">
     <div class="row">
@@ -68,18 +87,18 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                 </div>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <a href="assets/img/room-1.jpg">
-                    <img src="assets/img/room-1.jpg" class="d-block w-100" alt="...">
+                    <a href="assets/img/5/room-5-5.jpg">
+                    <img src="assets/img/5/room-5-5.jpg" class="d-block w-100" alt="...">
                     </a>
                   </div>
                   <div class="carousel-item">
-                    <a href="assets/img/room-1.jpg">
-                    <img src="assets/img/room-2.jpg" class="d-block w-100" alt="...">
+                    <a href="assets/img/5/room-5-6.jpg">
+                    <img src="assets/img/5/room-5-6.jpg" class="d-block w-100" alt="...">
                     </a>
                   </div>
                   <div class="carousel-item">
-                    <a href="assets/img/room-1.jpg">
-                    <img src="assets/img/room-3.jpg" class="d-block w-100" alt="...">
+                    <a href="assets/img/5/room-5-1.jpg">
+                    <img src="assets/img/5/room-5-1.jpg" class="d-block w-100" alt="...">
                     </a>
                   </div>
                 </div>

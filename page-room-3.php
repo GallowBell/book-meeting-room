@@ -22,7 +22,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 <body>
 
   <?php
-    include 'header.php';
+    include 'headertop.php';
     include 'sidebar.php';
   ?>
 
@@ -41,7 +41,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   }
 </style>
 
-<main id="main" class="main">
+    <!-- For Full page -->
+    <style>   
+#main-full{
+  margin: 80px 25px 10px 25px ;
+}
+
+</style>
+
+<main id="main-full" class="main">
 
   <div class="pagetitle">
     <h1>ห้องประชุมชั้น 9</h1>
@@ -68,15 +76,19 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
                 </div>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <a href="assets/img/room-1.jpg">
-                    <img src="assets/img/room-1.jpg" class="d-block w-100">
+                    <a href="assets/img/9/room-9-1.jpg">
+                    <img src="assets/img/9/room-9-1.jpg" class="d-block w-100">
                     </a>
                   </div>
                   <div class="carousel-item">
-                    <img src="assets/img/room-2.jpg" class="d-block w-100">
+                    <a href="assets/img/9/room-9-2.jpg">
+                    <img src="assets/img/9/room-9-2.jpg" class="d-block w-100" alt="...">
+                    </a>
                   </div>
                   <div class="carousel-item">
-                    <img src="assets/img/room-3.jpg" class="d-block w-100">
+                    <a href="assets/img/9/room-9-6.jpg">
+                    <img src="assets/img/9/room-9-6.jpg" class="d-block w-100" alt="...">
+                    </a>
                   </div>
                 </div>
 
@@ -94,8 +106,8 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
               <div class="col-md-6">
                 <div class="card-body">
                   <h5 class="card-title">ห้องประชุมชั้น 9</h5>
-                  <p class="card-text"><span class="topic1">รายละเอียด :</span> ห้องประชุมพร้อมระบบ Video conference ที่นั่งผู้เข้าร่วมประชุม รูปตัว U 2 แถว</p>
-                  <p class="card-text"><span class="topic1">จำนวนที่นั่ง :</span> 50 ที่นั่ง รูปตัว U</p>
+                  <p class="card-text"><span class="topic1">รายละเอียด :</span> ห้องประชุมขนาดใหญ่ มีที่นั่งผู้เข้าร่วมประชุม 6 แถว</p>
+                  <p class="card-text"><span class="topic1">จำนวนที่นั่ง :</span> 100 ที่นั่ง</p>
                 </div>
               </div>
             </div>

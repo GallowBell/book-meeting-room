@@ -64,6 +64,18 @@
         return;
     }
 
+    // รอการอนุมัติ
+    if($status == 'wait'){
+        $reservation_id = $_POST['reservation_id'];
+        $status = -1;
+        $result = UpdateIsApprove([
+            'reservation_id' => $reservation_id,
+            'status' => $status
+        ]);
+        echo json_encode($result);
+        return;
+    }
+
     echo json_encode([
         'status' => 400,
         'message' => 'Bad Request'

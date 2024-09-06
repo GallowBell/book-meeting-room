@@ -91,11 +91,32 @@ foreach ($data as $key => $value) {
 
 
   <?php
-  include 'header.php';
+  include 'headertop.php';
   include 'sidebar.php';
   ?>
 
-  <main id="main" class="main">
+      <!-- For Full page -->
+<style>   
+#main-full{
+  margin: 80px 25px 10px 25px ;
+}
+.btn-delete{
+  background-color:red !important;
+  color: white !important;
+}
+
+.btn-wait{
+  background-color:#ff9e00 !important;
+  color: white !important;
+}
+
+.bg-warning{
+  background-color:#ff9e00 !important;
+  color: white !important;
+}
+</style>
+
+  <main id="main-full" class="main">
 
     <div class="pagetitle">
       <h1>รายงานการจองห้องประชุม</h1>
@@ -238,7 +259,10 @@ foreach ($data as $key => $value) {
                                 <button type="button" class="btn btn-danger" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerReject(`<?= $row['reservation_id'] ?>`)">
                                   ✖
                                 </button>
-                                <button type="button" class="btn btn-warning" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerDelete(`<?= $row['reservation_id'] ?>`)">
+                                <button type="button" class="btn btn-wait" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerWait(`<?= $row['reservation_id'] ?>`)">
+                                  <i class="bi bi-clock"></i>
+                                </button>
+                                <button type="button" class="btn btn-delete" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerDelete(`<?= $row['reservation_id'] ?>`)">
                                   <i class="bi bi-trash"></i>
                                 </button>
                               <?php
@@ -355,11 +379,11 @@ foreach ($data as $key => $value) {
             <input type="date" class="form-control" id="reservation_date" name="reservation_date" disabled>
           </div> -->
                 <div class="col-md-6 mb-3">
-                  <label for="reservation_date" class="form-label">วันที่เริ่มต้น</label>
+                  <label for="reservation_date" class="form-label">วันที่เริ่มต้น (เดือน/วัน/ปี)</label>
                   <input type="date" class="form-control" id="reservation_date" name="reservation_date">
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="reservation_date_end" class="form-label">วันที่สิ้นสุด</label>
+                  <label for="reservation_date_end" class="form-label">วันที่สิ้นสุด (เดือน/วัน/ปี)</label>
                   <input type="date" class="form-control" id="reservation_date_end" name="reservation_date_end">
                 </div>
                 <div class="col-md-6 mb-3">
@@ -683,6 +707,48 @@ foreach ($data as $key => $value) {
       });
     }
 
+    function handlerWait(reservation_id) {
+      console.log('handlerWait id', reservation_id)
+      Swal.fire({
+        icon: 'question',
+        title: 'ให้รอการอนุมัติ',
+        showCancelButton: true,
+        confirmButtonText: 'ยืนยัน',
+        cancelButtonText: 'ย้อนกลับ',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33'
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          return;
+        }
+        SendApprove(reservation_id, 'wait')
+          .then((result) => {
+            console.log('result', result);
+            if (result.status == 200) {
+              Swal.fire({
+                icon: 'success',
+                title: 'ให้รออนุมัติการจองเรียบร้อยแล้ว',
+                confirmButtonText: 'ยืนยัน',
+                confirmButtonColor: '#3085d6'
+              }).then(() => {
+                location.reload();
+              });
+              return;
+            }
+            throw new Error(result?.message ? result?.message : 'มีบางอย่างผิดพลาด')
+          }).catch((err) => {
+            console.log('err', err);
+            Swal.fire({
+              title: 'เกิดข้อผิดพลาด',
+              text: 'โปรดลองใหม่อีกครั้ง ' + error,
+              icon: 'error',
+              confirmButtonText: 'ตกลง',
+              confirmButtonColor: '#3085d6'
+            })
+          });
+      });
+    }
+
 function handlerDelete(reservationId) {
     Swal.fire({
         title: 'แน่ใจหรือไม่ ?',
@@ -700,22 +766,30 @@ function handlerDelete(reservationId) {
             xhr.open("POST", "delete_reservation.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    Swal.fire(
-                        'ลบเรียบร้อย!',
-                        'ข้อมูลของคุณถูกลบแล้ว.',
-                        'success'
-                    ).then(() => {
-                        location.reload();  // โหลดหน้าเว็บใหม่เพื่ออัปเดตข้อมูล
-                    });
-                } else if (xhr.readyState === 4) {
-                    Swal.fire(
-                        'เกิดข้อผิดพลาด!',
-                        'ไม่สามารถลบข้อมูลได้.',
-                        'error'
-                    );
-                }
-            };
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                  if (xhr.responseText.trim() === "success") {
+                      Swal.fire(
+                          'ลบเรียบร้อย!',
+                          'ข้อมูลของคุณถูกลบแล้ว.',
+                          'success'
+                      ).then(() => {
+                          location.reload();  // โหลดหน้าเว็บใหม่เพื่ออัปเดตข้อมูล
+                      });
+                  } else {
+                      Swal.fire(
+                          'เกิดข้อผิดพลาด!',
+                          'ไม่สามารถลบข้อมูลได้: ' + xhr.responseText, // Display detailed error
+                          'error'
+                      );
+                  }
+              } else if (xhr.readyState === 4) {
+                  Swal.fire(
+                      'เกิดข้อผิดพลาด!',
+                      'ไม่สามารถลบข้อมูลได้.',
+                      'error'
+                  );
+              }
+          };
             xhr.send("reservation_id=" + reservationId);
         }
     });

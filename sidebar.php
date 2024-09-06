@@ -52,7 +52,7 @@
 </head>
 <body>
    <!-- ======= Sidebar ======= -->
-   <aside id="sidebar" class="sidebar">
+   <aside id="sidebar" class="sidebar d-lg-none">
 
 <ul class="sidebar-nav" id="sidebar-nav">
 

@@ -10,7 +10,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   <!-- Header -->
   <?php
     include 'head.php';
-    include 'header.php';
+    include 'headertop.php';
     include 'sidebar.php';
   ?>
 
@@ -303,10 +303,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
 
 <body>
-  
+    <!-- For Full page -->
+<style>   
+#main-full{
+  margin: 80px 25px 10px 25px ;
+}
 
+</style>
 
-  <main id="main" class="main">
+  <main id="main-full" class="main">
 
     <div class="pagetitle">
           <h1>หน้าแรก</h1>

@@ -22,7 +22,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 <body>  
 
   <?php
-    include 'header.php';
+    include 'headertop.php';
     include 'sidebar.php';
   ?>
 
@@ -42,7 +42,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   
 </style>
 
-<main id="main" class="main">
+    <!-- For Full page -->
+    <style>   
+#main-full{
+  margin: 80px 25px 10px 25px ;
+}
+
+</style>
+
+<main id="main-full" class="main">
 
   <div class="pagetitle">
     <h1>ห้องประชุมชั้น 4</h1>
@@ -54,6 +62,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
       </ol>
     </nav>
   </div><!-- End Page Title -->
+  
 
   <section class="section">
     <div class="row">

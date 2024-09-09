@@ -270,7 +270,7 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           //console.log('arg', arg)
           console.log('reservations_id', reservations_id)
         },
-        eventColor: 'green',
+        eventColor: 'white',
         editable: false,
         dayMaxEvents: true,
         events: <?php echo json_encode($data); ?>,
@@ -287,8 +287,8 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
           // Create a custom element to display the event details
           const html = `
             <div class="${color_1} text-light w-100">
-              <div class="fc-event-title">${event.title}</div>
-              <div class="fc-event-time">${startTime} - ${endTime}</div>
+              <div class="fc-event-title ps-1 pt-1">${event.title}</div>
+              <div class="fc-event-time ps-1 pb-1">${startTime}น. - ${endTime}น.</div>
             </div>
           `;
           
@@ -336,20 +336,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
                 <div class="card-body p-0">
                   <a href="booking.php">
-                  <h5 class="card-title"></h5>
+                  <!-- <h5 class="card-title"></h5> -->
 
-                  <div class="d-flex align-items-center justify-content-center">
-                    <!-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-feather"></i>
-                    </div> -->
+                  <div class="d-flex align-items-center justify-content-center flex-wrap flex-md-nowrap p-4">
                     <div class="p-3">
-                      <h1 class="text-white">จองห้องประชุม</h1>
-                    </div>
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-feather text-white"></i>
+                      <h1 class="text-white text-center">จองห้องประชุม <i class="bi bi-feather text-white"></i></h1>
                     </div>
                   </div>
-                  <h5 class="card-title"></h5>
+
+                  <!-- <h5 class="card-title"></h5> -->
                 </div>
                 </a>
 
@@ -361,20 +356,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
                 <div class="card-body p-0">
                   <a href="booking-report.php">
-                  <h5 class="card-title"></h5>
+                  <!-- <h5 class="card-title"></h5> -->
 
-                  <div class="d-flex align-items-center justify-content-center">
-                    <!-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-feather"></i>
-                    </div> -->
+                  <div class="d-flex align-items-center justify-content-center flex-wrap flex-md-nowrap p-4">
                     <div class="p-3">
-                      <h1 class="text-white">ดูรายการจอง</h1>
-                    </div>
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-file-earmark-bar-graph-fill text-white"></i>
+                      <h1 class="text-white text-center">รายการจองของฉัน <i class="bi bi-file-earmark-bar-graph-fill text-white"></i></h1>
                     </div>
                   </div>
-                  <h5 class="card-title"></h5>
+
+                  <!-- <h5 class="card-title"></h5> -->
                 </div>
                 </a>
 
@@ -438,16 +428,19 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
                 <div class="row m-4">
                 <div class="col-xxl-4 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
-                <!-- <i class="fs-5 bi bi-square-fill text-success"></i> -->
-                <span class="badge bg-success text-wrap fs-5 ms-2 py-3">ห้องประชุมชั้น 4</span>
+                  <i class="fs-5 bi bi-square-fill text-success"></i>
+                    <span class="fs-5 ms-2 py-3">ห้องประชุมชั้น 4</span>
+                <!-- <span class="badge bg-success text-wrap fs-5 ms-2 py-3">ห้องประชุมชั้น 4</span> -->
                   </div>
                 <div class="col-xxl-4 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
-                  <!-- <i class="fs-5 bi bi-square-fill text-primary"></i> -->
-                  <span class="badge bg-primary text-wrap fs-5 ms-2 py-3">ห้องประชุมชั้น 5</span>
+                  <i class="fs-5 bi bi-square-fill text-primary"></i>
+                    <span class="fs-5 ms-2 py-3">ห้องประชุมชั้น 5</span>
+                  <!-- <span class="badge bg-primary text-wrap fs-5 ms-2 py-3">ห้องประชุมชั้น 5</span> -->
                 </div>
                 <div class="col-xxl-4 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
-                  <!-- <i class="fs-5 bi bi-square-fill text-danger"></i> -->
-                  <span class="badge bg-danger text-wrap fs-5 ms-2 py-3">ห้องประชุมชั้น 9</span>
+                  <i class="fs-5 bi bi-square-fill text-danger"></i>
+                    <span class="fs-5 ms-2 py-3">ห้องประชุมชั้น 9</span>
+                  <!-- <span class="badge bg-danger text-wrap fs-5 ms-2 py-3">ห้องประชุมชั้น 9</span> -->
                 </div>
                 </div>
                 </div>

@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
 
 // โค้ดสำหรับผู้ที่เข้าสู่ระบบแล้ว
 $username = $_SESSION['username'];
-$userlevel = $_SESSION['userlevel'];
+$role_id = $_SESSION['role_id'];
 
 // ตรวจสอบการเชื่อมต่อ
 if ($conn->connect_error) {
@@ -45,7 +45,7 @@ if ($conn->connect_error) {
 // Query ข้อมูลจากตาราง reservations
 $sql = "SELECT * FROM `reservations` ";
 
-if ($userlevel == 'user') {
+if ($role_id == '2') {
   $sql .= " WHERE `user_id` = '" . $_SESSION['user_id'] . "' ";
 }
 
@@ -252,18 +252,18 @@ foreach ($data as $key => $value) {
                           <td class="text-truncate">
                             <div class="btn-group-sm" role="group">
                               <?php
-                              if ($_SESSION['userlevel'] == 'admin') :
+                              if ($_SESSION['role_id'] == '1') :
                               ?>
-                                <button type="button" class="btn btn-success" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerApprove(`<?= $row['reservation_id'] ?>`)">
+                                <button type="button" class="btn btn-success" onclick="handlerApprove(`<?= $row['reservation_id'] ?>`)">
                                   ✔
                                 </button>
-                                <button type="button" class="btn btn-danger" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerReject(`<?= $row['reservation_id'] ?>`)">
+                                <button type="button" class="btn btn-danger" onclick="handlerReject(`<?= $row['reservation_id'] ?>`)">
                                   ✖
                                 </button>
-                                <button type="button" class="btn btn-wait" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerWait(`<?= $row['reservation_id'] ?>`)">
+                                <button type="button" class="btn btn-wait" onclick="handlerWait(`<?= $row['reservation_id'] ?>`)">
                                   <i class="bi bi-clock"></i>
                                 </button>
-                                <button type="button" class="btn btn-delete" <?php echo $is_disabled ? ' disabled ' : ''; ?> onclick="handlerDelete(`<?= $row['reservation_id'] ?>`)">
+                                <button type="button" class="btn btn-delete" onclick="handlerDelete(`<?= $row['reservation_id'] ?>`)">
                                   <i class="bi bi-trash"></i>
                                 </button>
                               <?php
@@ -449,7 +449,7 @@ foreach ($data as $key => $value) {
         console.log('data a a', data);
         if (data) {
           // Correctly setting is_admin as a Boolean
-      let is_admin = <?php echo $_SESSION['userlevel'] == 'admin' ? 'true' : 'false'; ?>;
+      let is_admin = <?php echo $_SESSION['role_id'] == '1' ? 'true' : 'false'; ?>;
 
       // Conditionally disable or enable form fields
       if (data.is_approve == '1' && !is_admin) {

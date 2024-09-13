@@ -3,7 +3,7 @@
 // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
 $is_logged_in = isset($_SESSION['username']);
 $username = $is_logged_in ? $_SESSION['username'] : 'Guest';
-$userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
+$role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
 ?>
 
 <!DOCTYPE html>
@@ -198,13 +198,13 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/userdf.png" alt="Profile" class="rounded-circle">
-            <span class="ps-2 text-light"><?php echo $username; ?> | <?php echo $userlevel; ?></span>
+            <span class="ps-2 text-light"><?php echo $username; ?> | <?php echo $role_id; ?></span>
           </a><!-- End Profile Iamge Icon -->
 
          <!-- <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6><?php echo $username; ?></h6>
-              <span><?php echo $userlevel; ?></span>
+              <span><?php echo $role_id; ?></span>
             </li>
             <li>
               <hr class="dropdown-divider">

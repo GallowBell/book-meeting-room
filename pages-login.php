@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // ตรวจสอบข้อมูลผู้ใช้
-    $sql = "SELECT * FROM user WHERE username='$username'";
+    $sql = "SELECT * FROM users WHERE username='$username'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $row['username'];
-            $_SESSION['userlevel'] = $row['userlevel'];
+            $_SESSION['role_id'] = $row['role_id'];
             header("Location: index.php");
             exit();
         } else {

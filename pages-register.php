@@ -9,10 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $phone_number = $_POST['phone_number'];
-    $userlevel = "user"; // ค่าเริ่มต้นคือ user
+    $role_id = "2"; // ค่าเริ่มต้นคือ user
 
     // ตรวจสอบว่ามี username ซ้ำหรือไม่
-    $sql_check = "SELECT * FROM user WHERE username='$username'";
+    $sql_check = "SELECT * FROM users WHERE username='$username'";
     $result = $conn->query($sql_check);
 
     if ($result->num_rows > 0) {
@@ -22,8 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </script>";
     } else {
         // เพิ่มข้อมูลผู้ใช้ใหม่
-        $sql = "INSERT INTO user (username, password, first_name, last_name, phone_number, userlevel)
-                VALUES ('$username', '$password', '$first_name', '$last_name', '$phone_number', '$userlevel')";
+        $sql = "INSERT INTO users (username, password, first_name, last_name, phone_number, role_id)
+                VALUES ('$username', '$password', '$first_name', '$last_name', '$phone_number', '$role_id')";
 
         if ($conn->query($sql) === TRUE) {
             echo '<!DOCTYPE html>
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 document.addEventListener("DOMContentLoaded", function() {
                     Swal.fire({
                         title: "มีบางอย่างผิดพลาด",
-                        icon: "success",
+                        icon: "error",
                         confirmButtonText: "ตกลง"
                     }).then(function() {
                         window.location.href = "pages-register.html";

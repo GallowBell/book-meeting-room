@@ -2,7 +2,7 @@
 session_start();
 include 'connection.php'; // Database connection file
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['userlevel']) && $_SESSION['userlevel'] == 'admin') {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['role_id']) && $_SESSION['role_id'] == '1') {
     $reservation_id = $_POST['reservation_id'];
 
     // ตรวจสอบว่ามี reservation_id หรือไม่

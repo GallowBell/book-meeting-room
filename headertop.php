@@ -3,7 +3,7 @@
 // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
 $is_logged_in = isset($_SESSION['username']);
 $username = $is_logged_in ? $_SESSION['username'] : 'Guest';
-$userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
+$role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +83,15 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   <a href="pages-contact.php" class="menu <?php echo ($current_page == 'pages-contact.php') ? 'btn btn-light' : 'light'; ?> d-none d-xxl-block me-3 fs-5">
     <span class="d-none d-xxl-block text-<?php echo ($current_page == 'pages-contact.php') ? 'dark' : 'light'; ?>">ติดต่อ</span>
   </a>
+  <?php
+    if (isset($_SESSION['role_id']) && $_SESSION['role_id'] == '1') :
+    ?>
+  <a href="manage_users.php" class="menu <?php echo ($current_page == 'manage_users.php') ? 'btn btn-light' : 'light'; ?> d-none d-xxl-block me-3 fs-5">
+    <span class="d-none d-xxl-block text-<?php echo ($current_page == 'manage_users.php') ? 'dark' : 'light'; ?>">จัดการผู้ใช้</span>
+  </a>
+  <?php
+    endif;
+  ?>
 
 <!--  
   <a href="index.php" class="btn btn-<?php echo ($current_page == 'index.php') ? 'danger' : 'light'; ?> d-none d-lg-block ms-3">หน้าแรก</a>
@@ -111,21 +120,31 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
 
-      <?php if ($is_logged_in): ?>
-        <li class="nav-item dropdown pe-3">
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/userdf.png" alt="Profile" class="rounded-circle d-none d-sm-block">
-            <span class="ps-2 text-light"><?php echo $username; ?> | <?php echo $userlevel; ?></span>
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a href="pages-logout.php" class="btn btn-danger">ออกจากระบบ <i class="bi bi-box-arrow-right"></i></a>
-        </li>
-      <?php else: ?>
-        <li class="nav-item dropdown">
-          <a href="pages-login.html" class="btn btn-primary text-white">เข้าสู่ระบบ <i class="bi bi-box-arrow-right"></i></a>
-        </li>
-      <?php endif; ?>
+    <?php if ($is_logged_in): ?>
+    <li class="nav-item dropdown pe-3">
+      <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+        <img src="assets/img/userdf.png" alt="Profile" class="rounded-circle d-none d-sm-block">
+        <span class="ps-2 text-light">
+          <?php echo $username; ?> | 
+          <?php 
+            if ($role_id == 1) {
+                echo "ผู้จัดการระบบ";
+            } elseif ($role_id == 2) {
+                echo "ผู้ใช้งาน";
+            } 
+          ?>
+        </span>
+      </a>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="pages-logout.php" class="btn btn-danger">ออกจากระบบ <i class="bi bi-box-arrow-right"></i></a>
+    </li>
+<?php else: ?>
+    <li class="nav-item dropdown">
+      <a href="pages-login.html" class="btn btn-primary text-white">เข้าสู่ระบบ <i class="bi bi-box-arrow-right"></i></a>
+    </li>
+<?php endif; ?>
+
 
     </ul>
   </nav>

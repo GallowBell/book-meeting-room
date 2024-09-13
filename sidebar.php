@@ -1,3 +1,11 @@
+<?php
+
+// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
+$is_logged_in = isset($_SESSION['username']);
+$username = $is_logged_in ? $_SESSION['username'] : 'Guest';
+$role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +36,8 @@
       ,.nav-link:hover .bi-envelope-fill 
       ,.nav-link:hover .bi-door-open-fill
       ,.nav-link:hover .bi-chevron-down
-      ,.nav-link:hover .bi-circle-fill {
+      ,.nav-link:hover .bi-circle-fill
+      ,.nav-link:hover .bi-person-fill-gear {
         color: white !important;
       }
 
@@ -43,7 +52,8 @@
       ,.nav-link.active .bi-envelope-fill 
       ,.nav-link.active .bi-door-open-fill
       ,.nav-link.active .bi-chevron-down
-      ,.nav-link.active .bi-circle-fill {
+      ,.nav-link.active .bi-circle-fill
+      ,.nav-link.active .bi-person-fill-gear {
         color: white !important;
       }
     
@@ -109,7 +119,21 @@
       <i class="bi bi-envelope-fill"></i>
       <span>ติดต่อเรา</span>
     </a>
-  </li><!-- End Contact Page Nav -->
+  </li>
+
+  <?php
+    if (isset($_SESSION['role_id']) && $_SESSION['role_id'] == '1') :
+    ?>
+  <li class="nav-item">
+    <a class="nav-link <?php echo ($current_page == 'manage_users.php') ? 'active' : 'collapsed'; ?> sb" href="manage_users.php">
+      <i class="bi bi-person-fill-gear"></i>
+      <span>จัดการผู้ใช้</span>
+    </a>
+  </li>
+  <?php
+    endif;
+  ?>
+<!-- End Contact Page Nav -->
 
 </ul>
 </aside><!-- End Sidebar-->

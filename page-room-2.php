@@ -4,7 +4,7 @@ session_start();
 // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
 $is_logged_in = isset($_SESSION['username']);
 $username = $is_logged_in ? $_SESSION['username'] : 'Guest';
-$userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
+$role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
 ?> 
 
 <!DOCTYPE html>
@@ -117,8 +117,8 @@ $userlevel = $is_logged_in ? $_SESSION['userlevel'] : 'guest';
               <div class="col-md-6">
                 <div class="card-body">
                   <h5 class="card-title">ห้องประชุมชั้น 5</h5>
-                  <p class="card-text"><span class="topic1">รายละเอียด :</span> ห้องประชุมพร้อมระบบ Video conference ที่นั่งผู้เข้าร่วมประชุม รูปตัว U 2 แถว</p>
-                  <p class="card-text"><span class="topic1">จำนวนที่นั่ง :</span> 50 ที่นั่ง รูปตัว U</p>
+                  <p class="card-text"><span class="topic1">รายละเอียด :</span> ห้องประชุมขนาดกลาง ที่นั่งผู้เข้าร่วมประชุม สามารถจัดรูปแบบทีนั่งได้</p>
+                  <p class="card-text"><span class="topic1">จำนวนที่นั่ง :</span> 250 ที่นั่ง</p>
                 </div>
               </div>
             </div>

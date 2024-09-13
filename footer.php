@@ -9,11 +9,8 @@
      <!-- ======= Footer ======= -->
   <footer id="footer-full" class="footer">
     <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bus.rmutp.ac.th/" target="_blank">RMUTP</a>
+      ออกแบบและพัฒนาโดย ทีมนักศึกษาสหกิจ 2567 สาขาวิชาระบบสารสนเทศ <a href="https://bus.rmutp.ac.th/" target="_blank">คณะบริหารธุรกิจ</a>
+      <a href="https://www.rmutp.ac.th/" target="_blank"><p class="text-center">มหาวิทยาลัยเทคโนโลยีราชมงคลพระนคร (RMUTP)</p></a>
     </div>
   </footer><!-- End Footer -->
   <!-- Vendor JS Files -->

@@ -33,7 +33,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
-$userlevel = $_SESSION['userlevel'];
+$role_id = $_SESSION['role_id'];
 ?>
 
 <!DOCTYPE html>

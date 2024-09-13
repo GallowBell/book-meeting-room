@@ -241,6 +241,16 @@ $roles = mysqli_query($conn, "SELECT * FROM roles");
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+    <!-- DataTables -->
+    <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.1.6/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.1.6/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.datatable').DataTable();
+        });
+    </script>
+
 </body>
 
 </html>

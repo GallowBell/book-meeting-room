@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer RMUTP</title>
-</head>
-<body>
+
      <!-- ======= Footer ======= -->
   <footer id="footer-full" class="footer">
     <div class="credits">
@@ -24,5 +17,3 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-</body>
-</html>

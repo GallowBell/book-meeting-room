@@ -219,63 +219,70 @@ function removeSeconds($time) {
     return $timeParts[0] . ':' . $timeParts[1];
 }
 
+/**
+ * Get the first and last day of each month in the current year.
+ *
+ * @return array An array of arrays, each containing the first and last day of a month.
+ */
+function getFirstAndLastDaysOfEachMonth() {
+    $currentYear = date('Y');
+    $months = [];
+
+    for ($month = 1; $month <= 12; $month++) {
+        $firstDay = new DateTime("$currentYear-$month-01");
+        $lastDay = (clone $firstDay)->modify('last day of this month');
+
+        $months[] = [
+            'first_day' => $firstDay->format('Y-m-d'),
+            'last_day' => $lastDay->format('Y-m-d'),
+            'month' => $firstDay->format('F'),
+        ];
+    }
+
+    return $months;
+}
+
+
+
 // Example usage
 //$time = '08:00:00';
 //$timeWithoutSeconds = removeSeconds($time);
 //echo $timeWithoutSeconds; // Output: "08:00"
 
-if(!isset($_GET['reservation_id'])){
-    die('Reservation ID is required');
-}
 
-$reservation_id = $_GET['reservation_id'];
+//$reservation_id = $_GET['reservation_id'];
 
 $start = '2024-09-01';
 $end = '2024-09-30';
 
-// Get the data from the database
-$query = $conn->query("SELECT 
-                            reservation_id,
-                            meeting_room,
-                            count(meeting_room) as total,
-                            SUM(participant_count) as total_participant 
-                    FROM `reservations` 
-            WHERE is_approve = 1 AND 
-            (
-                reservation_date BETWEEN '".$start."' AND '".$end."' 
-                OR reservation_date_end BETWEEN '".$start."' AND '".$end."' 
-            ) 
-            GROUP BY meeting_room;");
-
-$data = $query -> fetch_all(MYSQLI_ASSOC);
-
-if(count($data) == 0){
-    die('Reservation data not found');
+// Example usage
+$months = getFirstAndLastDaysOfEachMonth();
+foreach ($months as $month) {
+    //echo "First day: " . $month['first_day'] . ", Last day: " . $month['last_day'] . "\n";
+    // Get the data from the database
+    $query = $conn->query("SELECT reservation_id, meeting_room, count(meeting_room) as total, SUM(participant_count) as total_participant FROM `reservations` WHERE is_approve = 1 AND reservation_date BETWEEN '".$month['first_day']."' AND '".$month['last_day']."' AND reservation_date_end BETWEEN '".$month['first_day']."' AND '".$month['last_day']."' GROUP BY meeting_room;");
+    $data[$month['month']] = $query -> fetch_all(MYSQLI_ASSOC);
 }
 
-if ($data[0]['is_approve'] == -1 || $data[0]['is_approve'] == 0) {
-    // Output the SweetAlert2 scripts
-    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
-    echo "<script>
-    window.onload = function() {
-        Swal.fire({
-            title: 'ไม่สามารถโหลดเอกสารได้',
-            text: 'เนื่องจากสถานะยังไม่อนุมัติ',
-            icon: 'error',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#3085d6'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = 'booking-report.php';
-            }
-        });
-    };
-    </script>";
 
-    // Terminate the script after outputting the message
-    exit;
+
+// $data['January'][0]['meeting_room']
+
+
+
+foreach ($data['September'] as $key => $value) {
+    if(empty($data['September'])){
+        echo 'No data';
+        break;
+    }
+    echo $value['meeting_room'] . ' - ' . $value['total'] . ' - ' . $value['total_participant'] . '<br>';
 }
 
+//echo json_encode($data);
+
+
+
+return;
 
 // $data = ข้อมูลจากตาราง reservations
 foreach ($data as $key_1 => $value_1) {

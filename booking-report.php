@@ -88,6 +88,12 @@ foreach ($data as $key => $value) {
   <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
+  <script> 
+    $(function(){
+      $("#reportsum").load("booking-sum-report.php"); 
+    });
+    </script> 
+
 <body>
 
 
@@ -128,6 +134,8 @@ foreach ($data as $key => $value) {
         </ol>
       </nav>
     </div><!-- End Page Title -->
+
+    <div id="reportsum"></div>
 
     <section class="section">
       <div class="row">

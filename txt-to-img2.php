@@ -53,6 +53,13 @@ foreach ($months as $month) {
     $data[$month['month']] = $query->fetch_all(MYSQLI_ASSOC);
 }
 
+//echo "<strong>$monthName</strong><br>";
+$x_step = 25;
+$y_step = 160;
+
+
+$last_X = 0;
+
 // Loop through each month and output data
 foreach ($data as $monthName => $monthData) {
     if (empty($monthData)) {
@@ -60,14 +67,14 @@ foreach ($data as $monthName => $monthData) {
         continue;
     }
 
-    //echo "<strong>$monthName</strong><br>";
-    $x_step = 25;
-    $y_step = 160;
     $sum = 0;
     $last_Y += $y_step;
-    $last_X = 0;
     foreach ($monthData['September'] as $key => $value) {
-        AddText(590 + $x_step, 930, 'รวมห้อง: ' . $value['total']);
+        AddText(590 + $x_step, $last_Y, 'รวมห้อง: ' . $value['total']);
+        $sum += $value['total_participant'];
+    }
+    foreach ($monthData['October'] as $key => $value) {
+        AddText(590 + $x_step, $last_Y, 'รวมห้อง: ' . $value['total']);
         $sum += $value['total_participant'];
     }
     AddText(2050, $last_Y, $sum);

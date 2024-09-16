@@ -84,18 +84,29 @@ foreach ($data2 as $monthName => $monthData) {
     $last_Y += $y_step;
 
     $sum = 0;
-    $curX = 230;
+    $curX = 600;
+
+
+    $x_step4 = 700;
+
+    $x_step5 = 1180;
+
+    $x_step9 = 1650;
+
     foreach ($monthData as $key => $value) {
         
 
-        if ($value['meeting_room'] == '1') {
-            $curX = $x_step;
+        if ($value['meeting_room'] == 'ห้องประชุมชั้น 4') {
+            $curX4 = $x_step4;
+            AddText($curX4, $last_Y,$value['total']);
         }
-        if ($value['meeting_room'] == '2') {
-            $curX = $x_step;
+        if ($value['meeting_room'] == 'ห้องประชุมชั้น 5') {
+            $curX5 = $x_step5;
+            AddText($curX5, $last_Y,$value['total']);
         }
-        if ($value['meeting_room'] == '3') {
-            $curX = $x_step;
+        if ($value['meeting_room'] == 'ห้องประชุมชั้น 9') {
+            $curX9 = $x_step9;
+            AddText($curX9, $last_Y,$value['total']);
         }
 
         if (empty($value)) {
@@ -103,14 +114,19 @@ foreach ($data2 as $monthName => $monthData) {
             continue;
         } 
         
-        AddText($curX, $last_Y,$value['total']);
+        // AddText($curX, $last_Y,$value['total']);
         $sum += $value['total_participant'];
+
+        $sumR += $value['total'];
     }
+
     $sumAll += $sum;
     AddText(2050, $last_Y, $sum);
     
 }
-
+$sumRoom += $sumR;
+AddText(1300, 515,(date('Y')+543));
+AddText(1650, 2880, $sumRoom);
 AddText(2050, 2880, $sumAll);
 
 // Save the modified image as booking_sum_page1.jpg

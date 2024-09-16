@@ -86,11 +86,23 @@ foreach ($data2 as $monthName => $monthData) {
     $sum = 0;
     $curX = 230;
     foreach ($monthData as $key => $value) {
-        $curX += $x_step;
+        
+
+        if ($value['meeting_room'] == '1') {
+            $curX = $x_step;
+        }
+        if ($value['meeting_room'] == '2') {
+            $curX = $x_step;
+        }
+        if ($value['meeting_room'] == '3') {
+            $curX = $x_step;
+        }
+
         if (empty($value)) {
             AddText($curX, $last_Y, 'ไม่มีข้อมูล');
             continue;
         } 
+        
         AddText($curX, $last_Y,$value['total']);
         $sum += $value['total_participant'];
     }

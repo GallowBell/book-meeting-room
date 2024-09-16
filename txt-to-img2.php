@@ -107,9 +107,11 @@ foreach ($data2 as $monthName => $monthData) {
         $sum += $value['total_participant'];
     }
     $sumAll += $sum;
-    AddText(2050, $last_Y, $sumAll);
+    AddText(2050, $last_Y, $sum);
     
 }
+
+AddText(2050, 2880, $sumAll);
 
 // Save the modified image as booking_sum_page1.jpg
 $result = imagejpeg($img, __DIR__ . '/assets/img/booking_sum_page1.jpg', 100);

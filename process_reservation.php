@@ -231,12 +231,11 @@ function InsertEquipment($tableName = '', $equipment=[]){
 $sql_check = "SELECT * FROM reservations 
               WHERE meeting_room = '$meeting_room' 
               AND (
-                  (reservation_date <= '$reservation_date_end' AND reservation_date_end >= '$reservation_date') 
-                  AND ((start_time <= '$end_time' AND end_time >= '$start_time'))
-              ) AND is_approve = 1";
+                  (reservation_date <= '$reservation_date_end' AND reservation_date_end >= '$reservation_date')
+                  AND ((start_time <= '$end_time' AND end_time >= '$start_time')))";
 
 $result = $conn->query($sql_check);
-//echo "row".$result->num_rows;
+// echo "row".$result->num_rows;
 if ($result->num_rows > 0) {
     echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
         echo "<script>

@@ -25,6 +25,15 @@ function AddText($x, $y, $text){
     imagettftext($img, $FontSize, 0, $x, $y, $black, $font, $text);
 }
 
+function AddBoldText($x, $y, $text){
+    global $img, $black, $font, $FontSize;
+    
+    // Render the text multiple times with small offsets to simulate boldness
+    for ($offset = -1; $offset <= 1; $offset++) {
+        imagettftext($img, $FontSize, 0, $x + $offset, $y + $offset, $black, $font, $text);
+    }
+}
+
 // Get the first and last day of each month in the current year
 function getFirstAndLastDaysOfEachMonth() {
     $currentYear = date('Y');
@@ -61,9 +70,6 @@ $last_Y = 760;
 // $last_X = 650;
 
 $data2 = [
-    $data['October'],
-    $data['November'],
-    $data['December'],
     $data['January'],
     $data['February'],
     $data['March'],
@@ -73,6 +79,9 @@ $data2 = [
     $data['July'],
     $data['August'],
     $data['September'],
+    $data['October'],
+    $data['November'],
+    $data['December'],
 ];
 
 $x_step = 480;
@@ -90,11 +99,11 @@ foreach ($data2 as $monthName => $monthData) {
     $curX = 600;
 
 
-    $x_step4 = 700;
+    $x_step4 = 740;
 
-    $x_step5 = 1180;
+    $x_step5 = 1220;
 
-    $x_step9 = 1650;
+    $x_step9 = 1670;
 
     foreach ($monthData as $key => $value) {
         
@@ -130,15 +139,15 @@ foreach ($data2 as $monthName => $monthData) {
     }
 
     $sumAll += $sum;
-    AddText(2050, $last_Y, $sum);
+    AddText(2090, $last_Y, $sum);
     
 }
 
-AddText(1300, 515,(date('Y')+543));
-AddText(2050, 2880, $sumAll);
-AddText(700, 2880, $sumRoom4);
-AddText(1180, 2880, $sumRoom5);
-AddText(1650, 2880, $sumRoom9);
+AddText(1250, 515,(date('Y')+543));
+AddBoldText(2090, 2880, $sumAll);
+AddBoldText(740, 2880, $sumRoom4);
+AddBoldText(1220, 2880, $sumRoom5);
+AddBoldText(1690, 2880, $sumRoom9);
 
 // Save the modified image as booking_sum_page1.jpg
 $result = imagejpeg($img, __DIR__ . '/assets/img/booking_sum_page1.jpg', 100);

@@ -62,12 +62,15 @@ foreach ($data as $monthName => $monthData) {
 
     //echo "<strong>$monthName</strong><br>";
     $x_step = 25;
+    $y_step = 160;
     $sum = 0;
-    foreach ($monthData as $key => $value) {
+    $last_Y += $y_step;
+    $last_X = 0;
+    foreach ($monthData['September'] as $key => $value) {
         AddText(590 + $x_step, 930, 'รวมห้อง: ' . $value['total']);
         $sum += $value['total_participant'];
     }
-    AddText(2050, 930 + 160, $sum);
+    AddText(2050, $last_Y, $sum);
 }
 
 // Save the modified image as booking_sum_page1.jpg

@@ -57,38 +57,37 @@ foreach ($months as $month) {
 $x_step = 25;
 $y_step = 160;
 
-$last_Y = 0;
-$last_X = 0;
+$last_Y = 300;
+$last_X = 590;
+
+$data2 = [
+    $data['October'],
+    $data['November'],
+    $data['March'],
+];
+
+$x_step = 300;
+$sumAll = 0;
 
 // Loop through each month and output data
-/* foreach ($data as $monthName => $monthData) {
+foreach ($data2 as $monthName => $monthData) {
+
+    $last_Y += $y_step;
+
     if (empty($monthData)) {
-        echo $monthName . ': No data<br>';
+        AddText(590 + $x_step, $last_Y, 'ไม่มีข้อมูล');
         continue;
-    } */
+    } 
 
-    $sumAll = 0;
     $sum = 0;
-    $last_Y += $y_step;
-    foreach ($data['September'] as $key => $value) {
-        AddText(590 + $x_step, $last_Y, 'รวมห้อง: ' . $value['total']);
-        $sum += $value['total_participant'];
-    }
-
-    $sumAll += $sum;
-    AddText(2050, $last_Y, $sum);
-    $sum = 0;
-    $last_Y += $y_step;
-
-    foreach ($data['October'] as $key => $value) {
+    foreach ($monthData as $key => $value) {
         AddText(590 + $x_step, $last_Y, 'รวมห้อง: ' . $value['total']);
         $sum += $value['total_participant'];
     }
     $sumAll += $sum;
     AddText(2050, $last_Y, $sum);
-    $sum = 0;
-    $last_Y += $y_step;
-//}
+    
+}
 
 // Save the modified image as booking_sum_page1.jpg
 $result = imagejpeg($img, __DIR__ . '/assets/img/booking_sum_page1.jpg', 100);

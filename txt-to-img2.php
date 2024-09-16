@@ -98,15 +98,23 @@ foreach ($data2 as $monthName => $monthData) {
 
         if ($value['meeting_room'] == 'ห้องประชุมชั้น 4') {
             $curX4 = $x_step4;
+            $sumRoom4 += $sumR;
             AddText($curX4, $last_Y,$value['total']);
+
         }
         if ($value['meeting_room'] == 'ห้องประชุมชั้น 5') {
             $curX5 = $x_step5;
+            $sumRoom5 += $sumR;
             AddText($curX5, $last_Y,$value['total']);
+
+
         }
         if ($value['meeting_room'] == 'ห้องประชุมชั้น 9') {
             $curX9 = $x_step9;
+            $sumRoom9 += $sumR;
             AddText($curX9, $last_Y,$value['total']);
+
+
         }
 
         if (empty($value)) {
@@ -124,10 +132,12 @@ foreach ($data2 as $monthName => $monthData) {
     AddText(2050, $last_Y, $sum);
     
 }
-$sumRoom += $sumR;
+
 AddText(1300, 515,(date('Y')+543));
-AddText(1650, 2880, $sumRoom);
 AddText(2050, 2880, $sumAll);
+AddText(700, 2880, $sumRoom4);
+AddText(1180, 2880, $sumRoom5);
+AddText(1650, 2880, $sumRoom9);
 
 // Save the modified image as booking_sum_page1.jpg
 $result = imagejpeg($img, __DIR__ . '/assets/img/booking_sum_page1.jpg', 100);

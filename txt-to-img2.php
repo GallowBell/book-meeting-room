@@ -83,15 +83,15 @@ foreach ($data2 as $monthName => $monthData) {
 
     $last_Y += $y_step;
 
-   
-
     $sum = 0;
+    $curX = 300;
     foreach ($monthData as $key => $value) {
+        $curX += $x_step;
         if (empty($value)) {
-            AddText(300 + $x_step, $last_Y, 'ไม่มีข้อมูล');
+            AddText($curX, $last_Y, 'ไม่มีข้อมูล');
             continue;
         } 
-        AddText(300 + $x_step, $last_Y, 'รวมห้อง: ' . $value['total']);
+        AddText($curX, $last_Y, 'รวมห้อง: ' . $value['total']);
         $sum += $value['total_participant'];
     }
     $sumAll += $sum;

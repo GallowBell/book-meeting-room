@@ -57,7 +57,7 @@ foreach ($months as $month) {
 $x_step = 25;
 $y_step = 160;
 
-
+$last_Y = 0;
 $last_X = 0;
 
 // Loop through each month and output data
@@ -67,17 +67,27 @@ $last_X = 0;
         continue;
     } */
 
+    $sumAll = 0;
     $sum = 0;
     $last_Y += $y_step;
-    foreach ($monthData['September'] as $key => $value) {
+    foreach ($data['September'] as $key => $value) {
         AddText(590 + $x_step, $last_Y, 'รวมห้อง: ' . $value['total']);
         $sum += $value['total_participant'];
     }
-    foreach ($monthData['October'] as $key => $value) {
-        AddText(590 + $x_step, $last_Y, 'รวมห้อง: ' . $value['total']);
-        $sum += $value['total_participant'];
-    }
+
+    $sumAll += $sum;
     AddText(2050, $last_Y, $sum);
+    $sum = 0;
+    $last_Y += $y_step;
+
+    foreach ($data['October'] as $key => $value) {
+        AddText(590 + $x_step, $last_Y, 'รวมห้อง: ' . $value['total']);
+        $sum += $value['total_participant'];
+    }
+    $sumAll += $sum;
+    AddText(2050, $last_Y, $sum);
+    $sum = 0;
+    $last_Y += $y_step;
 //}
 
 // Save the modified image as booking_sum_page1.jpg

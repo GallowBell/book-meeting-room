@@ -77,6 +77,9 @@ $data2 = [
 
 $x_step = 480;
 $sumAll = 0;
+$sumRoom4 = 0;
+$sumRoom5 = 0;
+$sumRoom9 = 0;
 
 // Loop through each month and output data
 foreach ($data2 as $monthName => $monthData) {
@@ -98,22 +101,20 @@ foreach ($data2 as $monthName => $monthData) {
 
         if ($value['meeting_room'] == 'ห้องประชุมชั้น 4') {
             $curX4 = $x_step4;
-            $sumRoom4 += $sumR;
+            $sumRoom4 += $value['total'];
             AddText($curX4, $last_Y,$value['total']);
 
         }
         if ($value['meeting_room'] == 'ห้องประชุมชั้น 5') {
             $curX5 = $x_step5;
-            $sumRoom5 += $sumR;
+            $sumRoom5 += $value['total'];
             AddText($curX5, $last_Y,$value['total']);
-
 
         }
         if ($value['meeting_room'] == 'ห้องประชุมชั้น 9') {
             $curX9 = $x_step9;
-            $sumRoom9 += $sumR;
+            $sumRoom9 += $value['total'];
             AddText($curX9, $last_Y,$value['total']);
-
 
         }
 

@@ -57,13 +57,22 @@ foreach ($months as $month) {
 $x_step = 25;
 $y_step = 160;
 
-$last_Y = 300;
+$last_Y = 790;
 $last_X = 590;
 
 $data2 = [
     $data['October'],
     $data['November'],
+    $data['December'],
+    $data['January'],
+    $data['February'],
     $data['March'],
+    $data['April'],
+    $data['May'],
+    $data['June'],
+    $data['July'],
+    $data['August'],
+    $data['September'],
 ];
 
 $x_step = 300;
@@ -75,13 +84,13 @@ foreach ($data2 as $monthName => $monthData) {
     $last_Y += $y_step;
 
     if (empty($monthData)) {
-        AddText(590 + $x_step, $last_Y, 'ไม่มีข้อมูล');
+        AddText(300 + $x_step, $last_Y, 'ไม่มีข้อมูล');
         continue;
     } 
 
     $sum = 0;
     foreach ($monthData as $key => $value) {
-        AddText(590 + $x_step, $last_Y, 'รวมห้อง: ' . $value['total']);
+        AddText(300 + $x_step, $last_Y, 'รวมห้อง: ' . $value['total']);
         $sum += $value['total_participant'];
     }
     $sumAll += $sum;

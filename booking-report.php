@@ -134,8 +134,13 @@ foreach ($data as $key => $value) {
         </ol>
       </nav>
     </div><!-- End Page Title -->
-
+    <?php
+      if ($_SESSION['role_id'] == '1') :
+    ?>
     <div id="reportsum"></div>
+    <?php
+      endif;
+    ?>
 
     <section class="section">
       <div class="row">

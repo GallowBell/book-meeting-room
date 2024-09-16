@@ -54,11 +54,11 @@ foreach ($months as $month) {
 }
 
 //echo "<strong>$monthName</strong><br>";
-$x_step = 25;
-$y_step = 160;
+// $x_step = 25;
+$y_step = 163;
 
-$last_Y = 790;
-$last_X = 590;
+$last_Y = 760;
+// $last_X = 650;
 
 $data2 = [
     $data['October'],
@@ -75,7 +75,7 @@ $data2 = [
     $data['September'],
 ];
 
-$x_step = 300;
+$x_step = 480;
 $sumAll = 0;
 
 // Loop through each month and output data
@@ -84,18 +84,18 @@ foreach ($data2 as $monthName => $monthData) {
     $last_Y += $y_step;
 
     $sum = 0;
-    $curX = 300;
+    $curX = 230;
     foreach ($monthData as $key => $value) {
         $curX += $x_step;
         if (empty($value)) {
             AddText($curX, $last_Y, 'ไม่มีข้อมูล');
             continue;
         } 
-        AddText($curX, $last_Y, 'รวมห้อง: ' . $value['total']);
+        AddText($curX, $last_Y,$value['total']);
         $sum += $value['total_participant'];
     }
     $sumAll += $sum;
-    AddText(2050, $last_Y, $sum);
+    AddText(2050, $last_Y, $sumAll);
     
 }
 

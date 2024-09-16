@@ -61,11 +61,11 @@ $y_step = 160;
 $last_X = 0;
 
 // Loop through each month and output data
-foreach ($data as $monthName => $monthData) {
+/* foreach ($data as $monthName => $monthData) {
     if (empty($monthData)) {
         echo $monthName . ': No data<br>';
         continue;
-    }
+    } */
 
     $sum = 0;
     $last_Y += $y_step;
@@ -78,7 +78,7 @@ foreach ($data as $monthName => $monthData) {
         $sum += $value['total_participant'];
     }
     AddText(2050, $last_Y, $sum);
-}
+//}
 
 // Save the modified image as booking_sum_page1.jpg
 $result = imagejpeg($img, __DIR__ . '/assets/img/booking_sum_page1.jpg', 100);

@@ -25,20 +25,20 @@ $mpdf->SetRightMargin(0);
 $mpdf->SetDisplayMode('fullwidth');
 $mpdf->SetAutoPageBreak(false, 5);
 
-// Define the path to the image (use forward slashes)
-$imagePath = 'assets/img/booking_sum_page.jpg';
+// Define the path to the modified image (use forward slashes)
+$imagePath = 'assets/img/booking_sum_page1.jpg'; // Use the modified image
 
 // Get the dimensions of the A4 page
 $pageWidth = 210; // Width in mm
 $pageHeight = 297; // Height in mm
 
-// สร้างรายการการจอง ในไฟล์ txt-to-img.php แล้วเรียกใช้ฟังก์ชัน AddText และ AddCheckBox
+// Include the text-to-image generation logic
 require_once __DIR__ . '/txt-to-img2.php';
 
+// Load the modified image onto the PDF
 $html_1 = '<img style="width: '.$pageWidth.'mm; height: '.$pageHeight.'mm; margin: 0; padding: 0; border: none;" src="'.$imagePath.'"></img>';
 
 $mpdf->WriteHTML($html_1);
-
 
 // Output the PDF to the browser
 $mpdf->Output('', 'I');

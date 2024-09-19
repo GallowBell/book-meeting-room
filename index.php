@@ -113,14 +113,14 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
   
   </style>
 
-<script src='fullcalendar/dist/index.global.js'></script>
+<!--   <script src='fullcalendar/dist/index.global.js'></script> -->
 
   <script>
 
       function Render_equipment_reservations(data = {}){
         const body = document.getElementById('myModal2_body');
         const title = document.getElementById('myModal2_header');
-        console.log('data', data);
+        //console.log('data', data);
         const arr = data?.equipment_reservations;
         const meeting_name = data?.meeting_name;
         const reservation_id = data?.reservation_id;
@@ -211,18 +211,18 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
           keyboard: false
         })
         
-        $('#time').daterangepicker({
+        /* $('#time').daterangepicker({
           timePicker: true,
           locale: {
             format: 'hh:mm:ss'
           },
           beforeShow: function(input) {
-      $(input).datepicker("widget").addClass('hide-calendar');
-    },
-        timePicker24Hour: true
-      }).focusin(function(){
-      $('.ui-datepicker-calendar').css("display","none");
-    });
+            $(input).datepicker("widget").addClass('hide-calendar');
+          },
+          timePicker24Hour: true
+        }).focusin(function(){
+          $('.ui-datepicker-calendar').css("display","none");
+        }); */
       var calendar = new FullCalendar.Calendar(calendarEl, {
         locale: 'th',
         headerToolbar: {
@@ -246,8 +246,8 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
         // Start Modal show when click
 
         // select: function(arg) {
-        //   console.log(123)
-        //   console.log('arg', arg)
+        //   //console.log(123)
+        //   //console.log('arg', arg)
         //   //var title = prompt('Event Title:');
 
         //  let date = arg.startStr
@@ -267,8 +267,8 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
           var reservations_id = event.extendedProps?.reservation_id; // Custom property
           Render_equipment_reservations(event?.extendedProps);
           myModal2.show();
-          //console.log('arg', arg)
-          console.log('reservations_id', reservations_id)
+          ////console.log('arg', arg)
+          //console.log('reservations_id', reservations_id)
         },
         eventColor: 'white',
         editable: false,
@@ -277,13 +277,13 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
         eventContent: function(arg) {
           // Extract the event details
           const event = arg.event;
-          /* console.log('startStr', event.startStr)
-          console.log('endStr', event.endStr) */
+          /* //console.log('startStr', event.startStr)
+          //console.log('endStr', event.endStr) */
           const startTime = new Date(event.startStr).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
           const endTime = new Date(event.endStr).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
-          console.log('event.extendedProps?.', event.extendedProps);
+          //console.log('event.extendedProps?.', event.extendedProps);
           const color_1 = event.extendedProps?.color_1
-          console.log(color_1);
+          //console.log(color_1);
           // Create a custom element to display the event details
           const html = `
             <div class="${color_1} text-light w-100">
@@ -815,7 +815,7 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
     window.onresize = addResponsiveClasses;
     let data_json = `<?php echo json_encode($data); ?>`;
     document.addEventListener('DOMContentLoaded', () => {
-      console.log(JSON.parse(data_json));
+      //console.log(JSON.parse(data_json));
       addResponsiveClasses();
     })
 

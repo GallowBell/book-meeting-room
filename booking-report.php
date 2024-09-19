@@ -485,6 +485,8 @@ foreach ($data as $key => $value) {
   include 'footer.php';
   ?>
 
+
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // console.log('asdasdasds');

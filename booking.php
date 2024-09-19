@@ -118,7 +118,7 @@ $role_id = $_SESSION['role_id'];
                   <label class="form-check-label me-3" for="sector1">
                     ภายนอก
                   </label>
-                  <input type="radio" id="sector2" name="sector" class="form-check-input" value="ภายใน" checked <?php echo $is_required; ?>>
+                  <input type="radio" id="sector2" name="sector" class="form-check-input" value="ภายใน" <?php echo $is_required; ?>>
                   <label class="form-check-label" for="sector2">
                     ภายใน
                   </label>
@@ -256,8 +256,8 @@ $role_id = $_SESSION['role_id'];
                           <input class="form-check-input" type="checkbox" id="equipment4" name="equipment[3]" value="จานแก้วใส">
                           <label class="form-check-label" for="equipment4">จานแก้วใส ขนาด</label>
                           <select class="inputint" id="equipment4" name="equipment_size_1">
-                            <option value="" selected>เลือก</option>
-                            <option value="ใหญ่">ใหญ่</option>
+                            <!-- <option value="" selected>เลือก</option> -->
+                            <option value="ใหญ่" selected >ใหญ่</option>
                             <option value="กลาง">กลาง</option>
                             <option value="เล็ก">เล็ก</option>
                           </select>
@@ -290,8 +290,8 @@ $role_id = $_SESSION['role_id'];
                           <input class="form-check-input" type="checkbox" id="equipment8" name="equipment[7]" value="ถ้วย">
                           <label class="form-check-label" for="equipment8">ถ้วย ขนาด </label>
                           <select class="inputint" id="equipment8" name="equipment_size_2">
-                            <option value="" selected>เลือก</option>
-                            <option value="ใหญ่">ใหญ่</option>
+                            <!-- <option value="" selected disabled hidden>เลือก</option> -->
+                            <option value="ใหญ่" selected >ใหญ่</option>
                             <option value="กลาง">กลาง</option>
                             <option value="เล็ก">เล็ก</option>
                           </select>

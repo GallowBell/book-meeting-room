@@ -289,19 +289,19 @@ foreach ($data as $key => $value) {
                               if ($_SESSION['role_id'] == '1') :
                               ?>
                                 <button type="button" class="btn btn-success" onclick="handlerReceive(`<?= $row['reservation_id'] ?>`)">
-                                  ✔
+                                  รับแจ้ง
                                 </button>
-                                <button type="button" class="btn btn-danger" onclick="handlerReceive2(`<?= $row['reservation_id'] ?>`)">
-                                  ✖
+                                <button type="button" class="btn btn-primary" onclick="handlerReceive2(`<?= $row['reservation_id'] ?>`)">
+                                  รับเรื่อง
                                 </button>
                                 <button type="button" class="btn btn-wait" onclick="handlerWait(`<?= $row['reservation_id'] ?>`)">
                                   <i class="bi bi-clock"></i>
                                 </button>
                                 <button type="button" class="btn btn-success" onclick="handlerApprove(`<?= $row['reservation_id'] ?>`)">
-                                  อนุมัติ
+                                  ✔
                                 </button>
                                 <button type="button" class="btn btn-danger" onclick="handlerReject(`<?= $row['reservation_id'] ?>`)">
-                                  ไม่อนุมัติ
+                                  ✖
                                 </button>
                                 <button type="button" class="btn btn-delete" onclick="handlerDelete(`<?= $row['reservation_id'] ?>`)">
                                   <i class="bi bi-trash"></i>
@@ -508,7 +508,8 @@ foreach ($data as $key => $value) {
       let is_admin = <?php echo $_SESSION['role_id'] == '1' ? 'true' : 'false'; ?>;
 
       // Conditionally disable or enable form fields
-      if (data.is_approve == '1' || data.is_approve == '0' || data.is_approve == '2' || data.is_approve == '3' && !is_admin) {
+      // && !is_admin
+      if (data.is_approve == '0' || data.is_approve == '1' || data.is_approve == '2' || data.is_approve == '3') {
         document.querySelectorAll('#viewForm')[0].querySelectorAll('input, select, textarea').forEach(e => {
           e.setAttribute('disabled', true);
         });

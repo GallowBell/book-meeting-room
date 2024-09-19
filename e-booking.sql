@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2024 at 10:53 AM
+-- Generation Time: Sep 19, 2024 at 11:04 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -53,22 +53,6 @@ CREATE TABLE `equipment_reservations` (
   `end_time` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `equipment_reservations`
---
-
-INSERT INTO `equipment_reservations` (`equipment_reservation_id`, `reservation_id`, `equipment_name`, `equipment_size`, `equipment_quantity`, `additional_details`, `reservation_date`, `reservation_date_end`, `start_time`, `end_time`) VALUES
-(1, 1, 'ชุดโต๊ะหมู่บูชา', '', '1', '', '2024-09-10', '2024-09-11', '08:00:00', '12:00:00'),
-(2, 1, 'จาน + ช้อนส้อม', '', '20', '', '2024-09-10', '2024-09-11', '08:00:00', '12:00:00'),
-(3, 1, 'ถาดเสิร์ฟ', '', '20', '', '2024-09-10', '2024-09-11', '08:00:00', '12:00:00'),
-(4, 1, 'จานแก้วใส', 'กลาง', '20', '', '2024-09-10', '2024-09-11', '08:00:00', '12:00:00'),
-(5, 1, 'คูลเลอร์ใส่น้ำดื่ม', '', '3', '', '2024-09-10', '2024-09-11', '08:00:00', '12:00:00'),
-(6, 1, 'ผ้าคลุมเก้าอี้', '', '20', '', '2024-09-10', '2024-09-11', '08:00:00', '12:00:00'),
-(7, 1, 'ที่จอดรถชั้น', '', '1', '', '0000-00-00', '2024-09-11', '00:00:00', '00:00:00'),
-(8, 1, 'จำนวนคัน', '', '1', '', '0000-00-00', '2024-09-11', '00:00:00', '00:00:00'),
-(9, 1, 'เลขทะเบียนรถ', '', '1กก 1234', '', '0000-00-00', '2024-09-11', '00:00:00', '00:00:00'),
-(10, 1, 'อื่นๆ', '', '0', 'อาหารกลางวัน จำนวน 50 ท่าน', '2024-09-10', '2024-09-11', '08:00:00', '12:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -91,23 +75,6 @@ CREATE TABLE `equipment_sod_reservations` (
   `operate_time_2` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `equipment_sod_reservations`
---
-
-INSERT INTO `equipment_sod_reservations` (`equipment_sod_reservations_id`, `reservation_id`, `equipment_sod_name`, `equipment_sod_quantity`, `additional_sod_details`, `operate_date`, `operate_time`, `reservation_date`, `reservation_date_end`, `start_time`, `end_time`, `operate_date_2`, `operate_time_2`) VALUES
-(1, 1, 'ชุดเครื่องเสียงห้องประชุม', '1', '', '2024-09-10', '09:00:00', NULL, NULL, NULL, NULL, '2024-09-10', '08:00:00'),
-(2, 1, 'เครื่องโปรเจคเตอร์', '1', '', '2024-09-10', '09:00:00', NULL, NULL, NULL, NULL, '2024-09-10', '08:00:00'),
-(3, 1, 'เจ้าหน้าที่ควบคุม', '1', '', '2024-09-10', '09:00:00', NULL, NULL, NULL, NULL, '2024-09-10', '08:00:00'),
-(4, 1, 'เครื่องเสียงพกพาพร้อมไมโครโฟน', '1', '', '2024-09-10', '09:00:00', NULL, NULL, NULL, NULL, '2024-09-10', '08:00:00'),
-(5, 1, 'การบันทึกภาพนิ่ง', '1', '', '2024-09-10', '09:00:00', NULL, NULL, NULL, NULL, '2024-09-10', '08:00:00'),
-(6, 1, 'แฟ้มเอกสาร', '20', '', '2024-09-10', '09:00:00', NULL, NULL, NULL, NULL, '2024-09-10', '08:00:00'),
-(7, 1, 'เอกสารของที่ระลึก', '10', '', '2024-09-10', '09:00:00', NULL, NULL, NULL, NULL, '2024-09-10', '08:00:00'),
-(8, 1, 'การประชุมออนไลน์', '1', 'Adobe Effect', '2024-09-10', '09:00:00', NULL, NULL, NULL, NULL, '2024-09-10', '08:00:00'),
-(9, 1, 'เอกสารแจก', '20', 'เอกสารแจก A4 ใบนำเสนอ', '2024-09-10', '09:00:00', NULL, NULL, NULL, NULL, '2024-09-10', '08:00:00'),
-(10, 1, 'พิธีกรดำเนินงาน (วัน/เวลา) ในวันที่', '1', '', '2024-09-10', '09:00:00', NULL, NULL, NULL, NULL, '2024-09-10', '08:00:00'),
-(11, 1, 'ช่างภาพ (วัน/เวลา) ในวันที่', '1', '', '2024-09-10', '09:00:00', NULL, NULL, NULL, NULL, '2024-09-10', '08:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -127,6 +94,7 @@ CREATE TABLE `permissions` (
 
 CREATE TABLE `reservations` (
   `reservation_id` int(11) NOT NULL,
+  `sector` varchar(255) DEFAULT NULL,
   `government_sector` varchar(255) DEFAULT NULL,
   `document_number` text DEFAULT NULL,
   `meeting_room` varchar(255) DEFAULT NULL,
@@ -144,13 +112,6 @@ CREATE TABLE `reservations` (
   `is_approve` int(2) DEFAULT -1,
   `user_id` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reservations`
---
-
-INSERT INTO `reservations` (`reservation_id`, `government_sector`, `document_number`, `meeting_room`, `meeting_name`, `meeting_type`, `participant_count`, `organizer_name`, `contact_number`, `reservation_date`, `reservation_date_end`, `start_time`, `end_time`, `notes`, `Timestamps`, `is_approve`, `user_id`) VALUES
-(1, 'กองสาธารณสุข', '', 'ห้องประชุมชั้น 4', '(ทดสอบ) สมดุล ฝุ่น คน เมือง', 'ประชุม', 50, 'เจษฎากร (Admin)', '555', '2024-09-10', '2024-09-11', '08:00:00', '12:00:00', '', '2024-09-10 08:48:28', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -185,6 +146,35 @@ CREATE TABLE `role_permissions` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user2`
+--
+
+CREATE TABLE `user2` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(10) NOT NULL,
+  `userlevel` varchar(10) NOT NULL,
+  `datasave` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user2`
+--
+
+INSERT INTO `user2` (`user_id`, `username`, `password`, `first_name`, `last_name`, `phone_number`, `userlevel`, `datasave`) VALUES
+(1, 'admin', '$2y$10$SKb60DuwLgBHsMP1J/7mSu4DI4ojXJWR3ixKnDXTbRQL32cPQWaIO', 'Admin', 'istrator', '805552736', 'admin', '2024-08-22 14:39:31'),
+(2, 'user', '$2y$10$Ox/wUg.Lo4J0c9bSqZ3zgekHAME99Hu.ArIWo5Ci750aQpOfqaeQO', 'User', 'lastname', '979868567', 'user', '2024-08-22 11:57:08'),
+(3, 'user2', '$2y$10$OQzycwX8FoiAa6CEG0DqqOxC5a.VefpSo7/Gwpy3RysI2zLslPf4e', 'User2', 'Two', '12345', 'user', '2024-08-23 02:50:06'),
+(4, 'user3', '$2y$10$2wbwOEWtxoQVpyUCCHCu0eDN4DAOsr7QWXC3AvahdoeRKcTXHBtWK', 'User3', 'User3', '885461234', 'user', '2024-08-27 02:57:31'),
+(5, 'user4', '$2y$10$OSBOKeDNOgIgPYaxKSi8IeApbuQakU5oxsR7fqQ2OeV5qitzhC4Xq', 'User4', 'user4', '0805552736', 'user', '2024-08-27 02:59:06'),
+(6, 'test', '$2y$10$v2H.oi5C6QEOF/6zMe.0s.A9R1vNNHBnfM6ERW53Lah1564mZzkIa', 'Tester', 'ter', '0854123456', 'user', '2024-09-04 04:15:03');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -195,7 +185,7 @@ CREATE TABLE `users` (
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
-  `role_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT 2,
   `create_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -204,8 +194,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `phone_number`, `role_id`, `create_date`) VALUES
-(1, 'admin', '$2y$10$pVUnxAD6KIYHzFMWAy82K.FOA2579EAMmSOTm6T9898aF6UvI8onK', 'Administrator', 'A1', '0123456789', 1, '2024-09-10 08:33:39'),
-(2, 'user', '$2y$10$gq6OhsVvgSqqNnoc823hgOb0nq.Y0oCyP7v.mjgknxrTuIWEDZ.Yu', 'User', 'U1', '0123456789', 2, '2024-09-10 08:34:12');
+(1, 'admin', '$2y$10$pVUnxAD6KIYHzFMWAy82K.FOA2579EAMmSOTm6T9898aF6UvI8onK', 'Administrator', 'A1', '0123456789', 2, '2024-09-19 08:33:19'),
+(2, 'user', '$2y$10$gq6OhsVvgSqqNnoc823hgOb0nq.Y0oCyP7v.mjgknxrTuIWEDZ.Yu', 'User', 'U1', '0123456789', 1, '2024-09-13 09:02:27'),
+(3, 'user2', '$2y$10$f3qCeW4AM01X5ht5aQKREufU.asO/34u4lqljwhE5nUSBk9wzwL5y', 'realname', 'lastname', '0123456789', 2, '2024-09-19 09:04:06'),
+(4, 'user3', '$2y$10$NLxvtfIgQYymduY7i59nzuR7JnKcT2O25z7q6Sq4HUktEu5.KlTTW', 'realname', 'lastname', '0123456789', 2, '2024-09-19 09:04:15');
 
 --
 -- Indexes for dumped tables
@@ -256,6 +248,12 @@ ALTER TABLE `role_permissions`
   ADD KEY `permission_id` (`permission_id`);
 
 --
+-- Indexes for table `user2`
+--
+ALTER TABLE `user2`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -276,13 +274,13 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `equipment_reservations`
 --
 ALTER TABLE `equipment_reservations`
-  MODIFY `equipment_reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `equipment_reservation_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `equipment_sod_reservations`
 --
 ALTER TABLE `equipment_sod_reservations`
-  MODIFY `equipment_sod_reservations_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `equipment_sod_reservations_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -294,18 +292,25 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user2`
+--
+ALTER TABLE `user2`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

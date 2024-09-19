@@ -14,6 +14,7 @@ return; */
 
 session_start();
 $user_id = $_SESSION['user_id'];
+$sector = $_POST['sector'];
 $government_sector = $_POST['government_sector'];
 $document_number = !empty($_POST['document_number']) ? $_POST['document_number'] : null;
 $meeting_room = $_POST['meeting_room'];
@@ -254,6 +255,7 @@ if ($result->num_rows > 0) {
 } else {
     // ถ้าไม่มีการจองซ้อนทับ ให้บันทึกการจองใหม่ในตาราง reservations
     $sql_insert = "INSERT INTO reservations (
+                                            sector,
                                             government_sector,
                                             document_number,
                                             meeting_room,
@@ -269,6 +271,7 @@ if ($result->num_rows > 0) {
                                             notes,
                                             user_id
                                         ) VALUES (
+                                            '$sector',
                                             '$government_sector',
                                             '$document_number',
                                             '$meeting_room',
@@ -347,6 +350,9 @@ if ($result->num_rows > 0) {
         $message =
             $header .
             "\n" .
+            'หน่วยงาน: ' .
+            $sector .
+            "\n" .
             'ชื่อผู้จอง: ' .
             $organizer_name .
             "\n" .
@@ -363,7 +369,7 @@ if ($result->num_rows > 0) {
             'เวลาที่จอง: ' .
             $start_time . ' ถึง ' . $end_time .
             "\n" .
-            'เบอร์: ' .
+            'โทร: ' .
             $contact_number .
             "\n" .
             'หมายเหตุ: ' .

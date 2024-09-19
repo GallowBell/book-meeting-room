@@ -170,12 +170,12 @@ foreach ($data as $key => $value) {
                   <table class="table table-striped datatable">
                     <thead>
                       <tr>
-                        <th scope="col" class="text-truncate">เลขที่การจอง</th>
+                        <th scope="col" class="text-truncate">เลขที่</th>
                         <!-- <th scope="col" class="text-truncate">ส่วนราชการ</th> -->
                         <th scope="col" class="text-truncate">เรื่อง</th>
                         <th scope="col" class="text-truncate">ห้องที่จอง</th>
                         <th scope="col" class="text-truncate">ชื่อผู้จอง</th>
-                        <th scope="col" class="text-truncate">วันที่ (ว/ด/ป)</th>
+                        <th scope="col" class="text-truncate">วันที่จอง</th>
                         <th scope="col" class="text-truncate">เวลาที่จอง</th>
                         <th scope="col" class="text-truncate">สถานะ</th>
                         <!-- <th scope="col" class="text-truncate">หมายเหตุ</th> -->
@@ -242,21 +242,42 @@ foreach ($data as $key => $value) {
                             ?>
                             <?= htmlspecialchars($start_time->format('H:i')) ?> น. ถึง <?= htmlspecialchars($end_time->format('H:i')) ?> น.</td>
                           <td class="text-truncate">
+
+                          <!-- รับแจ้ง 2
+                              รับเรื่อง 3
+                              รอตรวจสอบ -1
+                              อนุมัติ 1
+                              ไม่อนุมัติ 0 -->
                             <?php
                             $is_disabled = false;
                             if ($row["is_approve"] == -1) :
                             ?>
-                              <span class="badge rounded-pill bg-warning fs-6">รออนุมัติ</span>
+                            <!-- รอการตรวจสอบ สีเหลือง -->
+                              <span class="badge rounded-pill bg-warning fs-6">รอตรวจสอบ</span>
                             <?php
-                            elseif ($row["is_approve"] == 0) :
+                            elseif ($row["is_approve"] == 3) :
                               $is_disabled = true;
                             ?>
-                              <span class="badge rounded-pill bg-danger fs-6">ไม่อนุมัติ</span>
+                            <!-- รับเรื่อง(ไม่อนุมัติ) สีแดง -->
+                              <span class="badge rounded-pill bg-primary fs-6">รับเรื่อง</span> 
+                            <?php
+                            elseif ($row["is_approve"] == 2) :
+                              $is_disabled = true;
+                            ?>
+                            <!-- รับแจ้ง(อนุมัติ) สีเขียว -->
+                              <span class="badge rounded-pill bg-success fs-6">รับแจ้ง</span>
                             <?php
                             elseif ($row["is_approve"] == 1) :
                               $is_disabled = true;
                             ?>
-                              <span class="badge rounded-pill bg-success fs-6">อนุมัติ</span>
+                            <!-- อนุมัติ สีเขียว -->
+                              <span class="badge rounded-pill bg-success fs-6">อนุมัติ</span> 
+                              <?php
+                            elseif ($row["is_approve"] == 0) :
+                              $is_disabled = true;
+                            ?>
+                            <!-- อนุมัติ สีแดง -->
+                            <span class="badge rounded-pill bg-danger fs-6">ไม่อนุมัติ</span> 
                             <?php
                             endif;
                             ?>
@@ -267,14 +288,20 @@ foreach ($data as $key => $value) {
                               <?php
                               if ($_SESSION['role_id'] == '1') :
                               ?>
-                                <button type="button" class="btn btn-success" onclick="handlerApprove(`<?= $row['reservation_id'] ?>`)">
+                                <button type="button" class="btn btn-success" onclick="handlerReceive(`<?= $row['reservation_id'] ?>`)">
                                   ✔
                                 </button>
-                                <button type="button" class="btn btn-danger" onclick="handlerReject(`<?= $row['reservation_id'] ?>`)">
+                                <button type="button" class="btn btn-danger" onclick="handlerReceive2(`<?= $row['reservation_id'] ?>`)">
                                   ✖
                                 </button>
                                 <button type="button" class="btn btn-wait" onclick="handlerWait(`<?= $row['reservation_id'] ?>`)">
                                   <i class="bi bi-clock"></i>
+                                </button>
+                                <button type="button" class="btn btn-success" onclick="handlerApprove(`<?= $row['reservation_id'] ?>`)">
+                                  อนุมัติ
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="handlerReject(`<?= $row['reservation_id'] ?>`)">
+                                  ไม่อนุมัติ
                                 </button>
                                 <button type="button" class="btn btn-delete" onclick="handlerDelete(`<?= $row['reservation_id'] ?>`)">
                                   <i class="bi bi-trash"></i>
@@ -337,26 +364,42 @@ foreach ($data as $key => $value) {
             <div class="col-lg-12">
               <form class="row" id="viewForm" action="report-update.php" method="post">
                 <input type="hidden" id="reservation_id" name="reservation_id">
+
+                <div class="col-md-12">
+                  <label for="sector" class="form-label fw-bold me-5">หน่วยงาน</label>
+                  <input type="radio" id="sector1" name="sector" class="form-check-input" value="ภายนอก">
+                  <label class="form-check-label me-5" for="sector1">
+                    ภายนอก
+                  </label>
+                  <input type="radio" id="sector2" name="sector" class="form-check-input" value="ภายใน">
+                  <label class="form-check-label" for="sector2">
+                    ภายใน
+                  </label>
+                  <div class="invalid-feedback">
+                    โปรดเลือกหน่วยงาน
+                  </div>
+                </div>
+
                 <div class="col-md-6 mb-3">
-                  <label for="government_sector" class="form-label">ส่วนราชการ</label>
+                  <label for="government_sector" class="form-label fw-bold">ส่วนราชการ</label>
                   <textarea class="form-control" name="government_sector" id="government_sector"></textarea>
                   <!-- <input type="text" class="form-control" id="government_sector" name="government_sector" disabled> -->
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="contact_number" class="form-label">โทร.</label>
+                  <label for="contact_number" class="form-label fw-bold">โทร.</label>
                   <input type="text" class="form-control" id="contact_number" name="contact_number">
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="meeting_name" class="form-label">เรื่อง</label>
+                  <label for="meeting_name" class="form-label fw-bold">เรื่อง</label>
                   <textarea class="form-control" name="meeting_name" id="meeting_name"></textarea>
                   <!-- <input type="text" class="form-control" id="meeting_name" name="meeting_name" disabled> -->
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="document_number" class="form-label">เลขที่หนังสือ</label>
+                  <label for="document_number" class="form-label fw-bold">เลขที่หนังสือ</label>
                   <input type="text" class="form-control" id="document_number" name="document_number">
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="meeting_room" class="form-label">ห้องที่จอง</label>
+                  <label for="meeting_room" class="form-label fw-bold">ห้องที่จอง</label>
                   <select class="form-select" id="meeting_room" name="meeting_room">
                     <option selected disabled hidden value="" >เลือกห้อง...</option>
                     <option value="ห้องประชุมชั้น 4">ห้องประชุมชั้น 4</option>
@@ -368,7 +411,7 @@ foreach ($data as $key => $value) {
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="meeting_type" class="form-label">ใช้สำหรับ</label>
+                  <label for="meeting_type" class="form-label fw-bold">ใช้สำหรับ</label>
                   <select id="meeting_type" name="meeting_type" class="form-select">
                     <option selected disabled hidden value="">ใช้สำหรับการ...</option>
                     <option value="ฝึกอาชีพ">ฝึกอาชีพ</option>
@@ -381,35 +424,35 @@ foreach ($data as $key => $value) {
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="participant_count" class="form-label">จำนวนผู้เข้าร่วม</label>
+                  <label for="participant_count" class="form-label fw-bold">จำนวนผู้เข้าร่วม</label>
                   <input type="text" class="form-control" id="participant_count" name="participant_count">
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="organizer_name" class="form-label">ชื่อผู้จอง</label>
+                  <label for="organizer_name" class="form-label fw-bold">ชื่อผู้จอง</label>
                   <input type="text" class="form-control" id="organizer_name" name="organizer_name">
                 </div>
                 <!-- <div class="col-md-6 mb-3">
-            <label for="reservation_date" class="form-label">วันที่</label>
+            <label for="reservation_date" class="form-label fw-bold">วันที่</label>
             <input type="date" class="form-control" id="reservation_date" name="reservation_date" disabled>
           </div> -->
                 <div class="col-md-6 mb-3">
-                  <label for="reservation_date" class="form-label">วันที่เริ่มต้น</label>
+                  <label for="reservation_date" class="form-label fw-bold">วันที่เริ่มต้น</label>
                   <input type="text" class="form-control bg-white" id="reservation_date" name="reservation_date">
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="reservation_date_end" class="form-label">วันที่สิ้นสุด</label>
+                  <label for="reservation_date_end" class="form-label fw-bold">วันที่สิ้นสุด</label>
                   <input type="text" class="form-control bg-white" id="reservation_date_end" name="reservation_date_end">
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="start_time" class="form-label">เวลาที่จองเริ่มต้น</label>
+                  <label for="start_time" class="form-label fw-bold">เวลาที่จองเริ่มต้น</label>
                   <input type="text" class="form-control bg-white" id="start_time" name="start_time">
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="end_time" class="form-label">เวลาที่จองสิ้นสุด</label>
+                  <label for="end_time" class="form-label fw-bold">เวลาที่จองสิ้นสุด</label>
                   <input type="text" class="form-control bg-white" id="end_time" name="end_time">
                 </div>
                 <div class="col-md-12 mb-3">
-                  <label for="notes" class="form-label">หมายเหตุ</label>
+                  <label for="notes" class="form-label fw-bold">หมายเหตุ</label>
                   <textarea class="form-control" id="notes" name="notes"></textarea>
                 </div>
 
@@ -465,18 +508,26 @@ foreach ($data as $key => $value) {
       let is_admin = <?php echo $_SESSION['role_id'] == '1' ? 'true' : 'false'; ?>;
 
       // Conditionally disable or enable form fields
-      if (data.is_approve == '1' && !is_admin) {
+      if (data.is_approve == '1' || data.is_approve == '0' || data.is_approve == '2' || data.is_approve == '3' && !is_admin) {
         document.querySelectorAll('#viewForm')[0].querySelectorAll('input, select, textarea').forEach(e => {
           e.setAttribute('disabled', true);
         });
       } else {
         document.querySelectorAll('#viewForm')[0].querySelectorAll('input, select, textarea').forEach(e => {
-          e.removeAttribute('disabled');
+          e.removeAttribute('disabled',);
         });
       }
 
           // เติมข้อมูลในฟอร์ม
           document.getElementById('reservation_id').value = data.reservation_id;
+
+          // ตรวจสอบและตั้งค่า radio button
+          if (data.sector === 'ภายนอก') {
+              document.getElementById('sector1').checked = true;
+          } else if (data.sector === 'ภายใน') {
+              document.getElementById('sector2').checked = true;
+          }
+
           document.getElementById('government_sector').value = data.government_sector;
           document.getElementById('document_number').value = data.document_number;
           document.getElementById('meeting_room').value = data.meeting_room;
@@ -670,6 +721,90 @@ foreach ($data as $key => $value) {
       console.table(JSON.parse(data_json))
     })
 
+    function handlerReceive(reservation_id) {
+      console.log('handlerReceive id', reservation_id)
+      Swal.fire({
+        icon: 'question',
+        title: 'ยืนยันการรับแจ้ง',
+        showCancelButton: true,
+        confirmButtonText: 'ยืนยัน',
+        cancelButtonText: 'ย้อนกลับ',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          return;
+        }
+        SendApprove(reservation_id, 'receive')
+          .then((result) => {
+            console.log('result', result);
+            if (result.status == 200) {
+              Swal.fire({
+                icon: 'success',
+                title: 'รับแจ้งการจองเรียบร้อยแล้ว',
+                confirmButtonText: 'ยืนยัน',
+                confirmButtonColor: '#3085d6'
+                
+              }).then(() => {
+                location.reload();
+              });
+              return;
+            }
+            throw new Error(result?.message ? result?.message : 'มีบางอย่างผิดพลาด')
+          }).catch((err) => {
+            console.log('err', err);
+            Swal.fire({
+              title: 'เกิดข้อผิดพลาด',
+              text: 'โปรดลองใหม่อีกครั้ง ' + error,
+              icon: 'error',
+              confirmButtonText: 'ตกลง'
+            })
+          });
+      });
+    }
+    
+    function handlerReceive2(reservation_id) {
+      console.log('handlerReceive2 id', reservation_id)
+      Swal.fire({
+        icon: 'question',
+        title: 'ยืนยันการรับเรื่อง',
+        showCancelButton: true,
+        confirmButtonText: 'ยืนยัน',
+        cancelButtonText: 'ย้อนกลับ',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          return;
+        }
+        SendApprove(reservation_id, 'receive2')
+          .then((result) => {
+            console.log('result', result);
+            if (result.status == 200) {
+              Swal.fire({
+                icon: 'success',
+                title: 'รับเรื่องการจองเรียบร้อยแล้ว',
+                confirmButtonText: 'ยืนยัน',
+                confirmButtonColor: '#3085d6'
+                
+              }).then(() => {
+                location.reload();
+              });
+              return;
+            }
+            throw new Error(result?.message ? result?.message : 'มีบางอย่างผิดพลาด')
+          }).catch((err) => {
+            console.log('err', err);
+            Swal.fire({
+              title: 'เกิดข้อผิดพลาด',
+              text: 'โปรดลองใหม่อีกครั้ง ' + error,
+              icon: 'error',
+              confirmButtonText: 'ตกลง'
+            })
+          });
+      });
+    }
+
     function handlerApprove(reservation_id) {
       console.log('handlerApprove id', reservation_id)
       Swal.fire({
@@ -758,7 +893,7 @@ foreach ($data as $key => $value) {
       console.log('handlerWait id', reservation_id)
       Swal.fire({
         icon: 'question',
-        title: 'ให้รอการอนุมัติ',
+        title: 'ให้รอการตรวจสอบ',
         showCancelButton: true,
         confirmButtonText: 'ยืนยัน',
         cancelButtonText: 'ย้อนกลับ',
@@ -774,7 +909,7 @@ foreach ($data as $key => $value) {
             if (result.status == 200) {
               Swal.fire({
                 icon: 'success',
-                title: 'ให้รออนุมัติการจองเรียบร้อยแล้ว',
+                title: 'ให้รอการตรวจสอบเรียบร้อยแล้ว',
                 confirmButtonText: 'ยืนยัน',
                 confirmButtonColor: '#3085d6'
               }).then(() => {

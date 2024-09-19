@@ -112,8 +112,23 @@ $role_id = $_SESSION['role_id'];
 
               <!-- General Form Elements -->
               <form action="process_reservation.php" method="post" class="row g-3 needs-validation" novalidate>
+              <div class="col-md-12">
+                  <label for="sector" class="form-label fw-bold me-3">หน่วยงาน</label>
+                  <input type="radio" id="sector1" name="sector" class="form-check-input" value="ภายนอก" <?php echo $is_required; ?>>
+                  <label class="form-check-label me-3" for="sector1">
+                    ภายนอก
+                  </label>
+                  <input type="radio" id="sector2" name="sector" class="form-check-input" value="ภายใน" checked <?php echo $is_required; ?>>
+                  <label class="form-check-label" for="sector2">
+                    ภายใน
+                  </label>
+                  <div class="invalid-feedback">
+                    โปรดเลือกหน่วยงาน
+                  </div>
+                 
+                </div>
               <div class="col-md-6">
-                  <label for="government_sector" class="form-label fw-bold fw-bold">ส่วนราชการ</label>
+                  <label for="government_sector" class="form-label fw-bold">ส่วนราชการ</label>
                   <input type="text" id="government_sector" name="government_sector" class="form-control" <?php echo $is_required; ?>>
                   <div class="invalid-feedback">
                     โปรดกรอกส่วนราชการ

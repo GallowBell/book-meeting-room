@@ -40,6 +40,30 @@
         
     }
 
+    // รับแจ้ง
+    if($status == 'receive'){
+        $reservation_id = $_POST['reservation_id'];
+        $status = 2;
+        $result = UpdateIsApprove([
+            'reservation_id' => $reservation_id,
+            'status' => $status
+        ]);
+        echo json_encode($result);
+        return;
+    }
+
+    // รับเรื่อง
+    if($status == 'receive2'){
+        $reservation_id = $_POST['reservation_id'];
+        $status = 3;
+        $result = UpdateIsApprove([
+            'reservation_id' => $reservation_id,
+            'status' => $status
+        ]);
+        echo json_encode($result);
+        return;
+    }
+
     // อนุมัติ
     if($status == 'approve'){
         $reservation_id = $_POST['reservation_id'];

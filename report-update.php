@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $notes = $_POST['notes']; */
 
     $reservation_id = $_POST['reservation_id']; 
+    $sector = $_POST['sector']; 
     $government_sector = $_POST['government_sector']; 
     $contact_number = $_POST['contact_number']; 
     $meeting_name = $_POST['meeting_name']; 
@@ -49,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         window.onload = function() {
             Swal.fire({
                 title: 'มีบางอย่างผิดพลาด',
-                text: 'ไม่สามารถจองวัน/เวลา ทับซ้อนได้ หรือสถานะเป็นอนุมัติอยู่',
+                text: 'ไม่สามารถจองวัน/เวลา ทับซ้อนได้ หรือสถานะเป็นรับแจ้งอยู่',
                 icon: 'error',
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#3085d6'
@@ -67,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // เตรียมและรันคำสั่ง SQL
     $stmt = $conn->prepare("UPDATE reservations SET 
+        sector = ?,
         government_sector = ?,
         contact_number = ?,
         meeting_name = ?,
@@ -82,7 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         notes = ?
     WHERE reservation_id=?");
    
-    $stmt->bind_param('ssssssssssssss', 
+    $stmt->bind_param('sssssssssssssss', 
+        $sector,
         $government_sector,
         $contact_number,
         $meeting_name,
@@ -105,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             window.onload = function() {
                 Swal.fire({
                     title: 'แก้ไขสำเร็จ',
-                    text: 'กรุณา อนุมัติ อีกครั้งด้วย !',
+                    text: 'กรุณา ตรวจสอบ อีกครั้งด้วย !',
                     icon: 'success',
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#3085d6'

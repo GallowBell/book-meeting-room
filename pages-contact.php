@@ -13,6 +13,8 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <!-- Font Awesome for Stars -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
   <title>Pakkret Municipality Booking Meeting Room</title>
   <?php
@@ -33,6 +35,11 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
 #main-full{
   margin: 80px 25px 10px 25px ;
 }
+
+.star-rating .fa-star {
+            color: #FFD700;
+            cursor: pointer;
+        }
 
 </style>
 
@@ -99,15 +106,25 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="comment_text" rows="6" placeholder="Message" required></textarea>
+                  <textarea class="form-control" name="comment_text" rows="3" placeholder="Message" required></textarea>
                 </div>
+
+                <div class="star-rating text-center">
+                        <!-- Stars -->
+                        <i class="far fa-star" data-value="1" style="font-size: 25px;"></i>
+                        <i class="far fa-star" data-value="2" style="font-size: 25px;"></i>
+                        <i class="far fa-star" data-value="3" style="font-size: 25px;"></i>
+                        <i class="far fa-star" data-value="4" style="font-size: 25px;"></i>
+                        <i class="far fa-star" data-value="5" style="font-size: 25px;"></i>
+                    </div>
+                    <input type="hidden" name="rating" id="rating" value="">
 
                 <div class="col-md-12 text-center">
                   <!-- <div class="loading">Loading</div>
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div> -->
 
-                  <button class="btn btn-primary" type="submit">Send Message</button>
+                  <button class="btn btn-primary" type="submit">ส่งคำแนะนำ</button>
                 </div>
 
               </div>
@@ -118,6 +135,19 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
 
       </div>
 
+      <div class="col-xl-12">
+        <div class="card p-4">
+            <div class="card-body">
+                <h4 class="d-flex justify-content-center m-4">วิธีการจองห้องประชุม</h4>
+              <div class="row gy-4">
+                <iframe width="auto" height="500" src="https://www.youtube.com/embed/98hyuQ1H-D4?si=5-a5aoI9mzBkq3DA" title="YouTube video player" 
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
   </main><!-- End #main -->
@@ -130,6 +160,70 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+// Star rating logic
+const stars = document.querySelectorAll('.fa-star');
+let selectedRating = 0;
+
+stars.forEach(star => {
+    star.addEventListener('mouseover', function () {
+        resetStars();
+        highlightStars(this.dataset.value);
+    });
+
+    star.addEventListener('click', function () {
+        selectedRating = this.dataset.value;
+        document.getElementById('rating').value = selectedRating;
+    });
+
+    star.addEventListener('mouseout', function () {
+        if (selectedRating === 0) {
+            resetStars();
+        } else {
+            highlightStars(selectedRating);
+        }
+    });
+});
+
+function resetStars() {
+    stars.forEach(star => star.classList.replace('fas', 'far'));  // Set back to empty stars
+}
+
+function highlightStars(rating) {
+    for (let i = 0; i < rating; i++) {
+        stars[i].classList.replace('far', 'fas');  // Fill the stars up to the selected rating
+    }
+}
+
+// Submit form via AJAX (example)
+document.getElementById('ratingForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const rating = document.getElementById('rating').value;
+
+    if (rating === "") {
+        alert("Please select a rating.");
+        return;
+    }
+
+    // Example AJAX request to submit the rating to the database
+    const formData = new FormData(this);
+
+    fetch('forms/contact.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert('Rating submitted successfully!');
+        // Close modal and reset rating
+        document.querySelector('.btn-close').click();
+        resetStars();
+        document.getElementById('rating').value = '';
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>
 
 </body>
 

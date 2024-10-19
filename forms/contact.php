@@ -3,10 +3,11 @@
 
         $comment_name = $_POST['comment_name'];
         $comment_text = $_POST['comment_text'];
+        $rating = $_POST['rating'];
 
 
-        $sql = "INSERT INTO comment (comment_name, comment_text)
-                VALUES ('$comment_name', '$comment_text')";
+        $sql = "INSERT INTO comment (comment_name, comment_text, rating)
+                VALUES ('$comment_name', '$comment_text', '$rating')";
 
         if ($conn->query($sql) === TRUE) {
             echo '<!DOCTYPE html>

@@ -121,7 +121,7 @@ function InsertCar($equipment_qty = [], $equipment = '')
 function sendlinemesg($message=''){
 
     define('LINE_API', "https://notify-api.line.me/api/notify");
-    define('LINE_TOKEN', "NcwsmJ87U6cXVYs8Lnbz8yGJeGLbRAos5zk1R4FPBwP"); //เปลี่ยนใส่ Token ของเราที่นี่  hT7YEphAiMRjuSyaejk7AoWJgZyfAA9e7AH2eJ8wFUL
+    // define('LINE_TOKEN', "NcwsmJ87U6cXVYs8Lnbz8yGJeGLbRAos5zk1R4FPBwP"); //เปลี่ยนใส่ Token ของเราที่นี่  hT7YEphAiMRjuSyaejk7AoWJgZyfAA9e7AH2eJ8wFUL
     
     $curl = curl_init();
 

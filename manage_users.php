@@ -68,6 +68,10 @@ if (isset($_POST['delete_user'])) {
 $users = mysqli_query($conn, "SELECT u.user_id, u.first_name, u.last_name, u.phone_number, u.username, r.role_name, u.role_id FROM users u LEFT JOIN roles r ON u.role_id = r.id");
 $roles = mysqli_query($conn, "SELECT * FROM roles");
 
+// ดึงข้อมูลจากตาราง comment
+$sqlcomment = "SELECT comment_id, comment_name, comment_text, rating, time_submit FROM comment";
+$resultcomment = $conn->query($sqlcomment);
+
 ?>
 
 <!DOCTYPE html>
@@ -210,16 +214,56 @@ $roles = mysqli_query($conn, "SELECT * FROM roles");
 
                 </div>
             </div>
+
+            <!-- Comment List -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>ข้อมูลความคิดเห็น</h3>
+                        <span>(แสดงให้เห็นความคิดเห็นและความพึงพอใจของผู้ใช้)</span>
+                    </div>
+                    <table class="table table-striped" id="datatable3">
+                        <thead class="thead-dark">
+                            <tr>
+                            <th>ความคิดเห็นที่</th>
+                            <th>ชื่อผู้ส่ง</th>
+                            <th>ข้อความ</th>
+                            <th>ความพึงพอใจ 1-5</th>
+                            <th>เวลาที่ส่งความคิดเห็น</th>
+                            </tr>
+                        </thead>
+                        <?php
+                if ($resultcomment->num_rows > 0) {
+                    // แสดงข้อมูลจากแต่ละแถว
+                    while ($row = $resultcomment->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row["comment_id"] . "</td>";
+                        echo "<td>" . htmlspecialchars($row["comment_name"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["comment_text"]) . "</td>";
+                        echo "<td>" . $row["rating"] . "</td>";
+                        echo "<td>" . $row["time_submit"] . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>No comments found</td></tr>";
+                }
+                ?>
+            </tbody>
+                    </table>
+
+
+
+                </div>
+                <?php $conn->close(); ?>
+
+
+            </div>
         </div>
 
         <!-- Bootstrap JS and dependencies -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-        <?php
-        /* include 'footer.php'; */
-        ?>
 
         <!-- ======= Footer ======= -->
         <footer id="footer-full" class="footer">
@@ -249,6 +293,9 @@ $roles = mysqli_query($conn, "SELECT * FROM roles");
         <script>
             $(document).ready(function() {
                 $('#datatable2').DataTable();
+            });
+            $(document).ready(function() {
+                $('#datatable3').DataTable();
             });
         </script>
 

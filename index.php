@@ -331,7 +331,27 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
           <div class="row">
 
             <!-- Sales Card -->
-            <div class="col-6">
+            <div class="col-4">
+              <div class="card-link mb-4 rounded-3 bg-dark">
+
+                <div class="card-body p-0">
+                  <a href="#howtouse">
+                  <!-- <h5 class="card-title"></h5> -->
+
+                  <div class="d-flex align-items-center justify-content-center flex-wrap flex-md-nowrap p-4">
+                    <div class="p-3">
+                      <h1 class="text-white text-center">วิธีการจองห้องประชุม <i class="bi bi-question-circle-fill text-white"></i></h1>
+                    </div>
+                  </div>
+
+                  <!-- <h5 class="card-title"></h5> -->
+                </div>
+                </a>
+
+              </div>
+            </div>
+
+            <div class="col-4">
               <div class="card-link mb-4 rounded-3 bg-dark">
 
                 <div class="card-body p-0">
@@ -351,7 +371,7 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
               </div>
             </div>
             <!-- End Sales Card -->
-            <div class="col-6">
+            <div class="col-4">
               <div class="card-link mb-4 rounded-3 bg-dark">
 
                 <div class="card-body p-0">
@@ -455,6 +475,20 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
             </div>
           </div>
         </div>
+
+        <div class="col-xl-12">
+        <div class="card p-4">
+            <div class="card-body">
+                <h4 id="howtouse" class="d-flex justify-content-center m-4">วิธีการจองห้องประชุม</h4>
+              <div class="row gy-4">
+                <iframe width="auto" height="500" src="https://www.youtube.com/embed/98hyuQ1H-D4?si=5-a5aoI9mzBkq3DA" title="YouTube video player" 
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
     </section>

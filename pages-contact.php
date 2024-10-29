@@ -98,7 +98,7 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
           <div class="card p-4">
             <form action="forms/contact.php" method="post" class="form-group">
               <div class="card-body">
-                <h4 class="d-flex justify-content-center m-4">เสนอคำแนะนำให้ระบบ</h4>
+                <h4 class="d-flex justify-content-center m-4">แสดงความคิดเห็นและความพึงพอใจ</h4>
               <div class="row gy-4">
 
                 <div class="col-md-12">
@@ -124,7 +124,7 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div> -->
 
-                  <button class="btn btn-primary" type="submit">ส่งคำแนะนำ</button>
+                  <button class="btn btn-primary" type="submit">ส่งความคิดเห็น</button>
                 </div>
 
               </div>
@@ -133,20 +133,6 @@ $role_id = $is_logged_in ? $_SESSION['role_id'] : 'guest';
 
         </div>
 
-      </div>
-
-      <div class="col-xl-12">
-        <div class="card p-4">
-            <div class="card-body">
-                <h4 class="d-flex justify-content-center m-4">วิธีการจองห้องประชุม</h4>
-              <div class="row gy-4">
-                <iframe width="auto" height="500" src="https://www.youtube.com/embed/98hyuQ1H-D4?si=5-a5aoI9mzBkq3DA" title="YouTube video player" 
-                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                </iframe>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 

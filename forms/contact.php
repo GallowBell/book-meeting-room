@@ -20,7 +20,7 @@
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
                     Swal.fire({
-                        title: "เราได้รับคำแนะนำของคุณแล้ว",
+                        title: "เราได้รับความคิดเห็นของคุณแล้ว",
                         icon: "success",
                         confirmButtonText: "ตกลง"
                     }).then(function() {
